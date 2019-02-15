@@ -12,10 +12,10 @@ import { HomeModule } from './home/home.module';
 		AppComponent,
 	],
 	imports: [
-		BrowserModule,
-		AppRoutingModule,
 		CoreModule,
 		HomeModule,
+		BrowserModule,
+		AppRoutingModule,
 	],
 	providers: [],
 	bootstrap: [AppComponent]

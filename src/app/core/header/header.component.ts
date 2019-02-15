@@ -9,6 +9,10 @@ export class HeaderComponent implements OnInit {
 
 	constructor() { }
 
-	ngOnInit() {
+	public ngOnInit() {
+	}
+
+	public logOff() {
+		console.log('log off button');
 	}
 }
