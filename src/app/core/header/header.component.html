@@ -1,8 +1,12 @@
-<header>
-	<app-logo></app-logo>
-	<div>
-		<p>User Login</p>
-		<button (click)="logOff()">Log off</button>
+<header class="header">
+	<div class="container">
+		<div class="header_wrapper">
+			<app-logo></app-logo>
+			<div class="user-article">
+				<p class="user-article__username">User Login</p>
+				<button class="user-article__button" (click)="logOff()">Log off</button>
+			</div>
+		</div>
 	</div>
 </header>
 

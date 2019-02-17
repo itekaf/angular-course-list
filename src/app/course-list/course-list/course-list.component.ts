@@ -23,6 +23,8 @@ const defaultData = [
 	styleUrls: ['./course-list.component.scss']
 })
 export class CourseListComponent implements OnInit {
+	public title: string = 'Find or add angular courses ...';
+
 	public query: string = '';
 	public courses: CourseModel[];
 
@@ -33,7 +35,7 @@ export class CourseListComponent implements OnInit {
 	}
 
 	public searchItem(query: string): void {
-		this.courses = defaultData.filter((x: CourseModel) => {
+		this.courses = this.courses.filter((x: CourseModel) => {
 			return x.title.toLocaleLowerCase().includes(query.toLocaleLowerCase());
 		});
 	}

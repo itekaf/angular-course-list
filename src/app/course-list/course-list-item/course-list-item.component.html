@@ -1,17 +1,40 @@
-<div>
-	<div>
-		<div>
-			{{courseItem.title}}
-			{{courseItem.date}}
-			{{courseItem.duration}}
-		</div>
-		<div>
-			{{courseItem.description}}
-		</div>
+<div class="box-course-item box-course-item__wrapper box-course-item__shadow">
+	<div class="box-course-item__img">
+		<a class="box-course-item__link">
+			<img
+				width="250"
+				alt="{{courseItem.title}}"
+				src="{{courseItem.img || defaultImage }}"
+			/>
+		</a>
 	</div>
-	<div>
-		<button (click)="edit(courseItem)">Edit</button>
-		<button (click)="remove(courseItem)">Delete</button>
+	<div class="box-course-item__wrapper">
+		<div class="box-course-item__info">
+			<div class="box-course-item__title">{{courseItem.title}}</div>
+			<div class="box-course-item__description">{{courseItem.description}}</div>
+			<div class="box-course-item__additionall-info">
+				<app-course-list-icon
+					title="Duration"
+					*ngIf="courseItem.duration"
+					[icon]="icons.duration"
+					[text]="courseItem.duration"
+				></app-course-list-icon>
+				<app-course-list-icon
+					title="Date"
+					*ngIf="courseItem.date"
+					[icon]="icons.date"
+					[text]="courseItem.date"
+				></app-course-list-icon>
+			</div>
+		</div>
+		<div class="box-course-item__buttons">
+			<button class="box-course-item__button" (click)="remove(courseItem)">
+				<fa-icon [icon]="icons.remove"></fa-icon>
+			</button>
+			<button class="box-course-item__button" (click)="edit(courseItem)">
+				<fa-icon [icon]="icons.edit"></fa-icon>
+			</button>
+		</div>
 	</div>
 </div>
 

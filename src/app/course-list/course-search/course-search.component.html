@@ -1,5 +1,11 @@
-<form #form="ngForm" (ngSubmit)="search()">
-	<input [(ngModel)]="query" placeholder="Search list" name="search" />
-	<button type="submit">Search</button>
-</form>
+<div class="course-search">
+	<form class="course-search-form" #form="ngForm" (ngSubmit)="search()">
+		<label class="course-search-form__label">
+			<fa-icon [icon]="icons.search"></fa-icon>
+			<input class="course-search-form__input" [(ngModel)]="query" placeholder="Search by name, description or date ... " name="search" />
+		</label>
+		<button class="course-search-form__button" type="submit">Search</button>
+	</form>
+</div>
+
 
