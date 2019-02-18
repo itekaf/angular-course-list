@@ -22,4 +22,18 @@ describe('FooterComponent', () => {
 	it('should create', () => {
 		expect(component).toBeTruthy();
 	});
+
+	it('should have default current year', () => {
+		// Arrage
+		const selector = '.footer__copy';
+		const currentYear = new Date().getFullYear();
+		const copyText = `© ${currentYear}`;
+
+		// Act
+		const nativeElement = fixture.nativeElement;
+		const copyTextElement = nativeElement.querySelector(selector);
+
+		// Assert
+		expect(copyTextElement.textContent).toBe(copyText);
+	});
 });

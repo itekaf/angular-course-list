@@ -7,50 +7,11 @@
 	display: flex;
 	justify-content: space-between;
 }
-.user-article {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-
-.user-article__username {
-	color: white;
-}
-.user-article__button {
-	margin-left: 20px;
-	border: 1px solid white;
-	padding: 15px;
-	color: white;
-	border-radius: 5px;
-}
-.user-article__button:hover {
-	background: #9bc837;
-	border: 1px solid transparent;
-}
-
-@media screen and (max-width: 1169px) {
-
-}
 
 @media screen and (max-width: 991px) {
-	/* start of large tablet styles */
 	.header_wrapper {
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
 	}
-
-	.user-article {
-		margin: 20px 0;
-	}
-}
-
-@media screen and (max-width: 767px) {
-	/* start of medium tablet styles */
-
-}
-
-@media screen and (max-width: 479px) {
-/* start of phone styles */
-
 }

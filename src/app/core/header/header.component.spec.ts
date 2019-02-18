@@ -2,6 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HeaderComponent } from './header.component';
 import { LogoComponent } from '../logo/logo.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('HeaderComponent', () => {
 	let component: HeaderComponent;
@@ -10,9 +11,9 @@ describe('HeaderComponent', () => {
 	beforeEach(async(() => {
 		TestBed.configureTestingModule({
 			declarations: [
-				LogoComponent,
 				HeaderComponent
-			]
+			],
+			schemas: [ NO_ERRORS_SCHEMA ]
 		})
 		.compileComponents();
 	}));
@@ -25,9 +26,5 @@ describe('HeaderComponent', () => {
 
 	it('should create', () => {
 		expect(component).toBeTruthy();
-	});
-
-	it('should log off', () => {
-		expect(component.logOff()).toBeUndefined();
 	});
 });
