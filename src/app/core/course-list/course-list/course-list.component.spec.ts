@@ -1,4 +1,5 @@
 import { FormsModule } from '@angular/forms';
+import { MockComponent } from 'ng-mocks';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -19,11 +20,11 @@ describe('CourseListComponent', () => {
 				FontAwesomeModule
 			],
 			declarations: [
-				CourseAddComponent,
 				CourseListComponent,
-				CourseSearchComponent,
-				CourseListItemComponent,
-				CourseListIconComponent,
+				MockComponent(CourseAddComponent),
+				MockComponent(CourseListItemComponent),
+				MockComponent(CourseListIconComponent),
+				MockComponent(CourseSearchComponent),
 			]
 		})
 		.compileComponents();
@@ -37,5 +38,15 @@ describe('CourseListComponent', () => {
 
 	it('should create', () => {
 		expect(component).toBeTruthy();
+	});
+
+	it('load more', () => {
+		expect(component.loadMore()).toBeUndefined();
+	});
+	it('remove item', () => {
+		expect(component.searchItem('')).toBeUndefined();
+	});
+	it('search item', () => {
+
 	});
 });

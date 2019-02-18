@@ -26,4 +26,8 @@ describe('HeaderComponent', () => {
 	it('should create', () => {
 		expect(component).toBeTruthy();
 	});
+
+	it('should log off', () => {
+		expect(component.logOff()).toBeUndefined();
+	});
 });

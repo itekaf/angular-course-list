@@ -2,17 +2,19 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CourseSearchComponent } from './course-search.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
-import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 
 describe('CourseSearchComponent', () => {
 	let component: CourseSearchComponent;
 	let fixture: ComponentFixture<CourseSearchComponent>;
 
+	beforeEach(() => {
+
+	});
+
 	beforeEach(async(() => {
 		TestBed.configureTestingModule({
-			imports: [ BrowserModule, FormsModule, FontAwesomeModule ],
+			imports: [ FormsModule, FontAwesomeModule ],
 			declarations: [ CourseSearchComponent ]
 		})
 		.compileComponents();
@@ -26,5 +28,9 @@ describe('CourseSearchComponent', () => {
 
 	it('should create', () => {
 		expect(component).toBeTruthy();
+	});
+
+	it('search', () => {
+		expect(component.search()).toBeUndefined();
 	});
 });

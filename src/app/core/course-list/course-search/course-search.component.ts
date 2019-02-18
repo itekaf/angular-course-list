@@ -14,9 +14,6 @@ export class CourseSearchComponent implements OnInit {
 	@Input() public query?: string;
 	@Output() public searchItem: EventEmitter<string> = new EventEmitter<string>();
 
-	constructor() {
-	}
-
 	public ngOnInit() {
 	}
 

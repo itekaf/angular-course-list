@@ -16,10 +16,11 @@ module.exports = function (config) {
       clearContext: false // leave Jasmine Spec Runner output visible in browser
     },
     coverageIstanbulReporter: {
-		dir: require('path').join(__dirname, '../coverage/Angular-course-list'),
-		reports: ['html', 'lcovonly', 'text-summary'],
+		dir: require('path').join(__dirname, '../coverage'),
+		reports: ['html', 'text-summary'],
 		combineBrowserReports: true,
 		fixWebpackSourcePaths: true,
+		skipFilesWithNoCoverage: true,
 		thresholds: {
 			global: {
 				statements: 80,
@@ -35,9 +36,7 @@ module.exports = function (config) {
 			}
 		},
 		'report-config': {
-			// all options available at: https://github.com/istanbuljs/istanbuljs/blob/aae256fb8b9a3d19414dcf069c592e88712c32c6/packages/istanbul-reports/lib/html/index.js#L135-L137
 			html: {
-				// outputs the report in ./coverage/html
 				subdir: 'html'
 			}
 		},

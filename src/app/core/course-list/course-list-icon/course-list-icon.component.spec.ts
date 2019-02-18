@@ -24,4 +24,23 @@ describe('CourseListIconComponent', () => {
 	it('should create', () => {
 		expect(component).toBeTruthy();
 	});
+
+	it('shoud have a text', () => {
+		// Arrage
+		const dummyText: string = 'dummy text';
+		const dummyTitle: string = 'dummy title';
+
+		component.text = dummyText;
+		component.title = dummyTitle;
+
+		// Act
+		fixture.detectChanges();
+		const nativeElement: HTMLElement = fixture.nativeElement;
+		const textElement: HTMLElement = nativeElement.querySelector('.course-item-icon__text');
+		const titleElement: HTMLElement = nativeElement.querySelector('.course-item-icon__title');
+
+		// Asert
+		expect(textElement.textContent).toBe(dummyText);
+		expect(titleElement.textContent).toBe(dummyTitle);
+	});
 });

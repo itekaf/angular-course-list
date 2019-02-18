@@ -1,3 +1,4 @@
+import { MockComponent } from 'ng-mocks';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HomeComponent } from './home.component';
@@ -6,6 +7,8 @@ import { CourseSearchComponent } from 'src/app/core/course-list/course-search/co
 import { CourseAddComponent } from 'src/app/core/course-list/course-add/course-add.component';
 import { CourseListIconComponent } from 'src/app/core/course-list/course-list-icon/course-list-icon.component';
 import { CourseListItemComponent } from 'src/app/core/course-list/course-list-item/course-list-item.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { FormsModule } from '@angular/forms';
 
 describe('HomeComponent', () => {
 	let component: HomeComponent;
@@ -13,13 +16,17 @@ describe('HomeComponent', () => {
 
 	beforeEach(async(() => {
 		TestBed.configureTestingModule({
+			imports: [
+				FormsModule,
+				FontAwesomeModule
+			],
 			declarations: [
 				HomeComponent,
-				CourseAddComponent,
-				CourseListComponent,
-				CourseSearchComponent,
-				CourseListItemComponent,
-				CourseListIconComponent,
+				MockComponent(CourseAddComponent),
+				MockComponent(CourseListComponent),
+				MockComponent(CourseSearchComponent),
+				MockComponent(CourseListItemComponent),
+				MockComponent(CourseListIconComponent),
 			]
 		})
 		.compileComponents();
