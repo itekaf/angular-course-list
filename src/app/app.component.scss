@@ -10,7 +10,7 @@ app-header {
 }
 app-breadcrumbs {
 	flex: 2 0 auto;
-	max-height: 50px;
+	max-height: 41px;
 }
 main {
 	flex: 3 0 auto;
@@ -19,4 +19,11 @@ main {
 app-footer {
 	flex: 4 0 auto;
 	max-height: 40px;
+}
+
+@media screen and (max-width: 991px) {
+	app-header {
+		height: auto;
+		max-height: inherit;
+	}
 }

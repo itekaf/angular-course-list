@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
+import { Config } from 'src/app/shared';
 
 @Component({
 	selector: 'app-course-add',
@@ -8,11 +9,7 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 })
 export class CourseAddComponent implements OnInit {
 
-	public icons = {
-		add: faPlus,
-	};
-
-	constructor() { }
+	public icons: Map<string, IconDefinition> = Config.icons;
 
 	public ngOnInit() {
 	}
@@ -20,5 +17,4 @@ export class CourseAddComponent implements OnInit {
 	public add() {
 		console.log('add new course');
 	}
-
 }

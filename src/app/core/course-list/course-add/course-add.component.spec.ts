@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { CourseAddComponent } from './course-add.component';
 
@@ -8,6 +9,7 @@ describe('CourseAddComponent', () => {
 
 	beforeEach(async(() => {
 		TestBed.configureTestingModule({
+			imports: [ FontAwesomeModule ],
 			declarations: [ CourseAddComponent ]
 		})
 		.compileComponents();

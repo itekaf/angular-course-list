@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CourseListIconComponent } from './course-list-icon.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 describe('CourseListIconComponent', () => {
 	let component: CourseListIconComponent;
@@ -8,6 +9,7 @@ describe('CourseListIconComponent', () => {
 
 	beforeEach(async(() => {
 		TestBed.configureTestingModule({
+			imports: [ FontAwesomeModule ],
 			declarations: [ CourseListIconComponent ]
 		})
 		.compileComponents();

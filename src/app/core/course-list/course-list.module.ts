@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { BrowserModule } from '@angular/platform-browser';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { CourseAddComponent } from './course-add/course-add.component';
@@ -11,6 +12,7 @@ import { CourseListIconComponent } from './course-list-icon/course-list-icon.com
 
 @NgModule({
 	imports: [
+		BrowserModule,
 		FormsModule,
 		CommonModule,
 		FontAwesomeModule,

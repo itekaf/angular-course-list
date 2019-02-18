@@ -24,8 +24,23 @@
 	color: white;
 	border-radius: 5px;
 	padding: 10px 15px;
-	transition: all 0.3s ease-out;
 }
 .course-list__button:hover {
 	background: darken($color: #30b6dd, $amount: 10)
+}
+
+@media screen and (max-width: 767px) {
+	.course-list_search {
+		flex-direction: column;
+	}
+
+	.course-search {
+		width: 100%;
+		margin-bottom: 20px;
+		margin-right: 0;
+	}
+
+	.course-add {
+		align-self: flex-start;
+	}
 }

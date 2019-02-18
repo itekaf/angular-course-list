@@ -8,8 +8,8 @@ import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
 })
 export class CourseListIconComponent implements OnInit {
 
-	@Input() public icon: IconDefinition;
-	@Input() public title: string;
+	@Input() public icon?: IconDefinition;
+	@Input() public title?: string;
 	@Input() public text: string;
 
 	constructor() { }

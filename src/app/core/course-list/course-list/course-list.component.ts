@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CourseModel } from 'src/models';
+import { ICourse } from 'src/app/shared/interface';
 
 const defaultData = [
 	{
@@ -24,9 +24,8 @@ const defaultData = [
 })
 export class CourseListComponent implements OnInit {
 	public title: string = 'Find or add angular courses ...';
-
 	public query: string = '';
-	public courses: CourseModel[];
+	public courses: ICourse[];
 
 	constructor() { }
 
@@ -35,13 +34,13 @@ export class CourseListComponent implements OnInit {
 	}
 
 	public searchItem(query: string): void {
-		this.courses = this.courses.filter((x: CourseModel) => {
-			return x.title.toLocaleLowerCase().includes(query.toLocaleLowerCase());
+		this.courses = this.courses.filter((course: ICourse) => {
+			return course.title.toLocaleLowerCase().includes(query.toLocaleLowerCase());
 		});
 	}
 
-	public removeItem(item: CourseModel): void {
-		this.courses = this.courses.filter((x: CourseModel) => x.id !== item.id);
+	public removeItem(item: ICourse): void {
+		this.courses = this.courses.filter((course: ICourse) => course.id !== item.id);
 	}
 
 	public loadMore(): void {

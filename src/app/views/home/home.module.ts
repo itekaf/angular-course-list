@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { HomeComponent } from './home/home.component';
-import { CourseListModule } from '../course-list/course-list.module';
+import { CourseListModule } from '../../core/course-list/course-list.module';
 
 @NgModule({
 	imports: [

@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
 import { CoreModule } from './core/core.module';
-import { HomeModule } from './home/home.module';
+import { HomeModule } from './views/home/home.module';
 
 @NgModule({
 	declarations: [

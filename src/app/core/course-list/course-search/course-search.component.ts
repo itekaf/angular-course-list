@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
+import { Config } from 'src/app/shared';
 
 @Component({
 	selector: 'app-course-search',
@@ -8,11 +9,9 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 })
 export class CourseSearchComponent implements OnInit {
 
-	public icons = {
-		search: faSearch,
-	};
+	public icons: Map<string, IconDefinition> = Config.icons;
 
-	@Input() public query: string;
+	@Input() public query?: string;
 	@Output() public searchItem: EventEmitter<string> = new EventEmitter<string>();
 
 	constructor() {

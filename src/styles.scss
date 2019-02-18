@@ -8,7 +8,8 @@ p {
 }
 
 * {
-	font-family: Tahoma, 'Segoe UI', Geneva, Verdana, sans-serif
+	font-family: Tahoma, 'Segoe UI', Geneva, Verdana, sans-serif;
+	transition: all 0.3s ease-out;
 }
 
 p,
@@ -35,4 +36,30 @@ button {
 	max-width: 1170px;
 	width: 100%;
 	margin: 0 auto;
+}
+
+@media screen and (max-width: 1169px) {
+	.container {
+		max-width: 990px;
+	}
+}
+
+@media screen and (max-width: 991px) {
+	.container {
+		max-width: 760px;
+	}
+}
+
+@media screen and (max-width: 767px) {
+	/* start of medium tablet styles */
+	.container {
+		max-width: 480px;
+	}
+}
+
+@media screen and (max-width: 479px) {
+/* start of phone styles */
+	.container {
+		max-width: 320px;
+	}
 }
