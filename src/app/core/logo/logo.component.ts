@@ -10,6 +10,7 @@ export class LogoComponent {
 
 	@Input() public path: string = Config.default.logoPath;
 	@Input() public width: string | number = '50';
+	@Input() public routerLink: string = '/';
 
 	constructor() {}
 }

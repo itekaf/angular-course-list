@@ -3,7 +3,7 @@ import * as Model from './models';
 import * as Interface from './interface';
 
 export {
-	Config,
 	Model,
+	Config,
 	Interface,
 };

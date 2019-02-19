@@ -1,13 +1,13 @@
+import { Component } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { UserWidgetComponent } from './user-widget.component';
-import { Component } from '@angular/core';
 
 @Component({
-	template: `<app-user-widget [butttonText]="butttonText"></app-user-widget>`,
+	template: `<app-user-widget [butttonText]="buttonText"></app-user-widget>`,
 })
 class TestHostComponent {
-	public butttonText: string  = 'Log out';
+	public buttonText: string  = 'Log out';
 }
 
 describe('UserWidgetComponent', () => {
@@ -18,7 +18,7 @@ describe('UserWidgetComponent', () => {
 		.compileComponents();
 	}));
 
-	describe('component alone', () => {
+	describe('Component Alone', () => {
 		let component: UserWidgetComponent;
 		let fixture: ComponentFixture<UserWidgetComponent>;
 
@@ -36,20 +36,20 @@ describe('UserWidgetComponent', () => {
 			// Act
 			expect(component.userData).toBeTruthy();
 		});
-		it('should have default propeties', () => {
-			// Arrage
-			const selector = '.user-article__button';
-			const defaultText = 'Log Off';
+		it('should have default properties', () => {
+			// Arrange
+			const selectorText = '.user-article__button';
+			const resultText = 'Log Off';
 
 			// Act
 			const nativeElement = fixture.debugElement.nativeElement;
-			const buttonElement = nativeElement.querySelector(selector);
+			const buttonElement = nativeElement.querySelector(selectorText);
 
 			// Assert
-			expect(buttonElement.textContent).toBe(defaultText);
+			expect(buttonElement.textContent).toBe(resultText);
 		});
 	});
-	describe('host component', () => {
+	describe('Test Host Component', () => {
 		let component: TestHostComponent;
 		let fixture: ComponentFixture<TestHostComponent>;
 
@@ -62,17 +62,17 @@ describe('UserWidgetComponent', () => {
 		it('should create', () => {
 			expect(component).toBeTruthy();
 		});
-		it('should change default propeties', () => {
-			// Arrage
-			const selector = '.user-article__button';
-			const defaultText = 'Log out';
+		it('should change default properties', () => {
+			// Arrange
+			const selectorText = '.user-article__button';
+			const resultText = 'Log out';
 
 			// Act
 			const nativeElement = fixture.debugElement.nativeElement;
-			const buttonElement = nativeElement.querySelector(selector);
+			const buttonElement = nativeElement.querySelector(selectorText);
 
 			// Assert
-			expect(buttonElement.textContent).toBe(defaultText);
+			expect(buttonElement.textContent).toBe(resultText);
 		});
 	});
 });

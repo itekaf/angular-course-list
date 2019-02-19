@@ -30,17 +30,13 @@
 }
 
 @media screen and (max-width: 767px) {
-	.course-list_search {
-		flex-direction: column;
-	}
-
 	.course-search {
 		width: 100%;
 		margin-bottom: 20px;
 		margin-right: 0;
 	}
-
-	.course-add {
-		align-self: flex-start;
+	.course-list_search {
+		flex-direction: column;
+		align-items: flex-start;
 	}
 }

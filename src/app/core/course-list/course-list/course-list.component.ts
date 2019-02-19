@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ICourse } from 'src/app/shared/interface';
+import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
+import { Config } from 'src/app/shared';
 
 const defaultData = [
 	{
@@ -23,27 +25,30 @@ const defaultData = [
 	styleUrls: ['./course-list.component.scss']
 })
 export class CourseListComponent implements OnInit {
-	public title: string = 'Find or add angular courses ...';
+	@Input() public title: string = 'Find or add angular courses ...';
+	@Input() public icons: Map<string, IconDefinition> = Config.icons;
+	@Input() public loadMoreText: string = 'Load More';
+
 	public query: string = '';
 	public courses: ICourse[];
 
 	constructor() { }
 
-	public ngOnInit() {
+	public ngOnInit(): void {
 		this.courses = defaultData;
 	}
 
-	public searchItem(query: string): void {
+	public onSearchItem(query: string): void {
 		this.courses = this.courses.filter((course: ICourse) => {
 			return course.title.toLocaleLowerCase().includes(query.toLocaleLowerCase());
 		});
 	}
 
-	public removeItem(item: ICourse): void {
+	public onRemoveItem(item: ICourse): void {
 		this.courses = this.courses.filter((course: ICourse) => course.id !== item.id);
 	}
 
-	public loadMore(): void {
+	public onLoadMore(): void {
 		this.courses = this.courses.concat(this.courses);
 	}
 }

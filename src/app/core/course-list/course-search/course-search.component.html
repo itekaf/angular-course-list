@@ -1,11 +1,9 @@
 <div class="course-search">
-	<form class="course-search-form" (ngSubmit)="search()">
+	<form class="course-search-form" (ngSubmit)="onSearch()">
 		<label class="course-search-form__label">
 			<fa-icon [icon]="icons.get('search')"></fa-icon>
 			<input class="course-search-form__input" [(ngModel)]="query" placeholder="Search by name, description or date ... " name="search" />
 		</label>
-		<button class="course-search-form__button" type="submit">Search</button>
+		<app-course-button className="button-course-search" (clickButton)="onSearch()" text="Search" type="submit"></app-course-button>
 	</form>
 </div>
-
-

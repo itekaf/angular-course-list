@@ -4,34 +4,36 @@
 			<img
 				width="100%"
 				alt="{{courseItem.title}}"
-				src="{{courseItem.img || defaultImage }}"
+				src="{{courseItem.img || defaultImagePath }}"
 			/>
 		</a>
 	</div>
 	<div class="box-course-item__content box-course-item__wrapper">
 		<div class="box-course-item__info">
 			<div class="box-course-item__title">{{courseItem.title}}</div>
-			<div class="box-course-item__description">{{courseItem.description}}</div>
+			<div class="box-course-item__description" *ngIf="courseItem.title">
+				{{courseItem.description}}
+			</div>
 			<div class="box-course-item__additionall-info">
 				<app-course-list-icon
 					title="Duration"
 					*ngIf="courseItem.duration"
 					[icon]="icons.get('clock')"
-					[text]="courseItem.duration"
+					text="{{courseItem.duration + ' h'}}"
 				></app-course-list-icon>
 				<app-course-list-icon
 					title="Date"
-					*ngIf="courseItem.date"
+					*ngIf="courseItem.creationDate"
 					[icon]="icons.get('calendar')"
-					[text]="courseItem.date"
+					[text]="courseItem.creationDate | date:'dd.MM.yyyy'"
 				></app-course-list-icon>
 			</div>
 		</div>
 		<div class="box-course-item__buttons">
-			<button class="box-course-item__button" (click)="remove(courseItem)">
+			<button class="box-course-item__remove box-course-item__button" (click)="onRemove()">
 				<fa-icon [icon]="icons.get('trash')"></fa-icon>
 			</button>
-			<button class="box-course-item__button" (click)="edit(courseItem)">
+			<button class="box-course-item__edit box-course-item__button" (click)="onEdit()">
 				<fa-icon [icon]="icons.get('edit')"></fa-icon>
 			</button>
 		</div>

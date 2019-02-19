@@ -1,7 +1,7 @@
+import { Component } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BreadcrumbsComponent } from './breadcrumbs.component';
-import { Component } from '@angular/core';
 
 @Component({
 	template: `<app-breadcrumbs [text]="text" ></app-breadcrumbs>`
@@ -18,7 +18,7 @@ describe('BreadcrumbsComponent', () => {
 		.compileComponents();
 	}));
 
-	describe('component alone', () => {
+	describe('Component Alone', () => {
 		let component: BreadcrumbsComponent;
 		let fixture: ComponentFixture<BreadcrumbsComponent>;
 
@@ -33,19 +33,19 @@ describe('BreadcrumbsComponent', () => {
 		});
 
 		it('should have default properties', () => {
-			// Arrage
-			const selector = '.breadcrumbs__text';
-			const defaultText = 'Courses';
+			// Arrange
+			const selectorText = '.breadcrumbs__text';
+			const resultText = 'Courses';
 
 			// Act
 			const nativeElement = fixture.nativeElement;
-			const textElement = nativeElement.querySelector(selector);
+			const textElement = nativeElement.querySelector(selectorText);
 
 			// Assert
-			expect(textElement.textContent).toBe(defaultText);
+			expect(textElement.textContent).toBe(resultText);
 		});
 	});
-	describe('host test', () => {
+	describe('Test Host Component', () => {
 		let component: TestHostComponent;
 		let fixture: ComponentFixture<TestHostComponent>;
 
@@ -60,16 +60,16 @@ describe('BreadcrumbsComponent', () => {
 		});
 
 		it('should change default properties', () => {
-			// Arrage
-			const selector = '.breadcrumbs__text';
-			const defaultText = 'Changed Text';
+			// Arrange
+			const selectorText = '.breadcrumbs__text';
+			const resultText = 'Changed Text';
 
 			// Act
 			const nativeElement = fixture.debugElement.nativeElement;
-			const textElement = nativeElement.querySelector(selector);
+			const textElement = nativeElement.querySelector(selectorText);
 
 			// Assert
-			expect(textElement.textContent).toBe(defaultText);
+			expect(textElement.textContent).toBe(resultText);
 		});
 	});
 

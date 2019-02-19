@@ -6,9 +6,9 @@
 				<app-course-search
 					class="course-search"
 					[query]="query"
-					(searchItem)="searchItem($event)"
+					(searchItem)="onSearchItem($event)"
 				></app-course-search>
-				<app-course-add class="course-add"></app-course-add>
+				<app-course-button text="Add Course" [icon]="icons.get('plus')"></app-course-button>
 			</div>
 		</div>
 	</div>
@@ -17,13 +17,12 @@
 			<app-course-list-item
 				*ngFor="let item of courses"
 				[courseItem]="item"
-				(removeItem)="removeItem($event)"
+				(removeItem)="onRemoveItem($event)"
 			></app-course-list-item>
 		</div>
 	</div>
 	<div class="course-list_footer container">
-
-		<button class="course-list__button" (click)="loadMore()">Load more</button>
+		<app-course-button [text]="loadMoreText" className="button-course" (clickButton)="onLoadMore()"></app-course-button>
 	</div>
 </div>
 

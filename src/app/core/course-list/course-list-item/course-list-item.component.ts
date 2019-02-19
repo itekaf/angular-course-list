@@ -10,25 +10,22 @@ import { Config } from 'src/app/shared/index';
 	templateUrl: './course-list-item.component.html',
 	styleUrls: ['./course-list-item.component.scss']
 })
-export class CourseListItemComponent implements OnInit {
-
-	public icons: Map<string, IconDefinition> = Config.icons;
-
-	public defaultImage: string = 'https://via.placeholder.com/500x400';
-
+export class CourseListItemComponent {
 	@Input() public courseItem: ICourse = new CourseModel();
+	@Input() public icons: Map<string, IconDefinition> = Config.icons;
+	@Input() public defaultImagePath: string = Config.default.imagePath;
+
+	@Output() public editItem: EventEmitter<ICourse> = new EventEmitter<ICourse>();
 	@Output() public removeItem: EventEmitter<ICourse> = new EventEmitter<ICourse>();
 
 	constructor() { }
 
-	public ngOnInit() {}
-
-	public edit(item: ICourse): void  {
-		console.log(item.id);
+	public onEdit(): void  {
+		this.editItem.emit(this.courseItem);
 	}
 
-	public remove(item: ICourse): void {
-		this.removeItem.emit(item);
+	public onRemove(): void {
+		this.removeItem.emit(this.courseItem);
 	}
 
 }

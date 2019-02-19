@@ -2,6 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { IUser } from 'src/app/shared/interface';
 import { UserModel } from 'src/app/shared/models';
 
+const userModel = new UserModel(1, 'Vasey');
+
 @Component({
 	selector: 'app-user-widget',
 	templateUrl: './user-widget.component.html',
@@ -15,7 +17,6 @@ export class UserWidgetComponent implements OnInit {
 	constructor() { }
 
 	public ngOnInit(): void {
-		const userModel = new UserModel(1, 'Vasya');
 		this.userData = userModel;
 	}
 	public logOff(): void {
