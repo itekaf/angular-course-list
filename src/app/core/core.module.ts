@@ -8,9 +8,11 @@ import { HeaderComponent } from './header/header.component';
 import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 
 import { WidgetsModule } from './widgets/widgets.module';
+import { UiModule } from './ui/ui.module';
 
 @NgModule({
 	imports: [
+		UiModule,
 		RouterModule,
 		CommonModule,
 		WidgetsModule,

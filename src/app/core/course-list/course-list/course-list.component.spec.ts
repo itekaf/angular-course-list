@@ -7,13 +7,18 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CourseModel } from 'src/app/shared/models';
 import { CourseListComponent } from './course-list.component';
-import { By } from '@angular/platform-browser';
+import { FilterByQueryPipe } from '../pipes/filter-by-query.pipe';
+import { SortedByPipe } from '../pipes/sorted-by.pipe';
 
 const dummyData = {
 	title: 'Dummy title',
 	icons: new Map([
 		['plus', faTrash ]
 	]),
+	items: [
+		new CourseModel(1, 'Dummy title 1'),
+		new CourseModel(2, 'Dummy title 2'),
+	],
 	moreText: 'Dummy more',
 };
 @Component({
@@ -40,6 +45,8 @@ describe('CourseListComponent', () => {
 			declarations: [
 				TestHostComponent,
 				CourseListComponent,
+				FilterByQueryPipe,
+				SortedByPipe,
 			],
 			schemas: [ NO_ERRORS_SCHEMA ],
 		})
@@ -79,13 +86,11 @@ describe('CourseListComponent', () => {
 		});
 		it('should load more', () => {
 			// Arrange
-			const firstItem = new CourseModel();
-			const inputData = [ firstItem ];
-			const outputData = [ firstItem, firstItem ];
+			const inputData = dummyData.items;
+			const outputData = dummyData.items.concat(dummyData.items);
 			component.courses = inputData;
 
 			// Act
-
 			component.onLoadMore();
 
 			// Assert
@@ -93,32 +98,32 @@ describe('CourseListComponent', () => {
 		});
 		it('should remove item', () => {
 			// Arrange
-			const firstItem = new CourseModel();
-			const secondItem = new CourseModel(1);
-			const inputData =  [ secondItem, firstItem ];
-			const outputData = [ firstItem ];
+			const removeItem = dummyData.items[0];
+			const inputData =  dummyData.items;
+			const outputData = [ dummyData.items[1] ];
 			component.courses = inputData;
 
 			// Act
-			component.onRemoveItem(secondItem);
+			component.onRemoveItem(removeItem);
 
 			// Assert
 			expect(component.courses).toEqual(outputData);
 		});
 		it('should search item', () => {
 			// Arrange
-			const firstItem = new CourseModel(1, 'title 1');
-			const secondItem = new CourseModel(1, 'title 2');
-
-			const inputData =  [ firstItem, secondItem ];
-			const outputData = [ firstItem ];
-			component.courses = inputData;
+			const inputQuery = '1';
+			const outputCount = 1;
+			const itemsSelector = '.block-course-list';
+			console.log(dummyData.items);
+			component.courses = dummyData.items;
 
 			// Act
-			component.onSearchItem('1');
+			component.onSearchItem(inputQuery);
+			const items = fixture.nativeElement.querySelector(itemsSelector);
+			fixture.detectChanges();
 
 			// Assert
-			expect(component.courses).toEqual(outputData);
+			expect(items.children.length).toEqual(outputCount);
 		});
 	});
 	describe('Test Host Component', () => {

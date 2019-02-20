@@ -9,6 +9,11 @@ import { CourseListComponent } from './course-list/course-list.component';
 import { CourseSearchComponent } from './course-search/course-search.component';
 import { CourseListItemComponent } from './course-list-item/course-list-item.component';
 import { CourseListIconComponent } from './course-list-icon/course-list-icon.component';
+import { FilterByQueryPipe } from './pipes/filter-by-query.pipe';
+import { SortedByPipe } from './pipes/sorted-by.pipe';
+import { ItemStatusLightDirective } from './directives/item-status-light.directive';
+import { ItemRatedLightDirective } from './directives/item-rated-light.directive';
+import { ItemDurationPipe } from './pipes/item-duration.pipe';
 
 @NgModule({
 	imports: [
@@ -23,6 +28,11 @@ import { CourseListIconComponent } from './course-list-icon/course-list-icon.com
 		CourseSearchComponent,
 		CourseListItemComponent,
 		CourseListIconComponent,
+		FilterByQueryPipe,
+		SortedByPipe,
+		ItemStatusLightDirective,
+		ItemRatedLightDirective,
+		ItemDurationPipe,
 	],
 	exports: [
 		CourseListComponent,

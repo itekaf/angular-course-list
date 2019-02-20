@@ -12,7 +12,7 @@ export class CourseSearchComponent {
 
 	public icons: Map<string, IconDefinition> = Config.icons;
 
-	@Input() public query?: string;
+	@Input() public query: string;
 	@Output() public searchItem: EventEmitter<string> = new EventEmitter<string>();
 
 	public onSearch(): void {

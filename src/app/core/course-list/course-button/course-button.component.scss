@@ -21,6 +21,9 @@
 .button-course:hover {
 	background: darken($color: #30b6dd, $amount: 10)
 }
+.button-course__text {
+	padding-left: 10px;
+}
 
 .button-course-search {
 	padding: 10px;

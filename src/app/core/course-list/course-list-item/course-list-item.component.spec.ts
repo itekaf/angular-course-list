@@ -8,6 +8,7 @@ import { Config } from 'src/app/shared';
 import { ICourse } from 'src/app/shared/interface';
 import { CourseModel } from 'src/app/shared/models';
 import { CourseListItemComponent } from './course-list-item.component';
+import { ItemDurationPipe } from '../pipes/item-duration.pipe';
 
 const dummyData = {
 	icons:  new Map([
@@ -51,6 +52,7 @@ describe('CourseListItemComponent', () => {
 			declarations: [
 				TestHostComponent,
 				CourseListItemComponent,
+				ItemDurationPipe,
 			],
 			schemas: [ NO_ERRORS_SCHEMA ],
 		})
@@ -104,9 +106,9 @@ describe('CourseListItemComponent', () => {
 			const selectorIcon: string = '.box-course-item__button svg';
 			const selectorImage: string = '.box-course-item__img img';
 			const selectorItemTitle: string = '.box-course-item__title';
-			const resultImagePath: string = dummyData.imgPath;
 			const resutIcon: string = 'plus';
-			const resultItemTitle = dummyData.model.title;
+			const resultImagePath: string = dummyData.imgPath;
+			const resultItemTitle = dummyData.model.title.toUpperCase();
 
 			// Act
 			const nativeElement: HTMLElement = fixture.debugElement.nativeElement;
@@ -115,8 +117,9 @@ describe('CourseListItemComponent', () => {
 			const titleElement: HTMLElement = nativeElement.querySelector(selectorItemTitle);
 
 			// Assert
+			console.log(typeof titleElement.textContent, titleElement.textContent, resultItemTitle);
 			expect(iconElement.dataset.icon).toBe(resutIcon);
-			expect(titleElement.textContent).toBe(resultItemTitle);
+			expect(titleElement.textContent).toContain(resultItemTitle);
 			expect(imageElement.getAttribute('src')).toBe(resultImagePath);
 		});
 

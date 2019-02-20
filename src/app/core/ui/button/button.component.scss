@@ -1,0 +1,35 @@
+.app-button {
+	padding: 10px 15px;
+	border-radius: 5px;
+	font-weight: bold;
+	font-size: 12px;
+	height: 100%;
+}
+.app-button__text {
+	padding-left: 10px;
+}
+
+.button-transparent {
+	color: white;
+	border: 1px solid white;
+}
+.button-transparent:hover {
+	border: 1px solid transparent;
+	background: #9bc837;
+}
+
+.button-course {
+	color: white;
+	background: #30b6dd;
+}
+.button-course:hover {
+	background: darken($color: #30b6dd, $amount: 10)
+}
+
+.button-course-search {
+	color: white;
+	background: #9bc837;
+}
+.button-course-search:hover {
+	background: darken(#9bc837, 10)
+}
