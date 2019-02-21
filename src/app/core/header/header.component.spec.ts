@@ -7,7 +7,7 @@ describe('HeaderComponent', () => {
 	beforeEach(async(() => {
 		TestBed.configureTestingModule({
 			declarations: [
-				HeaderComponent
+				HeaderComponent,
 			],
 			schemas: [ NO_ERRORS_SCHEMA ]
 		})
@@ -25,8 +25,13 @@ describe('HeaderComponent', () => {
 		});
 
 		it('should create', () => {
+			// Assert
 			expect(component).toBeTruthy();
 		});
-	});
 
+		it('should get user data', () => {
+			// Assert
+			expect(component.userData).toBeTruthy();
+		});
+	});
 });

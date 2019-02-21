@@ -1,8 +1,13 @@
 <header class="header">
 	<div class="container">
 		<div class="header_wrapper">
-			<app-logo></app-logo>
-			<app-user-widget></app-user-widget>
+			<div class="header_logo">
+				<app-logo></app-logo>
+			</div>
+			<article class="user-article">
+				<p *ngIf="userData && userData.firstName" class="user-article__username">{{userData.firstName}}</p>
+				<app-button *ngIf="userData" (clickButton)="onLogOff()" text="Log Off"></app-button>
+			</article>
 		</div>
 	</div>
 </header>

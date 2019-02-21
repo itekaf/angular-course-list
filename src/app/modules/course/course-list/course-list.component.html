@@ -1,0 +1,50 @@
+<div class="course-list">
+	<div class="course-list_header">
+		<div class="container">
+			<h2 class="course-list__title">{{title}}</h2>
+			<div class="course-list_search">
+				<app-course-search
+					class="course-search"
+					[query]="query"
+					(searchItem)="onSearchItem($event)"
+				></app-course-search>
+				<app-button text="Add Course" [icon]="icons.get('plus')" (clickButton)="onAdd()"></app-button>
+			</div>
+		</div>
+	</div>
+
+	<div class="course-list_content">
+		<div class="course-list_filter">
+			<div class="container">
+				<!-- TODO: RL: Refactor this + create test -->
+				<app-button text="name" className="button-course" [icon]="sortedByTitle ? icons.get('sortNumericDown') : icons.get('sortNumericUp')" (clickButton)="onSortedByTitle()"></app-button>
+				<app-button text="date" className="button-course" [icon]="sortedByDate ? icons.get('sortNumericDown') : icons.get('sortNumericUp')" (clickButton)="onSortedByDate()"></app-button>
+				<app-button text="duration" className="button-course" [icon]="sortedByDuration ? icons.get('sortNumericDown') : icons.get('sortNumericUp')" (clickButton)="onSortedByDuration()"></app-button>
+			</div>
+		</div>
+
+		<div class="block-course-list container">
+			<ng-container *ngIf="(courses
+				| filterByQuery: query
+				| sortedBy: 'title': sortedByTitle
+				| sortedBy: 'creationDate': sortedByDate
+				| sortedBy: 'duration': sortedByDuration
+			) as items">
+				<app-course-item
+					*ngFor="let item of items"
+					[courseItem]="item"
+					(editEvent)="onEditItem($event)"
+					(removeEvent)="onRemoveItem($event)"
+				></app-course-item>
+				<div *ngIf="!items.length" class="block-course-list__empty">
+					{{ noDataMessage | uppercase }}
+				</div>
+			</ng-container>
+		</div>
+	</div>
+	<div class="course-list_footer container">
+		<app-button [text]="loadMoreText" className="button-course" (clickButton)="onLoadMore()"></app-button>
+	</div>
+</div>
+
+

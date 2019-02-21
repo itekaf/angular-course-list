@@ -4,9 +4,10 @@
 	font-weight: bold;
 	font-size: 12px;
 	height: 100%;
+	display:  flex;
 }
-.app-button__text {
-	padding-left: 10px;
+.app-button__icon {
+	padding-right: 10px;
 }
 
 .button-transparent {
@@ -24,6 +25,22 @@
 }
 .button-course:hover {
 	background: darken($color: #30b6dd, $amount: 10)
+}
+
+.button-course-item {
+	color: #30b6dd;
+	border: 1px solid #30b6dd;
+	border-radius: 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 40px;
+	height: 40px;
+	margin: 10px 0;
+}
+.button-course-item:hover {
+	color: white;
+	background: #30b6dd;
 }
 
 .button-course-search {

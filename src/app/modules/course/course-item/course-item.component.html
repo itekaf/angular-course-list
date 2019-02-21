@@ -1,0 +1,46 @@
+<div class="box-course-item" [appItemStatusLight]="courseItem.creationDate" [appItemRatedLight]="courseItem.topRated">
+	<div class="box-course-item__img">
+		<a class="box-course-item__link">
+			<!-- TODO: RL: move later defaultImagePath to back-end check data class -->
+			<img
+				width="100%"
+				alt="{{courseItem.title}}"
+				src="{{courseItem.img || defaultImagePath }}"
+			/>
+		</a>
+	</div>
+	<div class="box-course-item__content box-course-item__wrapper">
+		<div class="box-course-item__info">
+			<div class="box-course-item__wrapper">
+				<div class="nox-course-item__title">
+					{{courseItem.title }}
+				</div>
+				<div class="box-course-item__top-rated">
+					<app-icon [icon]="icons.get('star')"></app-icon>
+				</div>
+			</div>
+			<div class="box-course-item__description" *ngIf="courseItem.description">
+				{{courseItem.description}}
+			</div>
+			<div class="box-course-item__footer box-course-item__additionall-info">
+				<app-icon
+					title="Duration"
+					*ngIf="courseItem.duration"
+					[icon]="icons.get('clock')"
+					text="{{courseItem.duration | itemDuration}}"
+				></app-icon>
+				<app-icon
+					title="Date"
+					*ngIf="courseItem.creationDate"
+					[icon]="icons.get('calendar')"
+					[text]="courseItem.creationDate | date:'dd.MM.yyyy'"
+				></app-icon>
+			</div>
+		</div>
+		<div class="box-course-item__buttons">
+			<app-button className="button-course-item" (clickButton)="onEdit()" [icon]="icons.get('edit')"></app-button>
+			<app-button className="button-course-item" (clickButton)="onRemove()" [icon]="icons.get('trash')"></app-button>
+		</div>
+	</div>
+</div>
+

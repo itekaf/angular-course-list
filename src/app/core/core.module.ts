@@ -7,7 +7,6 @@ import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
 import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 
-import { WidgetsModule } from './widgets/widgets.module';
 import { UiModule } from './ui/ui.module';
 
 @NgModule({
@@ -15,7 +14,6 @@ import { UiModule } from './ui/ui.module';
 		UiModule,
 		RouterModule,
 		CommonModule,
-		WidgetsModule,
 	],
 	declarations: [
 		LogoComponent,
@@ -24,10 +22,11 @@ import { UiModule } from './ui/ui.module';
 		BreadcrumbsComponent,
 	],
 	exports: [
-		HeaderComponent,
+		UiModule,
+		LogoComponent,
 		FooterComponent,
+		HeaderComponent,
 		BreadcrumbsComponent,
 	]
-
 })
 export class CoreModule { }

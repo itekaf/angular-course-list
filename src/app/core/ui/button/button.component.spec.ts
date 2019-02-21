@@ -1,32 +1,27 @@
 import { By } from '@angular/platform-browser';
-import { Component } from '@angular/core';
-import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
+import { Component, NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { Config } from 'src/app/shared';
 import { ButtonComponent } from './button.component';
 
 const dummyData = {
 	text: 'Dummy text',
-	type: 'Submit',
-	icon: Config.icons.get('plus'),
-	className: 'button-dummy',
+	type: 'submit',
+	className: 'dummy-class',
 };
 
 @Component({
 	template: `
 		<app-button
 			[text]="text"
-			[icon]="icon"
-			[className]="className"
 			[type]="type"
+			[className]="className"
 			(clickButton)="onClickButton()"
 		></app-button>
 	`,
 })
 class TestHostComponent {
 	public text: string = dummyData.text;
-	public icon: IconDefinition = dummyData.icon;
 	public type: string = dummyData.type;
 	public className: string = dummyData.className;
 	public hasClicked: boolean = false;
@@ -36,7 +31,8 @@ class TestHostComponent {
 describe('ButtonComponent', () => {
 	beforeEach(async(() => {
 		TestBed.configureTestingModule({
-		declarations: [ ButtonComponent, TestHostComponent ]
+			declarations: [ ButtonComponent, TestHostComponent ],
+			schemas: [ NO_ERRORS_SCHEMA ],
 		})
 		.compileComponents();
 	}));
@@ -58,8 +54,9 @@ describe('ButtonComponent', () => {
 
 		it('should have default properties', () => {
 			// Arrange
-			const resultType: string = 'button';
 			const selectorButton: string = 'button';
+
+			const resultType: string = 'button';
 			const resultClassName: string = 'button-transparent';
 
 			// Act
@@ -89,23 +86,19 @@ describe('ButtonComponent', () => {
 		it('should change default properties and set ', () => {
 			// Arrange
 			const selectorText = `.${dummyData.className}__text`;
-			const selectorIcon = `.${dummyData.className}__img svg`;
 			const selectorButton = 'button';
+
 			const resultText: string = dummyData.text;
-			const resultIcon: string = 'plus';
 			const resultType: string = dummyData.type;
 
 			// Act
 			const nativeElement: HTMLElement = fixture.debugElement.nativeElement;
 			const textElement: HTMLElement = nativeElement.querySelector(selectorText);
-			const iconElement: HTMLElement = nativeElement.querySelector(selectorIcon);
 			const buttonElement: HTMLElement = nativeElement.querySelector(selectorButton);
 
 			// Assert
 			expect(textElement).toBeTruthy();
-			expect(iconElement).toBeTruthy();
 			expect(textElement.textContent).toBe(resultText);
-			expect(iconElement.dataset.icon).toBeTruthy(resultIcon);
 			expect(buttonElement.getAttribute('type')).toBe(resultType);
 		});
 

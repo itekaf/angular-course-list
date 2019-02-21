@@ -4,10 +4,9 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 @Component({
 	selector: 'app-button',
 	templateUrl: './button.component.html',
-	styleUrls: ['./button.component.scss']
+	styleUrls: ['./button.component.scss'],
 })
 export class ButtonComponent {
-
 	@Input() public text: string;
 	@Input() public icon: IconDefinition;
 	@Input() public type: string = 'button';

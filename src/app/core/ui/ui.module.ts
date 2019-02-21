@@ -4,9 +4,11 @@ import { IconComponent } from './icon/icon.component';
 import { ButtonComponent } from './button/button.component';
 import { InputComponent } from './input/input.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
 	imports: [
+		FormsModule,
 		CommonModule,
 		FontAwesomeModule,
 	],
