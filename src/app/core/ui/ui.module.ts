@@ -5,6 +5,7 @@ import { ButtonComponent } from './button/button.component';
 import { InputComponent } from './input/input.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
+import { LabelComponent } from './label/label.component';
 
 @NgModule({
 	imports: [
@@ -16,8 +17,10 @@ import { FormsModule } from '@angular/forms';
 		IconComponent,
 		InputComponent,
 		ButtonComponent,
+		LabelComponent,
 	],
 	exports: [
+		LabelComponent,
 		IconComponent,
 		InputComponent,
 		ButtonComponent,

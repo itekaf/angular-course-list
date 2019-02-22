@@ -13,16 +13,22 @@ class LabelConfig {
 	styleUrls: ['./input.component.scss']
 })
 export class InputComponent {
+	// TODO: RL: Implement Label Config
 	@Input() public label: LabelConfig;
 	@Input() public type: string = 'text';
-	@Input() public value: string;
+	@Input() public defaultValue: string;
 	@Input() public placeholder: string = 'Enter value ...';
 
 	@Output() public inputEvent: EventEmitter<string> = new EventEmitter<string>();
 
+	public value: string = this.defaultValue;
+
 	constructor() { }
 
-	public onInput(): void {
+	public onInput(event: any): void {
+		console.log(event);
+		console.log('11111');
+		console.log(this.value, this.defaultValue);
 		this.inputEvent.emit(this.value);
 	}
 }
