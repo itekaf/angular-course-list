@@ -7,6 +7,7 @@ import { InputComponent } from './input.component';
 
 const dummyData = {
 	type: 'dummy',
+	name: 'dummy',
 	value: 'dummy value',
 	placeholder: 'dummy placeholder',
 };
@@ -15,6 +16,7 @@ const dummyData = {
 	template: `
 		<app-input
 			[type]="type"
+			[name]="name"
 			[defaultValue]="defaultValue"
 			[placeholder]="placeholder"
 			(inputEvent)="onInput()"
@@ -23,6 +25,7 @@ const dummyData = {
 })
 class TestHostComponent {
 	public type: string = dummyData.type;
+	public name: string = dummyData.name;
 	public defaultValue: string = dummyData.value;
 	public placeholder: string = dummyData.placeholder;
 
@@ -57,10 +60,16 @@ describe('InputComponent', () => {
 
 		it('should have default properties', () => {
 			// Arrange
+			const selectInput = 'input';
+			const resultType = 'text';
+			const resultPlaceholder = 'Enter value ...';
 
 			// Act
+			const inputElement: HTMLElement = fixture.nativeElement.querySelector(selectInput);
 
 			// Assert
+			expect(inputElement.getAttribute('type')).toBe(resultType);
+			expect(inputElement.getAttribute('placeholder')).toBe(resultPlaceholder);
 		});
 	});
 

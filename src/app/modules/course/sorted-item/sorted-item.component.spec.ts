@@ -87,7 +87,7 @@ describe('SortedItemComponent', () => {
 
 		it('should change default properties', () => {
 			// Arange
-			// TODO: RL: How to test it?
+			// TODO: RL: How to test it? - with spy
 
 			// Act
 

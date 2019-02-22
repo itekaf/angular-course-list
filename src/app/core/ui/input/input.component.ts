@@ -15,9 +15,10 @@ class LabelConfig {
 export class InputComponent {
 	// TODO: RL: Implement Label Config
 	@Input() public label: LabelConfig;
+	@Input() public name: string;
 	@Input() public type: string = 'text';
-	@Input() public defaultValue: string;
 	@Input() public placeholder: string = 'Enter value ...';
+	@Input() public defaultValue: string = '';
 
 	@Output() public inputEvent: EventEmitter<string> = new EventEmitter<string>();
 
