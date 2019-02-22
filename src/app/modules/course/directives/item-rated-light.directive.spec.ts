@@ -7,9 +7,9 @@ import { ItemRatedLightDirective } from './item-rated-light.directive';
 
 @Component({
 	template: `
-		<div [appItemRatedLight]='on'></div>
-		<div [appItemRatedLight]='off'></div>
-		<div></div>
+		<div [appItemRatedLight]='on'>Directive On</div>
+		<div [appItemRatedLight]='off'>Directive Off</div>
+		<div>Directive Missing</div>
 	`,
 })
 class TestHostComponent {
@@ -50,7 +50,7 @@ describe('ItemRatedLightDirective', () => {
 		expect(resultCount).toBe(itemsCount);
 	});
 
-	it('should light 1st <div> as "top"', () => {
+	it('should lighted 1st element as "top"', () => {
 		// Arange
 		const topRatedElement = directivesElements[0];
 
@@ -61,7 +61,7 @@ describe('ItemRatedLightDirective', () => {
 		expect(resultLight).toBe(ItemRatedLightEnum.top);
 	});
 
-	it('should light 1st <div> as "default"', () => {
+	it('should lighted 2st element as "default"', () => {
 		// Arange
 		const noRatedElement = directivesElements[1];
 
@@ -72,7 +72,7 @@ describe('ItemRatedLightDirective', () => {
 		expect(resultLight).toBe(ItemRatedLightEnum.default);
 	});
 
-	it('bare <div> should not have a style property', () => {
+	it('bare element should not have a style property', () => {
 		// Arrange
 		const selectorNoDirective = 'div:not([appItemRatedLight])';
 		const noDirectiveElement = fixture.debugElement.query(By.css(selectorNoDirective));

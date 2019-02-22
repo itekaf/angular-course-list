@@ -63,7 +63,7 @@ describe('ItemStatusLightDirective', () => {
 		expect(resultCount).toBe(elementsCount);
 	});
 
-	it('should have new light of element', () => {
+	it('should lighted 1st element as "new"', () => {
 		// Arrange
 		const newElement = directiveElements[0];
 
@@ -74,7 +74,7 @@ describe('ItemStatusLightDirective', () => {
 		expect(resultLight).toBe(ItemStatusLightEnum.new);
 	});
 
-	it('should have future light of element', () => {
+	it('should lighted 2st element as "future"', () => {
 		// Arrange
 		const futureElement = directiveElements[1];
 
@@ -85,7 +85,7 @@ describe('ItemStatusLightDirective', () => {
 		expect(resultLight).toBe(ItemStatusLightEnum.future);
 	});
 
-	it('should have default light of element', () => {
+	it('should lighted 3st element as "default"', () => {
 		// Arrange
 		const secondElement = 2;
 		const defaultElement = directiveElements[secondElement];
@@ -97,7 +97,7 @@ describe('ItemStatusLightDirective', () => {
 		expect(resultLight).toBe(ItemStatusLightEnum.default);
 	});
 
-	it('bare <div> should not have a style property', () => {
+	it('bare element should not have a style property', () => {
 		// Arrange
 		const selectorNoDirective = 'div:not([appItemStatusLight])';
 		const noDirectiveElement = fixture.debugElement.query(By.css(selectorNoDirective));

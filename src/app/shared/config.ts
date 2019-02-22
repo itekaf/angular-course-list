@@ -1,11 +1,15 @@
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
-import { faPlus, faEdit, faClock, faTrashAlt, faCalendarAlt, faSearch, faSortAmountDown, faSortAmountUp, faSortNumericDown, faSortNumericUp, faStar } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faEdit, faClock, faTrashAlt, faCalendarAlt, faSearch, faSortAmountDown, faSortAmountUp, faSortNumericDown, faSortNumericUp, faStar, faAt, faKey, faSmile, faMinus } from '@fortawesome/free-solid-svg-icons';
 
 export class Config {
 	public static icons: Map<string, IconDefinition> = new Map([
+		['at', faAt],
+		['key', faKey],
 		['star', faStar],
 		['plus', faPlus],
 		['edit', faEdit],
+		['minus', faMinus],
+		['dummy', faSmile],
 		['clock', faClock],
 		['trash', faTrashAlt],
 		['search', faSearch],

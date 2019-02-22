@@ -1,0 +1,21 @@
+<div class="container">
+	<div class="page-login">
+		<!-- TODO: RL: Implementing it later with separate form component -->
+		<form class="login-form" (submit)="onSubmit()">
+			<!-- TODO: RL: Move it later to separate component `form-item` which should be included an element with a result of input validation  -->
+			<div class="login-form__item login-form__wrapper">
+				<app-label className="login-form" [icon]="icons.get('at')" text="Username" for="username">
+					<input text="text" class="login-form__input" [(ngModel)]="username" placeholder="Please enter email ..." name="username" />
+				</app-label>
+			</div>
+			<!-- TODO: RL: Move it later to separate component `form-item` which should be included an element with a result of input validation  -->
+			<div class="login-form__item login-form__wrapper">
+				<app-label className="login-form" [icon]="icons.get('key')" text="Password" for="password">
+					<input type="password" class="login-form__input" [(ngModel)]="password" placeholder="Please enter password ..." name="password" />
+				</app-label>
+			</div>
+			<app-button type="submit" className="button-blue" text="Login"></app-button>
+		</form>
+	</div>
+</div>
+

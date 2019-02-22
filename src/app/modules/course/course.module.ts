@@ -16,6 +16,7 @@ import { FilterByQueryPipe } from './pipes/filter-by-query.pipe';
 
 import { ItemRatedLightDirective } from './directives/item-rated-light.directive';
 import { ItemStatusLightDirective } from './directives/item-status-light.directive';
+import { SortedItemComponent } from './sorted-item/sorted-item.component';
 
 @NgModule({
 	imports: [
@@ -26,6 +27,7 @@ import { ItemStatusLightDirective } from './directives/item-status-light.directi
 		FontAwesomeModule,
 	],
 	declarations: [
+		SortedItemComponent,
 		CourseItemComponent,
 		CourseListComponent,
 		CourseSearchComponent,

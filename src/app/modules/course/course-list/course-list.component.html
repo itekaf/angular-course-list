@@ -17,9 +17,9 @@
 		<div class="course-list_filter">
 			<div class="container">
 				<!-- TODO: RL: Refactor this + create test -->
-				<app-button text="name" className="button-course" [icon]="sortedByTitle ? icons.get('sortNumericDown') : icons.get('sortNumericUp')" (clickButton)="onSortedByTitle()"></app-button>
-				<app-button text="date" className="button-course" [icon]="sortedByDate ? icons.get('sortNumericDown') : icons.get('sortNumericUp')" (clickButton)="onSortedByDate()"></app-button>
-				<app-button text="duration" className="button-course" [icon]="sortedByDuration ? icons.get('sortNumericDown') : icons.get('sortNumericUp')" (clickButton)="onSortedByDuration()"></app-button>
+				<app-sorted-item (clickEvent)="onSortedByTitle()">name</app-sorted-item>
+				<app-sorted-item (clickEvent)="onSortedByDate()">date</app-sorted-item>
+				<app-sorted-item (clickEvent)="onSortedByDuration()">duration</app-sorted-item>
 			</div>
 		</div>
 
@@ -43,7 +43,7 @@
 		</div>
 	</div>
 	<div class="course-list_footer container">
-		<app-button [text]="loadMoreText" className="button-course" (clickButton)="onLoadMore()"></app-button>
+		<app-button [text]="loadMoreText" className="button-blue" (clickButton)="onLoadMore()"></app-button>
 	</div>
 </div>
 

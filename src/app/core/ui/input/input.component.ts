@@ -25,10 +25,7 @@ export class InputComponent {
 
 	constructor() { }
 
-	public onInput(event: any): void {
-		console.log(event);
-		console.log('11111');
-		console.log(this.value, this.defaultValue);
+	public onInput(): void {
 		this.inputEvent.emit(this.value);
 	}
 }

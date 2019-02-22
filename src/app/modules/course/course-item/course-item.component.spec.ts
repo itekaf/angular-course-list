@@ -44,7 +44,7 @@ class TestHostComponent {
 		this.editItem = item;
 	}
 }
-describe('CourseListItemComponent', () => {
+describe('CourseItemComponent', () => {
 	beforeEach(async(() => {
 		TestBed.configureTestingModule({
 			imports: [ FontAwesomeModule ],
@@ -106,7 +106,7 @@ describe('CourseListItemComponent', () => {
 			const selectorItemTitle: string = '.box-course-item__title';
 
 			const resultImagePath: string = dummyData.imgPath;
-			const resultItemTitle = dummyData.model.title;
+			const resultItemTitle: string = dummyData.model.title;
 
 			// Act
 			const nativeElement: HTMLElement = fixture.debugElement.nativeElement;
@@ -118,28 +118,28 @@ describe('CourseListItemComponent', () => {
 			expect(imageElement.getAttribute('src')).toBe(resultImagePath);
 		});
 
-		// it('should remove item', () => {
-		// 	// Arrange
-		// 	const selectorButtonRemove: string = '.box-course-item__remove';
+		it('should remove item', () => {
+			// // Arrange
+			// const selectorButtonRemove: string = '.box-course-item__remove';
 
-		// 	// Act
-		// 	const buttonElement: DebugElement = fixture.debugElement.query(By.css(selectorButtonRemove));
-		// 	buttonElement.triggerEventHandler('click', null);
+			// // Act
+			// const buttonElement: DebugElement = fixture.debugElement.query(By.css(selectorButtonRemove));
+			// buttonElement.triggerEventHandler('click', null);
 
-		// 	// Assert
-		// 	expect(component.removeItem).toEqual(dummyData.model);
-		// });
+			// // Assert
+			// expect(component.removeItem).toEqual(dummyData.model);
+		});
 
-		// it('should edit item', () => {
-		// 	// Arrange
-		// 	const selectorButtonRemove: string = '.box-course-item__edit';
+		it('should edit item', () => {
+			// // Arrange
+			// const selectorButtonRemove: string = '.box-course-item__edit';
 
-		// 	// Act
-		// 	const buttonElement: DebugElement = fixture.debugElement.query(By.css(selectorButtonRemove));
-		// 	buttonElement.triggerEventHandler('click', null);
+			// // Act
+			// const buttonElement: DebugElement = fixture.debugElement.query(By.css(selectorButtonRemove));
+			// buttonElement.triggerEventHandler('click', null);
 
-		// 	// Assert
-		// 	expect(component.editItem).toEqual(dummyData.model);
-		// });
+			// // Assert
+			// expect(component.editItem).toEqual(dummyData.model);
+		});
 	});
 });
