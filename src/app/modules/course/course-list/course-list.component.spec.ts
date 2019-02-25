@@ -7,8 +7,11 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CourseModel } from 'src/app/shared/models';
 import { CourseListComponent } from './course-list.component';
-import { FilterByQueryPipe } from '../pipes/filter-by-query.pipe';
+
 import { SortedByPipe } from '../pipes/sorted-by.pipe';
+import { FilterByQueryPipe } from '../pipes/filter-by-query.pipe';
+
+import { CourseService } from '../services/course.service';
 
 const dummyData = {
 	title: 'Dummy title',
@@ -37,7 +40,12 @@ class TestHostComponent {
 	public loadMoreText: string = dummyData.moreText;
 }
 describe('CourseListComponent', () => {
+	let serviceObj;
+
 	beforeEach(async(() => {
+		serviceObj = jasmine.createSpyObj('CourseService', ['getList', 'remove', 'edit', 'create']);
+		serviceObj.getList.and.returnValue(dummyData.items);
+
 		TestBed.configureTestingModule({
 			imports: [
 				FormsModule,
@@ -48,6 +56,9 @@ describe('CourseListComponent', () => {
 				CourseListComponent,
 				FilterByQueryPipe,
 				SortedByPipe,
+			],
+			providers: [
+				{ provide: CourseService, useValue: serviceObj }
 			],
 			schemas: [ NO_ERRORS_SCHEMA ],
 		})
@@ -82,14 +93,12 @@ describe('CourseListComponent', () => {
 		});
 
 		it('should get courses list', () => {
-			// Act
-			expect(component.courses.length).not.toBe(0);
+			// Assert
+			expect(serviceObj.getList.calls.any()).toBe(true);
 		});
 		it('should load more', () => {
 			// Arrange
-			const inputData = dummyData.items;
 			const outputData = dummyData.items.concat(dummyData.items);
-			component.courses = inputData;
 
 			// Act
 			component.onLoadMore();
@@ -100,16 +109,33 @@ describe('CourseListComponent', () => {
 		it('should remove item', () => {
 			// Arrange
 			const removeItem = dummyData.items[0];
-			const inputData =  dummyData.items;
-			const outputData = [ dummyData.items[1] ];
-			component.courses = inputData;
 
 			// Act
 			component.onRemoveItem(removeItem.id);
 
 			// Assert
-			expect(component.courses).toEqual(outputData);
+			expect(serviceObj.remove.calls.any()).toBe(true);
 		});
+
+		it('should edit item', () => {
+			// Arrange
+			const editItem = dummyData.items[0];
+
+			// Act
+			component.onEditItem(editItem.id, editItem);
+
+			// Assert
+			expect(serviceObj.edit.calls.any()).toBe(true);
+		});
+
+		it('should add item', () => {
+			// Act
+			component.onAdd();
+
+			// Assert
+			expect(serviceObj.create.calls.any()).toBe(true);
+		});
+
 		it('should search item', () => {
 			// Arrange
 			const inputQuery = '1';

@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Config } from 'src/app/shared';
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
+import { AuthService } from 'src/app/modules/user/services/auth.service';
 
 @Component({
 	selector: 'app-login',
@@ -13,9 +14,9 @@ export class LoginComponent {
 
 	public icons: Map<string, IconDefinition> = Config.icons;
 
-	constructor() { }
+	constructor(private authService: AuthService) { }
 
 	public onSubmit(): void {
-		console.log(`${this.username} logged in successfully`);
+		this.authService.Login(this.username, this.password);
 	}
 }

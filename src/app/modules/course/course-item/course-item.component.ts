@@ -1,9 +1,11 @@
 import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
+import { IEdit } from 'src/app/shared/interface/edit.interface';
+import { Config } from 'src/app/shared/index';
 import { CourseModel } from 'src/app/shared/models';
 
-import { Config } from 'src/app/shared/index';
+type EditCourseType = IEdit<CourseModel>;
 
 @Component({
 	selector: 'app-course-item',
@@ -11,21 +13,27 @@ import { Config } from 'src/app/shared/index';
 	styleUrls: ['./course-item.component.scss']
 })
 export class CourseItemComponent {
-	@Input() public courseItem: CourseModel = new CourseModel();
+	// TODO: RL: move courseItem, and e.t.c like a DI
+	@Input() public courseItem: CourseModel = new CourseModel(1, 'temp');
 	@Input() public icons: Map<string, IconDefinition> = Config.icons;
-	@Input() public defaultImagePath: string = Config.default.imagePath;
 
-	@Output() public editEvent: EventEmitter<CourseModel> = new EventEmitter<CourseModel>();
-	@Output() public removeEvent: EventEmitter<CourseModel> = new EventEmitter<CourseModel>();
+	@Output() public editEvent: EventEmitter<EditCourseType> = new EventEmitter<EditCourseType>();
+	@Output() public removeEvent: EventEmitter<number> = new EventEmitter<number>();
 
-	constructor() { }
+	// TODO: RL: Move out it
+	constructor() {	}
 
 	public onEdit(): void  {
-		this.editEvent.emit(this.courseItem);
+		const editData = {
+			id: this.courseItem.id,
+			data: this.courseItem,
+		};
+		this.editEvent.emit(editData);
 	}
 
 	public onRemove(): void {
-		this.removeEvent.emit(this.courseItem);
+		const result = confirm('Do you really want to delete this course?');
+		if (result) { this.removeEvent.emit(this.courseItem.id); }
 	}
 
 }

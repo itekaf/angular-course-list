@@ -1,11 +1,10 @@
 <div class="box-course-item" [appItemStatusLight]="courseItem.creationDate" [appItemRatedLight]="courseItem.topRated">
 	<div class="box-course-item__img">
 		<a class="box-course-item__link">
-			<!-- TODO: RL: move later defaultImagePath to back-end check data class -->
 			<img
 				width="100%"
 				alt="{{courseItem.title}}"
-				src="{{courseItem.img || defaultImagePath }}"
+				src="{{courseItem.imagePath }}"
 			/>
 		</a>
 	</div>

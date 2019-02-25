@@ -1,4 +1,3 @@
-import { By } from '@angular/platform-browser';
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
@@ -16,7 +15,6 @@ const dummyData = {
 		['clock', Config.icons.get('plus')],
 		['calendar', Config.icons.get('plus')],
 	]),
-	imgPath: 'https://via.placeholder.com/100',
 	model: new CourseModel(1, 'Angular Vasey')
 };
 
@@ -25,7 +23,6 @@ const dummyData = {
 		<app-course-item
 			[icons]="icons"
 			[courseItem]="courseItem"
-			[defaultImagePath]="defaultImagePath"
 			(editItem)="onEditItem($event)"
 			(removeItem)="onRemoveItem($event)"
 		></app-course-item>
@@ -33,7 +30,6 @@ const dummyData = {
 })
 class TestHostComponent {
 	public icons: Map<string, IconDefinition> = dummyData.icons;
-	public defaultImagePath: string = dummyData.imgPath;
 	public courseItem: CourseModel = dummyData.model;
 	public removeItem: CourseModel;
 	public editItem: CourseModel;
@@ -102,44 +98,32 @@ describe('CourseItemComponent', () => {
 
 		it('should change default properties', () => {
 			// Arrange
-			const selectorImage: string = '.box-course-item__img img';
 			const selectorItemTitle: string = '.box-course-item__title';
 
-			const resultImagePath: string = dummyData.imgPath;
 			const resultItemTitle: string = dummyData.model.title;
 
 			// Act
 			const nativeElement: HTMLElement = fixture.debugElement.nativeElement;
-			const imageElement: HTMLElement = nativeElement.querySelector(selectorImage);
 			const titleElement: HTMLElement = nativeElement.querySelector(selectorItemTitle);
 
 			// Assert
 			expect(titleElement.textContent).toContain(resultItemTitle);
-			expect(imageElement.getAttribute('src')).toBe(resultImagePath);
 		});
 
 		it('should remove item', () => {
-			// // Arrange
-			// const selectorButtonRemove: string = '.box-course-item__remove';
+			// Arrange
 
-			// // Act
-			// const buttonElement: DebugElement = fixture.debugElement.query(By.css(selectorButtonRemove));
-			// buttonElement.triggerEventHandler('click', null);
+			// Act
 
-			// // Assert
-			// expect(component.removeItem).toEqual(dummyData.model);
+			// Assert
 		});
 
 		it('should edit item', () => {
-			// // Arrange
-			// const selectorButtonRemove: string = '.box-course-item__edit';
+			// Arrange
 
-			// // Act
-			// const buttonElement: DebugElement = fixture.debugElement.query(By.css(selectorButtonRemove));
-			// buttonElement.triggerEventHandler('click', null);
+			// Act
 
-			// // Assert
-			// expect(component.editItem).toEqual(dummyData.model);
+			// Assert
 		});
 	});
 });

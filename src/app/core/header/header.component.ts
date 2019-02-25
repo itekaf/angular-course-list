@@ -1,8 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 import { UserModel } from 'src/app/shared/models';
-
-const userData = new UserModel(1, 'Vasey');
+import { AuthService } from 'src/app/modules/user/services/auth.service';
 
 @Component({
 	selector: 'app-header',
@@ -10,14 +9,17 @@ const userData = new UserModel(1, 'Vasey');
 	styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
+	public userAuth: boolean = false;
 	public userData: UserModel;
 
-	constructor() { }
+	constructor(private authService: AuthService) { }
 
 	public ngOnInit(): void {
-		this.userData = userData;
+		this.userData = this.authService.getUserInfo();
+		this.userAuth = this.authService.IsAuthenticated();
 	}
+
 	public onLogOff(): void {
-		console.log(this.userData.firstName);
+		this.authService.Logout();
 	}
 }

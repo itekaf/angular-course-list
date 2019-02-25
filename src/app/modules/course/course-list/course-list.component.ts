@@ -3,14 +3,7 @@ import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 
 import { Config } from 'src/app/shared';
 import { CourseModel } from 'src/app/shared/models';
-
-const defaultData = [
-	new CourseModel(1, 'Course 1', 1, new Date()),
-	// tslint:disable-next-line: no-magic-numbers
-	new CourseModel(2, 'Course 2', 65, new Date(), 'Description', true),
-	// tslint:disable-next-line: no-magic-numbers
-	new CourseModel(3, 'Course 3', 2, new Date(1), 'Description', true),
-];
+import { CourseService } from '../services/course.service';
 
 @Component({
 	selector: 'app-course-list',
@@ -29,10 +22,10 @@ export class CourseListComponent implements OnInit {
 	public sortedByTitle: boolean = true;
 	public sortedByDuration: boolean = true;
 
-	constructor() { }
+	constructor(private courseService: CourseService) { }
 
 	public ngOnInit(): void {
-		this.courses = defaultData;
+		this.courses = this.courseService.getList();
 	}
 
 	// TODO: RL: Refactor this + create test
@@ -52,21 +45,24 @@ export class CourseListComponent implements OnInit {
 		this.query = query;
 	}
 
-	public onRemoveItem(id: number): void {
-		this.courses = this.courses.filter((course: CourseModel) => course.id !== id);
+	public onRemoveItem(id: number): CourseModel[] {
+		this.courses = this.courseService.remove(id);
+		return this.courses;
 	}
 
 	public onLoadMore(): void {
 		this.courses = this.courses.concat(this.courses);
 	}
 
-	// tslint:disable-next-line: prefer-function-over-method
-	public onEditItem(item: CourseModel): void {
-		console.log(`Edit: ${item.id}`);
+	public onEditItem(id: number, data: CourseModel): CourseModel[] {
+		this.courses = this.courseService.edit(id, data);
+		return this.courses;
 	}
 
 	// tslint:disable-next-line: prefer-function-over-method
-	public onAdd(): void {
-		console.log('Add button clicked');
+	public onAdd(): CourseModel[] {
+		const tempData = new CourseModel(1, 'Course temp');
+		this.courses = this.courseService.create(tempData);
+		return this.courses;
 	}
 }

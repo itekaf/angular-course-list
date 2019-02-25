@@ -6,7 +6,6 @@ import { Component, Input } from '@angular/core';
 	styleUrls: ['./breadcrumbs.component.scss'],
 })
 export class BreadcrumbsComponent {
-
 	@Input() public text: string = 'Courses';
 
 	constructor() { }

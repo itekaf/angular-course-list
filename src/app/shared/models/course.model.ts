@@ -1,3 +1,4 @@
+import { Config } from '..';
 import { ICourse } from '../interface/';
 
 export class CourseModel implements ICourse {
@@ -7,21 +8,24 @@ export class CourseModel implements ICourse {
 	public creationDate: Date;
 
 	public topRated?: boolean;
+	public imagePath?: string;
 	public description?: string;
 
 	constructor(
-		id?: number,
-		title?: string,
+		id: number,
+		title: string,
 		duration?: number,
-		creationDate?: Date,
-		description?: string,
 		topRated?: boolean,
+		imagePath?: string,
+		description?: string,
+		creationDate?: Date,
 	) {
 		this.id = id;
 		this.title = title;
 		this.duration = duration;
 		this.topRated = topRated;
 		this.description = description;
+		this.imagePath = imagePath || Config.default.imagePath;
 		this.creationDate = creationDate;
 	}
 }
