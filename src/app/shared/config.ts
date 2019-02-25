@@ -1,7 +1,8 @@
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
-import { faPlus, faEdit, faClock, faTrashAlt, faCalendarAlt, faSearch, faSortAmountDown, faSortAmountUp, faSortNumericDown, faSortNumericUp, faStar, faAt, faKey, faSmile, faMinus } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faEdit, faClock, faTrashAlt, faCalendarAlt, faSearch, faSortAmountDown, faSortAmountUp, faSortNumericDown, faSortNumericUp, faStar, faAt, faKey, faSmile, faMinus, faUsers, faSignature, faListAlt } from '@fortawesome/free-solid-svg-icons';
 
 export class Config {
+	// TODO: RL: Need to refactor this
 	public static icons: Map<string, IconDefinition> = new Map([
 		['at', faAt],
 		['key', faKey],
@@ -11,9 +12,12 @@ export class Config {
 		['minus', faMinus],
 		['dummy', faSmile],
 		['clock', faClock],
-		['trash', faTrashAlt],
+		['users', faUsers],
 		['search', faSearch],
+		['trash', faTrashAlt],
+		['listAlt', faListAlt],
 		['calendar', faCalendarAlt],
+		['signature', faSignature],
 		['sortAmountUp', faSortAmountUp],
 		['sortNumericUp', faSortNumericUp],
 		['sortAmountDown', faSortAmountDown],

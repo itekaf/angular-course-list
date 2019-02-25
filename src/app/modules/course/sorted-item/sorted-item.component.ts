@@ -11,22 +11,18 @@ import { ItemSortedIconsEnum } from '../enums/item-sorted-icons.enum';
 })
 export class SortedItemComponent {
 	// TODO: RL: create type for this object
-	@Input()
-	public icons = {
+	@Input() public icons = {
 		asc: Config.icons.get(ItemSortedIconsEnum.asc),
 		desc: Config.icons.get(ItemSortedIconsEnum.desc)
 	};
 
-	@Input()
-	public className: string = 'button-blue';
+	@Input() public text: string;
+	@Input() public className: string = 'button-blue';
+	@Input() public defaultSortIcon: IconDefinition = this.icons.asc;
 
-	@Output()
-	public clickEvent: EventEmitter<string> = new EventEmitter<string>();
+	@Output() public clickEvent: EventEmitter<string> = new EventEmitter<string>();
 
-	@Input()
-	public defaultSortIcon: IconDefinition = this.icons.asc;
-
-	private sortIcon: IconDefinition = this.defaultSortIcon;
+	public sortIcon: IconDefinition = this.defaultSortIcon;
 
 	constructor() { }
 

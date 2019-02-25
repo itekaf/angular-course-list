@@ -122,7 +122,7 @@ describe('CourseListComponent', () => {
 			const editItem = dummyData.items[0];
 
 			// Act
-			component.onEditItem(editItem.id, editItem);
+			component.onEditItem(editItem.id);
 
 			// Assert
 			expect(serviceObj.edit.calls.any()).toBe(true);

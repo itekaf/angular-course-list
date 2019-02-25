@@ -4,6 +4,9 @@ import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { Config } from 'src/app/shared';
 import { CourseModel } from 'src/app/shared/models';
 import { CourseService } from '../services/course.service';
+import { IEdit } from 'src/app/shared/interface/edit.interface';
+
+type EditCourseType = IEdit<CourseModel>;
 
 @Component({
 	selector: 'app-course-list',
@@ -46,7 +49,11 @@ export class CourseListComponent implements OnInit {
 	}
 
 	public onRemoveItem(id: number): CourseModel[] {
-		this.courses = this.courseService.remove(id);
+		const result = confirm('Do you really want to delete this course?');
+		if (result) {
+			this.courses = this.courseService.remove(id);
+		}
+
 		return this.courses;
 	}
 
@@ -54,8 +61,9 @@ export class CourseListComponent implements OnInit {
 		this.courses = this.courses.concat(this.courses);
 	}
 
-	public onEditItem(id: number, data: CourseModel): CourseModel[] {
-		this.courses = this.courseService.edit(id, data);
+	public onEditItem(id: number): CourseModel[] {
+		const selectCourse = this.courses.find((x: CourseModel) => x.id === id);
+		this.courses = selectCourse ? this.courseService.edit(id, selectCourse) : this.courses;
 		return this.courses;
 	}
 

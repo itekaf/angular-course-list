@@ -6,9 +6,11 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { UiModule } from '../../core/ui/ui.module';
 
+import { SortedItemComponent } from './sorted-item/sorted-item.component';
+import { CourseFormComponent } from './course-form/course-form.component';
 import { CourseListComponent } from './course-list/course-list.component';
-import { CourseSearchComponent } from './course-search/course-search.component';
 import { CourseItemComponent } from './course-item/course-item.component';
+import { CourseSearchComponent } from './course-search/course-search.component';
 
 import { SortedByPipe } from './pipes/sorted-by.pipe';
 import { ItemDurationPipe } from './pipes/item-duration.pipe';
@@ -16,7 +18,6 @@ import { FilterByQueryPipe } from './pipes/filter-by-query.pipe';
 
 import { ItemRatedLightDirective } from './directives/item-rated-light.directive';
 import { ItemStatusLightDirective } from './directives/item-status-light.directive';
-import { SortedItemComponent } from './sorted-item/sorted-item.component';
 
 @NgModule({
 	imports: [
@@ -27,6 +28,7 @@ import { SortedItemComponent } from './sorted-item/sorted-item.component';
 		FontAwesomeModule,
 	],
 	declarations: [
+		CourseFormComponent,
 		SortedItemComponent,
 		CourseItemComponent,
 		CourseListComponent,
@@ -41,6 +43,8 @@ import { SortedItemComponent } from './sorted-item/sorted-item.component';
 	],
 	exports: [
 		CourseListComponent,
+		CourseFormComponent,
+		CourseSearchComponent,
 	]
 })
 export class CourseListModule { }
