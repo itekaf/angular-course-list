@@ -2,11 +2,12 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-import { LoginComponent } from './login/login.component';
-import { HomeComponent } from './home/home.component';
 import { CoreModule } from '../core/core.module';
 import { ModulesModule } from '../modules/modules.module';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+
+import { CoursesComponent } from './courses/courses.component';
+import { LoginComponent } from './login/login.component';
+import { NoContentComponent } from './no-content/no-content.component';
 
 @NgModule({
 	imports: [
@@ -17,8 +18,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 	],
 	declarations: [
 		LoginComponent,
-		HomeComponent,
-		PageNotFoundComponent
+		CoursesComponent,
+		NoContentComponent
 	],
 })
 export class PagesModule { }

@@ -1,13 +1,13 @@
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HomeComponent } from './home.component';
+import { CoursesComponent } from './courses.component';
 
-describe('HomeComponent', () => {
+describe('Courses Page Component', () => {
 	beforeEach(async(() => {
 		TestBed.configureTestingModule({
 			declarations: [
-				HomeComponent,
+				CoursesComponent,
 			],
 			schemas: [ NO_ERRORS_SCHEMA ],
 		})
@@ -15,11 +15,11 @@ describe('HomeComponent', () => {
 	}));
 
 	describe('Component Alone', () => {
-		let component: HomeComponent;
-		let fixture: ComponentFixture<HomeComponent>;
+		let component: CoursesComponent;
+		let fixture: ComponentFixture<CoursesComponent>;
 
 		beforeEach(() => {
-			fixture = TestBed.createComponent(HomeComponent);
+			fixture = TestBed.createComponent(CoursesComponent);
 			component = fixture.componentInstance;
 			fixture.detectChanges();
 		});
