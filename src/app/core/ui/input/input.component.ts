@@ -1,5 +1,5 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
+import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 
 class LabelConfig {
 	public icon: IconDefinition;
@@ -10,7 +10,8 @@ class LabelConfig {
 @Component({
 	selector: 'app-input',
 	templateUrl: './input.component.html',
-	styleUrls: ['./input.component.scss']
+	styleUrls: ['./input.component.scss'],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputComponent {
 	// TODO: RL: Implement Label Config
