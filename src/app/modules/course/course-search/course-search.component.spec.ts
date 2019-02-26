@@ -5,6 +5,7 @@ import { Component, DebugElement, NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CourseSearchComponent } from './course-search.component';
+import { InputResultModel } from 'src/app/shared/models/input-result.model';
 
 const dummyData = {
 	query: 'test query'
@@ -19,9 +20,10 @@ const dummyData = {
 })
 class TestHostComponent {
 	public query: string = dummyData.query;
-	public searchedQuery: string;
-	public onSearchItem(query: string): void {
-		this.searchedQuery = query;
+
+	public searchedQuery: InputResultModel;
+	public onSearchItem($event: InputResultModel): void {
+		this.searchedQuery = $event;
 	}
 }
 describe('CourseSearchComponent', () => {
@@ -72,7 +74,7 @@ describe('CourseSearchComponent', () => {
 			buttonElement.triggerEventHandler('submit', null);
 
 			// Assert
-			expect(component.searchedQuery).toBe(resultQuery);
+			expect(component.searchedQuery.value).toBe(resultQuery);
 		});
 	});
 

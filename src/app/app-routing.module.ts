@@ -6,10 +6,10 @@ import { NoContentComponent } from './pages/no-content/no-content.component';
 
 const routes: Routes = [
 	{ path: 'courses', component: CoursesComponent },
-	{ path: '', redirectTo: 'courses', pathMatch: 'full' },
-	// { path: 'courses/new', canActivate: },
+	// { path: 'courses/new', component: },
 	// { path: 'courses/:id', component: },
 	{ path: 'login', component: LoginComponent },
+	{ path: '', redirectTo: 'courses', pathMatch: 'full' },
 	{ path: '**', component: NoContentComponent }
 ];
 

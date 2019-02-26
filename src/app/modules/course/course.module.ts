@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ModuleWithProviders } from '@angular/compiler/src/core';
 
 import { UiModule } from '../../core/ui/ui.module';
 
@@ -18,6 +19,8 @@ import { FilterByQueryPipe } from './pipes/filter-by-query.pipe';
 
 import { ItemRatedLightDirective } from './directives/item-rated-light.directive';
 import { ItemStatusLightDirective } from './directives/item-status-light.directive';
+
+import { CourseService } from './services/course.service';
 
 @NgModule({
 	imports: [
@@ -47,4 +50,13 @@ import { ItemStatusLightDirective } from './directives/item-status-light.directi
 		CourseSearchComponent,
 	]
 })
-export class CourseListModule { }
+export class CourseListModule {
+	public static forRoot(): ModuleWithProviders {
+		return {
+			ngModule: CourseListModule,
+			providers: [
+				CourseService,
+			],
+		};
+	}
+ }

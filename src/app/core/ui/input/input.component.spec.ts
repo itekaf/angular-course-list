@@ -4,6 +4,7 @@ import { NO_ERRORS_SCHEMA, Component } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { InputComponent } from './input.component';
+import { InputResultModel } from 'src/app/shared/models/input-result.model';
 
 const dummyData = {
 	type: 'dummy',
@@ -19,7 +20,7 @@ const dummyData = {
 			[name]="name"
 			[defaultValue]="defaultValue"
 			[placeholder]="placeholder"
-			(inputEvent)="onInput()"
+			(inputEvent)="onInput($event)"
 		></app-input>
 	`,
 })
@@ -29,9 +30,10 @@ class TestHostComponent {
 	public defaultValue: string = dummyData.value;
 	public placeholder: string = dummyData.placeholder;
 
-	public inputChangedValue: string;
-	public onInput(value: string): void {
-		this.inputChangedValue = value;
+	public hasInputEvent: InputResultModel;
+
+	public onInput($event: InputResultModel): void {
+		this.hasInputEvent = $event;
 	}
 }
 
@@ -103,14 +105,14 @@ describe('InputComponent', () => {
 
 		it('should change input by event', () => {
 			// Arrange
-			const selectInput: string = 'input';
-			const resultValue: string = dummyData.value;
+			const selectElement: string = 'input';
 
 			// Act
-			const inputDebugElement = fixture.debugElement.query(By.css(selectInput));
-			const inputNativeElement = inputDebugElement.nativeElement;
+			const inputElement = fixture.debugElement.query(By.css(selectElement));
+			inputElement.triggerEventHandler('input', null);
 
 			// Assert
+			expect(component.hasInputEvent).toBeTruthy();
 		});
 	});
 });

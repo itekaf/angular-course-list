@@ -4,7 +4,7 @@
 			<div class="header_logo">
 				<app-logo></app-logo>
 			</div>
-			<article *ngIf="userAuth" class="user-article">
+			<article class="user-article">
 				<p *ngIf="userData && userData.firstName" class="user-article__username">{{userData.firstName}}</p>
 				<app-button *ngIf="userData" (clickButton)="onLogOff()" text="Log Off"></app-button>
 			</article>

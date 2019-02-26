@@ -25,8 +25,8 @@ export class BreadcrumbsComponent implements OnInit	{
 	@Input() public text: string = 'Courses';
 
 	constructor(
-		private _router: Router,
-		private activatedRoute: ActivatedRoute,
+		// private _router: Router,
+		// private activatedRoute: ActivatedRoute,
 	) { }
 
 	public ngOnInit(): void {

@@ -7,7 +7,7 @@ import { CourseModel } from 'src/app/shared/models';
 	providedIn: 'root'
 })
 export class CourseService {
-	private defaultData: CourseModel[] = [
+	public defaultData: CourseModel[] = [
 		new CourseModel(1, 'Course 1', 1, true, null, null, new Date()),
 		// tslint:disable-next-line: no-magic-numbers
 		new CourseModel(2, 'Course 2', 65, true, null, 'Description', new Date()),
@@ -17,7 +17,7 @@ export class CourseService {
 
 	constructor() {	}
 
-	public getList(): CourseModel[] {
+	public read(): CourseModel[] {
 		const items = this.defaultData;
 		const result = items.map((item: CourseModel) => {
 			item.imagePath = item.imagePath || Config.default.imagePath;
@@ -31,14 +31,14 @@ export class CourseService {
 		return this.defaultData;
 	}
 
-	public edit(id: number, data: CourseModel): CourseModel[] {
+	public update(id: number, data: CourseModel): CourseModel[] {
 		this.defaultData = this.defaultData.map((course: CourseModel) => {
 			return course.id === id ? data : course;
 		});
 		return this.defaultData;
 	}
 
-	public remove(id: number): CourseModel[] {
+	public delete(id: number): CourseModel[] {
 		this.defaultData = this.defaultData.filter((x: CourseModel) => x.id !== id );
 		return this.defaultData;
 	}

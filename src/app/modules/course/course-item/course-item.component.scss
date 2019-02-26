@@ -9,7 +9,6 @@
 .box-course-item__wrapper {
 	display: flex;
 	width: 100%;
-	height: 100%;
 	margin: 15px 0;
 }
 .box-course-item__shadow {
@@ -21,13 +20,10 @@
 	margin-right: 70px;
 }
 .box-course-item__content {
-	width: 75%;
+	flex: 0 1 75%;
 }
 .box-course-item__info {
-	width: calc(100% - 70px);
-	display: flex;
-	margin-right: 20px;
-	flex-direction: column;
+	flex: 1 0 auto;
 }
 .box-course-item__buttons {
 	width: 85px;
@@ -43,15 +39,11 @@
 	text-transform: uppercase;
 }
 .box-course-item__description {
-	flex: 2 0 auto;
-	height: calc(100% - 40px);
+	flex: 2 0 100%;
 	overflow: hidden;
 	color: #6c7283;
-	margin: 20px 0;
 }
 .box-course-item__additionall-info {
-	display: flex;
-	justify-content: flex-start;
 	flex: 3 0 auto;
 }
 .box-course-item__duration {

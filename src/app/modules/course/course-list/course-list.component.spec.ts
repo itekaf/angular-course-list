@@ -43,8 +43,8 @@ describe('CourseListComponent', () => {
 	let serviceObj;
 
 	beforeEach(async(() => {
-		serviceObj = jasmine.createSpyObj('CourseService', ['getList', 'remove', 'edit', 'create']);
-		serviceObj.getList.and.returnValue(dummyData.items);
+		serviceObj = jasmine.createSpyObj('CourseService', ['read', 'delete', 'update', 'create']);
+		serviceObj.read.and.returnValue(dummyData.items);
 
 		TestBed.configureTestingModule({
 			imports: [
@@ -94,7 +94,7 @@ describe('CourseListComponent', () => {
 
 		it('should get courses list', () => {
 			// Assert
-			expect(serviceObj.getList.calls.any()).toBe(true);
+			expect(serviceObj.read.calls.any()).toBe(true);
 		});
 		it('should load more', () => {
 			// Arrange
@@ -114,7 +114,7 @@ describe('CourseListComponent', () => {
 			component.onRemoveItem(removeItem.id);
 
 			// Assert
-			expect(serviceObj.remove.calls.any()).toBe(true);
+			expect(serviceObj.delete.calls.any()).toBe(true);
 		});
 
 		it('should edit item', () => {
@@ -125,7 +125,7 @@ describe('CourseListComponent', () => {
 			component.onEditItem(editItem.id);
 
 			// Assert
-			expect(serviceObj.edit.calls.any()).toBe(true);
+			expect(serviceObj.update.calls.any()).toBe(true);
 		});
 
 		it('should add item', () => {

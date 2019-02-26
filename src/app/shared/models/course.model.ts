@@ -1,3 +1,4 @@
+import { Config } from '../config';
 import { ICourse } from '../interface/';
 
 export class CourseModel implements ICourse {
@@ -23,7 +24,7 @@ export class CourseModel implements ICourse {
 		this.title = title;
 		this.duration = duration;
 		this.topRated = topRated;
-		this.imagePath = imagePath;
+		this.imagePath = imagePath || Config.default.imagePath;
 		this.description = description;
 		this.creationDate = creationDate;
 	}

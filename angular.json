@@ -90,7 +90,11 @@
             "assets": [
               "src/favicon.ico",
               "src/assets"
-            ]
+			],
+			"codeCoverageExclude": [
+				"/**/*.module.ts",
+				"/**/*.model.ts"
+			]
           }
         },
         "lint": {

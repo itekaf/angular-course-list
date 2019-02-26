@@ -2,12 +2,20 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HeaderComponent } from './header.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { AuthService } from 'src/app/modules/auth/services/auth.service';
 
 describe('HeaderComponent', () => {
+	let authServiceSpy;
+
 	beforeEach(async(() => {
+		authServiceSpy = jasmine.createSpyObj('AuthService', ['getUserInfo', 'logout', 'isAuthenticated']);
+
 		TestBed.configureTestingModule({
 			declarations: [
 				HeaderComponent,
+			],
+			providers: [
+				{ provide: AuthService, useValue: authServiceSpy }
 			],
 			schemas: [ NO_ERRORS_SCHEMA ]
 		})
@@ -29,9 +37,18 @@ describe('HeaderComponent', () => {
 			expect(component).toBeTruthy();
 		});
 
-		it('should get user data', () => {
+		it('should check auth by init ', () => {
 			// Assert
-			expect(component.userData).toBeTruthy();
+			expect(authServiceSpy.getUserInfo.calls.any()).toBeTruthy();
+			expect(authServiceSpy.isAuthenticated.calls.any()).toBeTruthy();
+		});
+
+		it('should logout by event', () => {
+			// Act
+			component.onLogOff();
+
+			// Assert
+			expect(authServiceSpy.logout.calls.any()).toBeTruthy();
 		});
 	});
 });

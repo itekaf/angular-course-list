@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 
 import { UserModel } from 'src/app/shared/models';
+import { JwtService } from './jwt.service';
+import { UserService } from './user.service';
 
 @Injectable({
 	providedIn: 'root'
@@ -9,28 +11,52 @@ export class AuthService {
 
 	private token: string = 'token';
 	private defaultData: UserModel = new UserModel(1, 'username', 'password');
-	private authenticated: boolean = false;
+	public isAuth: boolean;
 
-	constructor() { }
+	constructor(
+		private jwtService: JwtService,
+		private userService: UserService,
+	) { }
 
-	public IsAuthenticated(): boolean {
-		return this.authenticated;
+	public isAuthenticated(): boolean {
+		return this.isAuth;
 	}
 
-	public getUserInfo(): UserModel | undefined {
-		const result = this.defaultData;
+	public getUserInfo(): UserModel {
+		const result = this.userService.getData();
 		return result;
 	}
 
-	public Login(username: string, password: string): boolean {
-		this.authenticated = true;
-		localStorage.setItem('jwtToken', this.token);
-		return this.IsAuthenticated();
+	public login(username: string, password: string): boolean {
+		if (this.isAuth) {
+			throw new Error(
+				'You are already logged. Please, log out first!');
+		}
+
+		if (!username || !password) {
+			throw new Error(
+				'Username and password are required properties!');
+		}
+		this.isAuth = true;
+		this.jwtService.setToken(this.token);
+		this.userService.setData(this.defaultData);
+
+		const resultAuth = this.isAuthenticated();
+		console.log(`Login: ${resultAuth}`);
+		return resultAuth;
 	}
 
-	public Logout(): boolean {
-		this.authenticated = false;
-		localStorage.removeItem('jwtToken');
-		return this.IsAuthenticated();
+	public logout(): boolean {
+		if (!this.isAuth) {
+			throw new Error(
+				'You are not auth. Please, login first!');
+		}
+		this.isAuth = false;
+		this.jwtService.removeToken();
+		this.userService.removeData();
+
+		const resultAuth = this.isAuthenticated();
+		console.log(`Logout: ${!resultAuth}`);
+		return resultAuth;
 	}
 }

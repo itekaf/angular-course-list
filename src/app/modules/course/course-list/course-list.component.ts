@@ -28,7 +28,7 @@ export class CourseListComponent implements OnInit {
 	constructor(private courseService: CourseService) { }
 
 	public ngOnInit(): void {
-		this.courses = this.courseService.getList();
+		this.courses = this.courseService.read();
 	}
 
 	// TODO: RL: Refactor this + create test
@@ -49,9 +49,9 @@ export class CourseListComponent implements OnInit {
 	}
 
 	public onRemoveItem(id: number): CourseModel[] {
-		const result = confirm('Do you really want to delete this course?');
-		if (result) {
-			this.courses = this.courseService.remove(id);
+		const resultOfModalWindow = true;
+		if (resultOfModalWindow) {
+			this.courses = this.courseService.delete(id);
 		}
 
 		return this.courses;
@@ -63,11 +63,10 @@ export class CourseListComponent implements OnInit {
 
 	public onEditItem(id: number): CourseModel[] {
 		const selectCourse = this.courses.find((x: CourseModel) => x.id === id);
-		this.courses = selectCourse ? this.courseService.edit(id, selectCourse) : this.courses;
+		this.courses = selectCourse ? this.courseService.update(id, selectCourse) : this.courses;
 		return this.courses;
 	}
 
-	// tslint:disable-next-line: prefer-function-over-method
 	public onAdd(): CourseModel[] {
 		const tempData = new CourseModel(1, 'Course temp');
 		this.courses = this.courseService.create(tempData);

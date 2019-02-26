@@ -33,6 +33,7 @@ class TestHostComponent {
 	public courseItem: CourseModel = dummyData.model;
 	public removeItem: CourseModel;
 	public editItem: CourseModel;
+
 	public onRemoveItem(item: CourseModel): void {
 		this.removeItem = item;
 	}
@@ -99,7 +100,6 @@ describe('CourseItemComponent', () => {
 		it('should change default properties', () => {
 			// Arrange
 			const selectorItemTitle: string = '.box-course-item__title';
-
 			const resultItemTitle: string = dummyData.model.title;
 
 			// Act

@@ -1,4 +1,6 @@
-import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
+
+import { InputResultModel } from 'src/app/shared/models/input-result.model';
 
 @Component({
 	selector: 'app-textarea',
@@ -11,6 +13,16 @@ export class TextareaComponent {
 	@Input() public cols: number = 45;
 	@Input() public name: string;
 	@Input() public placeholder: string;
+	@Input() public defaultValue: string = '';
+
+	@Output() public inputEvent: EventEmitter<InputResultModel> = new EventEmitter<InputResultModel>();
+
+	public text: string = this.defaultValue;
 
 	constructor() { }
+
+	public onInput(): void {
+		const result = new InputResultModel(this.name, this.text);
+		this.inputEvent.emit(result);
+	}
 }
