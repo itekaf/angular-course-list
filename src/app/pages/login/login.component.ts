@@ -1,7 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Config } from 'src/app/shared';
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
-import { AuthService } from 'src/app/modules/user/services/auth.service';
+
+import { Config } from 'src/app/shared';
+import { AuthService } from 'src/app/modules/auth/services/auth.service';
 
 @Component({
 	selector: 'app-login',

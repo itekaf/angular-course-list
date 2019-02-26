@@ -1,13 +1,13 @@
 {
     "spellright.language": [
-        "en"
+        "en",
+        "ru"
     ],
     "spellright.documentTypes": [
         "markdown",
         "latex",
         "plaintext",
-        "html",
-        "typescript"
+        "html"
     ],
 	"todo.embedded.exclude": ["**/coverage/**", "**/node_modules/**", "**/.git/**"]
 }

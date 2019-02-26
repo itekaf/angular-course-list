@@ -6,9 +6,6 @@
 	height: 100%;
 	display:  flex;
 }
-.app-button__icon {
-	padding-right: 10px;
-}
 
 .button-transparent {
 	color: white;
@@ -22,6 +19,7 @@
 .button-blue {
 	color: white;
 	background: #30b6dd;
+	margin: 0 10px;
 }
 .button-blue:hover {
 	background: darken($color: #30b6dd, $amount: 10)

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 
+import { Config } from 'src/app/shared';
 import { CourseModel } from 'src/app/shared/models';
 
 @Injectable({
@@ -17,7 +18,12 @@ export class CourseService {
 	constructor() {	}
 
 	public getList(): CourseModel[] {
-		return this.defaultData;
+		const items = this.defaultData;
+		const result = items.map((item: CourseModel) => {
+			item.imagePath = item.imagePath || Config.default.imagePath;
+			return item;
+		});
+		return result;
 	}
 
 	public create(data: CourseModel): CourseModel[] {
