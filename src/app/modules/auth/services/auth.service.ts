@@ -33,10 +33,6 @@ export class AuthService {
 				'You are already logged. Please, log out first!');
 		}
 
-		if (!username || !password) {
-			throw new Error(
-				'Username and password are required properties!');
-		}
 		this.isAuth = true;
 		this.jwtService.setToken(this.token);
 		this.userService.setData(this.defaultData);

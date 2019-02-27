@@ -117,7 +117,7 @@ describe('CourseListComponent', () => {
 			expect(serviceObj.delete.calls.any()).toBe(true);
 		});
 
-		it('should edit item', () => {
+		it('should edit an item by exist id', () => {
 			// Arrange
 			const editItem = dummyData.items[0];
 
@@ -126,6 +126,17 @@ describe('CourseListComponent', () => {
 
 			// Assert
 			expect(serviceObj.update.calls.any()).toBe(true);
+		});
+
+		it('should doesn\'t edit an item if item with input id does not exist', () => {
+			// Arrange
+			const falseId = 100;
+
+			// Act
+			component.onEditItem(falseId);
+
+			// Assert
+			expect(serviceObj.update).not.toHaveBeenCalled();
 		});
 
 		it('should add item', () => {

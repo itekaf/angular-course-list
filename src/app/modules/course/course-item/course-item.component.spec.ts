@@ -81,6 +81,34 @@ describe('CourseItemComponent', () => {
 			// Assert
 			expect(imageElement.getAttribute('src')).toBe(resultImagePath);
 		});
+
+		it('should remove item by click', () => {
+			// Arrange
+			const inputModel = dummyData.model;
+			component.courseItem = inputModel;
+
+			// Assert
+			component.removeEvent.subscribe((output: number) => {
+				expect(output).toBe(inputModel.id);
+			});
+
+			// Act
+			component.onRemove();
+		});
+
+		it('should edit item by click', () => {
+			// Arrange
+			const inputModel = dummyData.model;
+			component.courseItem = inputModel;
+
+			// Assert
+			component.editEvent.subscribe((output: number) => {
+				expect(output).toBe(inputModel.id);
+			});
+
+			// Act
+			component.onEdit();
+		});
 	});
 
 	describe('Test Host Component', () => {
@@ -108,22 +136,6 @@ describe('CourseItemComponent', () => {
 
 			// Assert
 			expect(titleElement.textContent).toContain(resultItemTitle);
-		});
-
-		it('should remove item', () => {
-			// Arrange
-
-			// Act
-
-			// Assert
-		});
-
-		it('should edit item', () => {
-			// Arrange
-
-			// Act
-
-			// Assert
 		});
 	});
 });

@@ -62,12 +62,47 @@ describe('SortedItemComponent', () => {
 		});
 
 		it('should have default properties', () => {
-			// Arange
-			// TODO: RL: How to test it?
+			// Assert
+			expect(component.icons.asc).toBeTruthy();
+			expect(component.icons.desc).toBeTruthy();
+			expect(component.className).toBeTruthy();
+			expect(component.defaultSortIcon).toBeTruthy();
+		});
+
+		it('should change icon by click if it desc', () => {
+			// Arrange
+			const inputIcons = dummyData.icons;
+			const resultSortIcon = dummyData.icons.asc.iconName;
+
+			component.icons = inputIcons;
+			component.sortIcon = inputIcons.desc;
 
 			// Act
+			component.clickEvent.subscribe((output: string) => {
+				expect(output).toBe(resultSortIcon);
+			});
+			component.onClick();
 
 			// Assert
+			expect(component.sortIcon.iconName).toBe(resultSortIcon);
+		});
+
+		it('should change icon by click if it asc', () => {
+			// Arrange
+			const inputIcons = dummyData.icons;
+			const resultSortIcon = dummyData.icons.desc.iconName;
+
+			component.icons = inputIcons;
+			component.sortIcon = inputIcons.asc;
+
+			// Act
+			component.clickEvent.subscribe((output: string) => {
+				expect(output).toBe(resultSortIcon);
+			});
+			component.onClick();
+
+			// Assert
+			expect(component.sortIcon.iconName).toBe(resultSortIcon);
 		});
 	});
 
@@ -83,24 +118,6 @@ describe('SortedItemComponent', () => {
 
 		it('should create', () => {
 			expect(component).toBeTruthy();
-		});
-
-		it('should change default properties', () => {
-			// Arange
-			// TODO: RL: How to test it? - with spy
-
-			// Act
-
-			// Assert
-		});
-
-		it('should change icon by click', () => {
-			// Arange
-			// TODO: RL: How to test it?
-
-			// Act
-
-			// Assert
 		});
 	});
 });

@@ -93,7 +93,8 @@
 			],
 			"codeCoverageExclude": [
 				"/**/*.module.ts",
-				"/**/*.model.ts"
+				"/**/*.model.ts",
+				"/**/config.ts"
 			]
           }
         },

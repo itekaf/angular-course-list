@@ -50,14 +50,40 @@ describe('AuthService', () => {
 			expect(jwtServiceSpy.setToken.calls.any()).toBeTruthy();
 		});
 
-		it('logout method', () => []);
-	});
+		it('should return throw if the user is already login', () => {
+			// Arrange
+			const username = dummyData.userData.userName;
+			const password = dummyData.userData.password;
+			service.isAuth = true;
 
-	describe('Test Host Component', () => {
-		it('should be create', () => {});
-		it('is auth method', () => {});
-		it('get info method', () => []);
-		it('login method', () => {});
-		it('logout method', () => []);
+			// Act
+			const loginError = (): boolean => service.login(username, password);
+
+			// Assert
+			expect(loginError).toThrow();
+		});
+
+		it('should logout user', () => {
+			// Arrange
+			service.isAuth = true;
+
+			// Act
+			const output = service.logout();
+
+			// Assert
+			expect(output).toBeFalsy();
+			expect(userServiceSpy.removeData.calls.any()).toBeTruthy();
+			expect(jwtServiceSpy.removeToken.calls.any()).toBeTruthy();
+		});
+		it('should return throw if the user is not login', () => {
+			// Arrange
+			service.isAuth = false;
+
+			// Act
+			const logoutError = (): boolean => service.logout();
+
+			// Assert
+			expect(logoutError).toThrow();
+		});
 	});
 });

@@ -1,39 +1,74 @@
-import { TestBed } from '@angular/core/testing';
-
 import { CourseService } from './course.service';
-import { Component } from '@angular/core';
+import { CourseModel } from 'src/app/shared/models';
+import { Config } from 'src/app/shared';
 
-@Component({
-	template: ``
-})
-class TestHostComponent {
-	constructor(private cousrService: CourseService) {}
+const dummyData = [
+	new CourseModel(1, 'Dummy 1'),
+	// tslint:disable-next-line: no-magic-numbers
+	new CourseModel(2, 'Dummy 2'),
+];
 
-	public onRead(): void {}
-	public onCreate(): void {}
-	public onUpdate(): void {}
-	public onDelete(): void {}
-}
 describe('CourseService', () => {
-	beforeEach(() => TestBed.configureTestingModule({}));
+	let service: CourseService;
+	beforeEach(() => {
+		service = new CourseService();
+		service.items = dummyData;
+	});
 
 	describe('Service alone', () => {
 		it('should be created', () => {
-			const service: CourseService = TestBed.get(CourseService);
 			expect(service).toBeTruthy();
 		});
-		it('get method', () => {});
-		it('put method', () => {});
-		it('delete method', () => {});
-		it('update method', () => {});
-	});
 
-	describe('Test Host Component', () => {
-		it('should be create', () => {});
-		it('get method', () => {});
-		it('put method', () => {});
-		it('delete method', () => {});
-		it('update method', () => {});
-	});
+		it('should return data array and set default properties', () => {
+			// Arrange
+			const resultItems: CourseModel[] = dummyData.map((item: CourseModel) => {
+				item.imagePath = Config.default.imagePath;
+				return item;
+			});
 
+			// Act
+			const output: CourseModel[] = service.read();
+
+			// Assert
+			expect(output).toEqual(resultItems);
+		});
+		it('should add new item and return data array', () => {
+			// Arrange
+			const newItemId = 3;
+			const newItemModel = new CourseModel(newItemId, 'Dummy 3');
+			const resultItems = dummyData.concat([newItemModel]);
+
+			// Act
+			const output = service.create(newItemModel);
+
+			// Assert
+			expect(output).toEqual(resultItems);
+		});
+		it('should remove item and return data array', () => {
+			// Arrange
+			const removeItem = dummyData[1];
+			const resultItems = dummyData.filter((item: CourseModel) => item.id !== removeItem.id);
+
+			// Act
+			const output = service.delete(removeItem.id);
+
+			// Assert
+			expect(output).toEqual(resultItems);
+		});
+		it('should update item and return data array', () => {
+			// Arrange
+			const updateItemId = 2;
+			const updateItemModel = new CourseModel(updateItemId, 'Dummy 4');
+			const resultItems = dummyData.map((item: CourseModel) => {
+				return item.id === updateItemId ? updateItemModel : item;
+			});
+
+			// Act
+			const output = service.update(updateItemId, updateItemModel);
+
+			// Assert
+			expect(output).toEqual(resultItems);
+		});
+	});
 });

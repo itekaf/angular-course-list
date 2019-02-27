@@ -39,7 +39,6 @@ class TestHostComponent {
 		this.hasInputEvent = $event;
 	}
 
-
 }
 describe('TextareaComponent', () => {
 	beforeEach(async(() => {

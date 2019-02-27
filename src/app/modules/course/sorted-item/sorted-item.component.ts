@@ -29,6 +29,6 @@ export class SortedItemComponent {
 	public onClick(): void {
 		this.sortIcon = this.sortIcon === this.icons.asc
 			? this.icons.desc : this.icons.asc;
-		this.clickEvent.emit();
+		this.clickEvent.emit(this.sortIcon.iconName);
 	}
 }
