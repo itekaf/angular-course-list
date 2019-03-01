@@ -64,7 +64,7 @@ describe('CourseFormComponent', () => {
 			component.onChange(inputChangeResult);
 
 			// Assert
-			expect(component.courseItem.title).toBe(changeValue);
+			expect(component.courseItem.name).toBe(changeValue);
 		});
 	});
 

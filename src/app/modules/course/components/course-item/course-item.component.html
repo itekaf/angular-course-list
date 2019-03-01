@@ -1,9 +1,9 @@
-<div class="box-course-item" [appItemStatusLight]="courseItem.creationDate" [appItemRatedLight]="courseItem.topRated">
+<div class="box-course-item" [appItemStatusLight]="courseItem.date" [appItemRatedLight]="courseItem.isTopRated">
 	<div class="box-course-item__img">
 		<a class="box-course-item__link">
 			<img
 				width="100%"
-				alt="{{courseItem.title}}"
+				alt="{{courseItem.name}}"
 				src="{{courseItem.imagePath }}"
 			/>
 		</a>
@@ -11,11 +11,11 @@
 	<div class=" box-course-item__content">
 		<div class="box-course-item__info">
 			<div class="box-course-item__wrapper">
-				<div *ngIf="courseItem.topRated" class="box-course-item__top-rated">
+				<div *ngIf="courseItem.isTopRated" class="box-course-item__top-rated">
 					<app-icon [icon]="icons.get('star')"></app-icon>
 				</div>
 				<div class="box-course-item__title">
-					{{courseItem.title }}
+					{{courseItem.name }}
 				</div>
 			</div>
 		</div>
@@ -25,16 +25,16 @@
 		<div class="box-course-item__footer box-course-item__additionall-info">
 			<div class="box-course-item__wrapper">
 				<app-icon
-					title="Duration"
-					*ngIf="courseItem.duration"
+					title="Length"
+					*ngIf="courseItem.length"
 					[icon]="icons.get('clock')"
-					text="{{courseItem.duration | itemDuration}}"
+					text="{{courseItem.length | itemDuration}}"
 				></app-icon>
 				<app-icon
 					title="Date"
-					*ngIf="courseItem.creationDate"
+					*ngIf="courseItem.date"
 					[icon]="icons.get('calendar')"
-					[text]="courseItem.creationDate | date:'dd.MM.yyyy'"
+					[text]="courseItem.date | date:'dd.MM.yyyy'"
 				></app-icon>
 			</div>
 		</div>

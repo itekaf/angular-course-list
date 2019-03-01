@@ -13,7 +13,7 @@ export class FilterByQueryPipe implements PipeTransform {
 	// tslint:disable-next-line: prefer-function-over-method
 	public getClearItems(courses: CourseModel[], query: string): CourseModel[] {
 		return courses.filter((course: CourseModel) => {
-			return course.title.toLocaleLowerCase().includes(query.toLocaleLowerCase());
+			return course.name.toLocaleLowerCase().includes(query.toLocaleLowerCase());
 		});
 	}
 }

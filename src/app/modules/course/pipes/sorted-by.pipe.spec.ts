@@ -19,7 +19,7 @@ describe('SortedByPipe', () => {
 		const unsortedItems = dummyItems.reverse();
 
 		// Act
-		const resultSortedItems = pipe.transform(unsortedItems, 'title', true);
+		const resultSortedItems = pipe.transform(unsortedItems, 'name', true);
 
 		// Assert
 		expect(resultSortedItems).toEqual(sortedItems);
@@ -31,7 +31,7 @@ describe('SortedByPipe', () => {
 		const unsortedItems = dummyItems;
 
 		// Act
-		const resultSortedItems = pipe.transform(unsortedItems, 'title', false);
+		const resultSortedItems = pipe.transform(unsortedItems, 'name', false);
 
 		// Assert
 		expect(resultSortedItems).toEqual(sortedItems);

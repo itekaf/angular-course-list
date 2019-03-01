@@ -26,9 +26,9 @@
 		<div class="block-course-list container">
 			<ng-container *ngIf="(courses
 				| filterByQuery: query
-				| sortedBy: 'title': sortedByTitle
-				| sortedBy: 'creationDate': sortedByDate
-				| sortedBy: 'duration': sortedByDuration
+				| sortedBy: 'name': sortedByTitle
+				| sortedBy: 'date': sortedByDate
+				| sortedBy: 'length': sortedByDuration
 			) as items">
 				<app-course-item
 					*ngFor="let item of items"

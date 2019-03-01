@@ -129,7 +129,7 @@ describe('CourseItemComponent', () => {
 		it('should change default properties', () => {
 			// Arrange
 			const selectorItemTitle: string = '.box-course-item__title';
-			const resultItemTitle: string = dummyData.model.title;
+			const resultItemTitle: string = dummyData.model.name;
 
 			// Act
 			const nativeElement: HTMLElement = fixture.debugElement.nativeElement;

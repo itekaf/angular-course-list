@@ -8,12 +8,14 @@ import { CoreModule } from './core/core.module';
 import { PagesModule } from './pages/pages.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { HistoryService } from './modules/routers/history.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
 	declarations: [
 		AppComponent,
 	],
 	imports: [
+		HttpClientModule,
 		BrowserModule,
 		AppRoutingModule,
 		CoreModule,

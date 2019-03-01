@@ -1,32 +1,37 @@
 import * as uuid from 'uuid/v4';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
 
 import { Config } from 'src/app/shared';
 import { CourseModel } from 'src/app/shared/models';
+import { Observable, BehaviorSubject } from 'rxjs';
+import { map } from 'rxjs/operators';
 
-const defaultData: CourseModel[] = [
-	new CourseModel(uuid(), 'Course 1', 1, true, null, null, new Date()),
-	// tslint:disable-next-line: no-magic-numbers
-	new CourseModel(uuid(), 'Course 2', 65, true, null, 'Description', new Date()),
-	// tslint:disable-next-line: no-magic-numbers
-	new CourseModel(uuid(), 'Course 3', 2, false, null, 'Description', new Date(1)),
-];
+const BASE_URL: string = 'http://localhost:3004/courses';
 
 @Injectable({
 	providedIn: 'root'
 })
 export class CourseService {
-	public items: CourseModel[] = defaultData;
+	private itemsObj: BehaviorSubject<CourseModel[]> = new BehaviorSubject<CourseModel[]>([]);
+	public items: CourseModel[];
 
-	constructor() {	}
+	constructor(
+		private http: HttpClient
+	) {	}
 
-	public read(): CourseModel[] {
-		this.items = this.items.map((item: CourseModel) => {
-			const itemImagePath = item.imagePath || Config.default.imagePath;
-			item.imagePath = itemImagePath;
-			return item;
-		});
-		return this.items;
+	public read(textFragment: string = '', start: string = '0', count: string = '5'): Observable<CourseModel[]> {
+		return this.http.get<CourseModel[]>(BASE_URL, { params: {
+			start,
+			count,
+			textFragment,
+		} }).pipe(
+			map((items: CourseModel[]) => {
+				this.items = items;
+				console.log(items.length);
+				return this.items;
+			})
+		);
 	}
 
 	public create(data: CourseModel): CourseModel[] {

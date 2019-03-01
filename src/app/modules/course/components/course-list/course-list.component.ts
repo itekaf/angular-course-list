@@ -6,6 +6,7 @@ import { Config } from 'src/app/shared';
 import { CourseModel } from 'src/app/shared/models';
 import { CourseService } from '../../services/course.service';
 import { InputResultModel } from 'src/app/shared/models/input-result.model';
+import { HttpParams } from '@angular/common/http';
 
 @Component({
 	selector: 'app-course-list',
@@ -13,6 +14,7 @@ import { InputResultModel } from 'src/app/shared/models/input-result.model';
 	styleUrls: ['./course-list.component.scss']
 })
 export class CourseListComponent implements OnInit {
+	@Input() public pageStep: string = '5';
 	@Input() public title: string = 'Find or add angular courses ...';
 	@Input() public icons: Map<string, IconDefinition> = Config.icons;
 	@Input() public loadMoreText: string = 'Load More';
@@ -31,7 +33,14 @@ export class CourseListComponent implements OnInit {
 	) { }
 
 	public ngOnInit(): void {
-		this.courses = this.courseService.read();
+		console.log(this.courses);
+		this.courseService.read(null, '0', this.pageStep).subscribe((items: CourseModel[]) => {
+			this.courses = items.map((item: CourseModel) => {
+				const itemImagePath = item.imagePath || Config.default.imagePath;
+				item.imagePath = itemImagePath;
+				return item;
+			});
+		});
 	}
 
 	// TODO: RL: Refactor this + create test
@@ -61,7 +70,17 @@ export class CourseListComponent implements OnInit {
 	}
 
 	public onLoadMore(): CourseModel[] {
-		this.courses = this.courses.concat(this.courses);
+		this.courseService.read(
+			null, this.courses.length.toString(), this.pageStep.toString(),
+		).subscribe((items: CourseModel[]) => {
+			const result = items.map((item: CourseModel) => {
+				const itemImagePath = item.imagePath || Config.default.imagePath;
+				item.imagePath = itemImagePath;
+				return item;
+			});
+			this.courses = this.courses.concat(result);
+			console.log(`TOTAL: ${this.courses.length}`);
+		});
 		return this.courses;
 	}
 

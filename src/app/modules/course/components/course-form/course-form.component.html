@@ -4,8 +4,8 @@
 	</div>
 	<div class="{{className}}__content">
 		<div class="{{className}}__item">
-			<app-label className="{{className}}" [icon]="icons.get('key')" text="Title" for="title">
-				<app-input className="{{className}}" [value]="courseItem.title" (inputEvent)="onChange($event)" placeholder="Please enter title ..." name="title"></app-input>
+			<app-label className="{{className}}" [icon]="icons.get('key')" text="Name" for="name">
+				<app-input className="{{className}}" [value]="courseItem.name" (inputEvent)="onChange($event)" placeholder="Please enter name ..." name="name"></app-input>
 			</app-label>
 		</div>
 		<div class="{{className}}__item">
@@ -15,13 +15,13 @@
 		</div>
 		<div class="{{className}}__item">
 			<app-label className="{{className}}" [icon]="icons.get('calendar')" text="Publish date" for="date">
-				<app-input className="{{className}}" [value]="courseItem.creationDate | date:'yyyy-MM-dd' " (inputEvent)="onChange($event)" type="date" placeholder="Please enter publish date ..." name="creationDate"></app-input>
+				<app-input className="{{className}}" [value]="courseItem.date | date:'yyyy-MM-dd' " (inputEvent)="onChange($event)" type="date" placeholder="Please enter publish date ..." name="date"></app-input>
 			</app-label>
 		</div>
 		<div class="{{className}}__item">
-			<app-label className="{{className}}" [icon]="icons.get('clock')" text="Duration" for="duration">
-				<app-input className="{{className}}" [value]="courseItem.duration" (inputEvent)="onChange($event)" type="number" placeholder="Please enter duration ..." name="duration" ></app-input>
-				<p>{{courseItem.duration | itemDuration}}</p>
+			<app-label className="{{className}}" [icon]="icons.get('clock')" text="Length" for="length">
+				<app-input className="{{className}}" [value]="courseItem.length" (inputEvent)="onChange($event)" type="number" placeholder="Please enter length ..." name="length" ></app-input>
+				<p>{{courseItem.length | itemDuration}}</p>
 			</app-label>
 
 		</div>

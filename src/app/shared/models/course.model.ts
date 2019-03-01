@@ -3,32 +3,32 @@ import { ICourse, IUser } from '../interface/';
 
 export class CourseModel implements ICourse {
 	public id: string;
-	public title: string;
-	public duration: number;
-	public creationDate: Date;
+	public name: string;
+	public length: number;
+	public date: Date;
 
 	public authors?: IUser[];
-	public topRated?: boolean;
+	public isTopRated?: boolean;
 	public imagePath?: string;
 	public description?: string;
 
 	constructor(
 		id?: string,
-		title?: string,
-		duration?: number,
-		topRated?: boolean,
+		name?: string,
+		length?: number,
+		isTopRated?: boolean,
 		imagePath?: string,
 		description?: string,
-		creationDate?: Date,
+		date?: Date,
 		authors?: IUser[],
 	) {
 		this.id = id;
-		this.title = title;
+		this.name = name;
 		this.authors = authors;
-		this.duration = duration;
-		this.topRated = topRated;
+		this.length = length;
+		this.isTopRated = isTopRated;
 		this.imagePath = imagePath || Config.default.imagePath;
 		this.description = description;
-		this.creationDate = creationDate;
+		this.date = date;
 	}
 }

@@ -1,0 +1,72 @@
+First of all:
+		[ ] - DI for all components
+		[ ] - (click)="fns.toggle()" for component without @Input decorator
+		[x] - WARNING in Circular dependency detected
+
+After all:
+		[x] - Add `hucky`
+		[ ] - Fix all styles
+		[ ] - Create all test + JSON generated data
+		[x] - Fix coverage
+		[ ] - `ng-template` and `ng-container`
+		[ ] - Create shared modules !!!
+		[ ] - Create modal window
+		[ ] - Clear history of git
+
+Bugs:
+		[ ] - Need to auto redirect if user login/logout
+
+Probable:
+		[ ] - JSDoc
+		[ ] - Pull Apruve
+		[ ] - Deploy process
+		[ ] - Semantic messages bot
+		[ ] - improving package.json file
+
+[x] - TASK #7: Routing
+		[x] -  `Protected` -  Implement routes for app if not done yet.
+				[X] `/courses`
+				[X] `/courses/:id`
+				[X] `/courses/new`
+				[X] Use `/courses` as a default route.
+		[X] - `For all` - Implement 404 page. (any design). (For another errors to)
+		[x] - `Public` Implement login page logic only for unauthorized users (Singleton)
+		[x] - `Protected` - Extend courses page behavior
+				[x] - On `logoff` action - erase token and user data. Then - redirect to login page.
+				[x] - Add course should lead to `/courses/new` page
+				[x] - Edit course should lead to `/courses/:id` page
+		[x] - `Protected` -  Extend edit page
+		[x] - `All` - Implement `breadcrumbs`
+		[X] - Lazy Loading child for `courses`
+		[x] - Refactor all
+		[x] - Fix all mistakes
+		[x] - Need to End watching video
+		[x] - Implement auth guard. Protect courses, edit course and add new course pages from unauthorized users. Redirect all unauthorized users. Refer to your method “IsAuthenticated”
+
+[ ] - TASK #8: HTTP
+		[ ] - Add integration for auth service (replace fake API calls to real).
+				[ ] - Integrate login method. Store fake token after successful request.
+				[ ] - Integrate get user info method
+		[ ] - Add integration for courses list. Courses request should take page number and count to create paging.
+		[x] - Create paging on courses page.
+			Use json server to get needed amount of courses: http://localhost:3004/courses?start=0&count=1
+			(You can implement “Load More” button to make this point)
+		[ ] - Replace search behavior. Implement server side search. Use method mentioned above. It takes textFragment to search within all courses by name and description
+		[ ] - Add integration for course delete. Recall courses list after delete action.
+		[ ] - Add integration for course create. Use two-way binding to grab all form data and pass it to BE
+		[ ] - Create interceptor to pass Authorization token received from BE for each API call
+		[ ] - To mock BE use json-server. You can use this archive.
+
+[ ] - TASK #9: RxJS
+		[ ] - Change search box behavior. Remove search button. Now we need to call API once user type something into the search input. To do this please follow the next steps:
+			Use ngChange directive to handle input changes. Create Observable in your component and changes its value on input change (use .next)
+			Add api call on each user input event
+		[ ] - Since we don’t want to spam our service add filter by input value and do not call API until user enter at least 3 chars.
+		[ ] - Add debounce to prevent API calls until user stop typing.
+		[ ] - Reveal user data using RxJs from service. Subscribe in header component to user data to show actual info in the header.
+		[ ] - Change logic of auth guard. Now use Observable as a return value in canActivate.
+		[ ] - Create global loading block component. It’s purpose to prevent user from any actions. Should be overlay covers whole page with loader animation in the center.
+				This feature will consist of two items:
+				[ ] - Loading-block component
+				[ ] - Service that keeps actual condition of block (show: true/false)
+		[ ] - Add using loading block for every api call (load courses, delete, login...)
