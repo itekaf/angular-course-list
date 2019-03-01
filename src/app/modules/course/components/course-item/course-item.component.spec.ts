@@ -1,12 +1,13 @@
+import uuid from 'uuid/v4';
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { NO_ERRORS_SCHEMA, Component } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { NO_ERRORS_SCHEMA, Component, DebugElement } from '@angular/core';
 
 import { Config } from 'src/app/shared';
 import { CourseModel } from 'src/app/shared/models';
-import { ItemDurationPipe } from '../pipes/item-duration.pipe';
 import { CourseItemComponent } from './course-item.component';
+import { ItemDurationPipe } from '../../pipes';
 
 const dummyData = {
 	icons:  new Map([
@@ -15,7 +16,7 @@ const dummyData = {
 		['clock', Config.icons.get('plus')],
 		['calendar', Config.icons.get('plus')],
 	]),
-	model: new CourseModel(1, 'Angular Vasey')
+	model: new CourseModel(uuid(), 'Dummy title')
 };
 
 @Component({
@@ -88,7 +89,7 @@ describe('CourseItemComponent', () => {
 			component.courseItem = inputModel;
 
 			// Assert
-			component.removeEvent.subscribe((output: number) => {
+			component.removeEvent.subscribe((output: string) => {
 				expect(output).toBe(inputModel.id);
 			});
 
@@ -102,7 +103,7 @@ describe('CourseItemComponent', () => {
 			component.courseItem = inputModel;
 
 			// Assert
-			component.editEvent.subscribe((output: number) => {
+			component.editEvent.subscribe((output: string) => {
 				expect(output).toBe(inputModel.id);
 			});
 

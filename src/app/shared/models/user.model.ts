@@ -1,7 +1,7 @@
 import { IUser } from '../interface/user.interface';
 
 export class UserModel implements IUser {
-	public id: number;
+	public id: string;
 	public userName: string;
 	public password: string;
 
@@ -9,7 +9,7 @@ export class UserModel implements IUser {
 	public firstName?: string;
 
 	constructor(
-		id: number,
+		id: string,
 		userName: string,
 		password: string,
 		firstName?: string,
@@ -23,7 +23,7 @@ export class UserModel implements IUser {
 		this.firstName = firstName;
 	}
 
-	get firsName(): string {
-		return this.firsName || this.userName;
+	get name(): string {
+		return this.firstName || this.userName;
 	}
 }

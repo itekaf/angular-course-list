@@ -1,11 +1,12 @@
+import uuid from 'uuid/v4';
 import { CourseService } from './course.service';
 import { CourseModel } from 'src/app/shared/models';
 import { Config } from 'src/app/shared';
 
 const dummyData = [
-	new CourseModel(1, 'Dummy 1'),
+	new CourseModel(uuid(), 'Dummy 1'),
 	// tslint:disable-next-line: no-magic-numbers
-	new CourseModel(2, 'Dummy 2'),
+	new CourseModel(uuid(), 'Dummy 2'),
 ];
 
 describe('CourseService', () => {
@@ -35,7 +36,7 @@ describe('CourseService', () => {
 		});
 		it('should add new item and return data array', () => {
 			// Arrange
-			const newItemId = 3;
+			const newItemId = '3';
 			const newItemModel = new CourseModel(newItemId, 'Dummy 3');
 			const resultItems = dummyData.concat([newItemModel]);
 
@@ -58,7 +59,7 @@ describe('CourseService', () => {
 		});
 		it('should update item and return data array', () => {
 			// Arrange
-			const updateItemId = 2;
+			const updateItemId = uuid();
 			const updateItemModel = new CourseModel(updateItemId, 'Dummy 4');
 			const resultItems = dummyData.map((item: CourseModel) => {
 				return item.id === updateItemId ? updateItemModel : item;

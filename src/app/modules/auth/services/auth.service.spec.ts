@@ -1,10 +1,11 @@
-import { TestBed } from '@angular/core/testing';
+import { Observable } from 'rxjs';
+import * as uuid from 'uuid/v4';
 
-import { AuthService } from './auth.service';
 import { UserModel } from 'src/app/shared/models';
+import { AuthService } from './auth.service';
 
 const dummyData = {
-	userData: new UserModel(1, 'dummy', 'dummy'),
+	userData: new UserModel(uuid(), 'dummy', 'dummy'),
 };
 
 describe('AuthService', () => {
@@ -25,17 +26,6 @@ describe('AuthService', () => {
 			expect(service).toBeTruthy();
 		});
 
-		it('should return user info', () => {
-			// Arrange
-			const resultData = dummyData.userData;
-
-			// Act
-			const output = service.getUserInfo();
-
-			// Assert
-			expect(output).toEqual(resultData);
-			expect(userServiceSpy.getData.calls.any()).toBeTruthy();
-		});
 		it('should login user', () => {
 			// Arrange
 			const username = dummyData.userData.userName;
@@ -54,10 +44,10 @@ describe('AuthService', () => {
 			// Arrange
 			const username = dummyData.userData.userName;
 			const password = dummyData.userData.password;
-			service.isAuth = true;
 
 			// Act
-			const loginError = (): boolean => service.login(username, password);
+			service.login(username, password);
+			const loginError = (): Observable<boolean> => service.login(username, password);
 
 			// Assert
 			expect(loginError).toThrow();
@@ -65,9 +55,11 @@ describe('AuthService', () => {
 
 		it('should logout user', () => {
 			// Arrange
-			service.isAuth = true;
+			const username = dummyData.userData.userName;
+			const password = dummyData.userData.password;
 
 			// Act
+			service.login(username, password);
 			const output = service.logout();
 
 			// Assert
@@ -76,11 +68,8 @@ describe('AuthService', () => {
 			expect(jwtServiceSpy.removeToken.calls.any()).toBeTruthy();
 		});
 		it('should return throw if the user is not login', () => {
-			// Arrange
-			service.isAuth = false;
-
 			// Act
-			const logoutError = (): boolean => service.logout();
+			const logoutError = (): Observable<boolean> => service.logout();
 
 			// Assert
 			expect(logoutError).toThrow();

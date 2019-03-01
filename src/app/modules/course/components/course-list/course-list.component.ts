@@ -1,12 +1,11 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
+import { Component, OnInit, Input } from '@angular/core';
 
 import { Config } from 'src/app/shared';
 import { CourseModel } from 'src/app/shared/models';
-import { CourseService } from '../services/course.service';
-import { IEdit } from 'src/app/shared/interface/edit.interface';
-
-type EditCourseType = IEdit<CourseModel>;
+import { CourseService } from '../../services/course.service';
+import { InputResultModel } from 'src/app/shared/models/input-result.model';
 
 @Component({
 	selector: 'app-course-list',
@@ -25,7 +24,11 @@ export class CourseListComponent implements OnInit {
 	public sortedByTitle: boolean = true;
 	public sortedByDuration: boolean = true;
 
-	constructor(private courseService: CourseService) { }
+	constructor(
+		private router: Router,
+		private courseService: CourseService,
+		private activatedRouter: ActivatedRoute,
+	) { }
 
 	public ngOnInit(): void {
 		this.courses = this.courseService.read();
@@ -44,11 +47,11 @@ export class CourseListComponent implements OnInit {
 		this.sortedByDuration = !this.sortedByDuration;
 	}
 
-	public onSearchItem(query: string): void {
-		this.query = query;
+	public onSearchItem($event: InputResultModel): void {
+		this.query = $event.value;
 	}
 
-	public onRemoveItem(id: number): CourseModel[] {
+	public onRemoveItem(id: string): CourseModel[] {
 		const resultOfModalWindow = true;
 		if (resultOfModalWindow) {
 			this.courses = this.courseService.delete(id);
@@ -57,19 +60,18 @@ export class CourseListComponent implements OnInit {
 		return this.courses;
 	}
 
-	public onLoadMore(): void {
+	public onLoadMore(): CourseModel[] {
 		this.courses = this.courses.concat(this.courses);
+		return this.courses;
 	}
 
-	public onEditItem(id: number): CourseModel[] {
-		const selectCourse = this.courses.find((x: CourseModel) => x.id === id);
-		this.courses = selectCourse ? this.courseService.update(id, selectCourse) : this.courses;
+	public onEditItem(id: string): CourseModel[] {
+		this.router.navigate(['./', id], { relativeTo: this.activatedRouter });
 		return this.courses;
 	}
 
 	public onAdd(): CourseModel[] {
-		const tempData = new CourseModel(1, 'Course temp');
-		this.courses = this.courseService.create(tempData);
+		this.router.navigate(['./new'], { relativeTo: this.activatedRouter });
 		return this.courses;
 	}
 }

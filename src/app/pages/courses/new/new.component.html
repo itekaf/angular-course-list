@@ -1,0 +1,11 @@
+<div class="container">
+	<div class="page-course-new">
+		<app-course-form
+			[courseItem]="item"
+			[title]="title"
+			(submitEvent)="onSubmit($event)"
+			(cancelEvent)="onCancel()"
+		></app-course-form>
+	</div>
+</div>
+

@@ -1,11 +1,12 @@
+import * as uuid from 'uuid/v4';
 import { CourseModel } from 'src/app/shared/models';
 import { SortedByPipe } from './sorted-by.pipe';
 
 describe('SortedByPipe', () => {
 	const pipe = new SortedByPipe();
 	const dummyItems = [
-		new CourseModel(1, 'Dummy title 1'),
-		new CourseModel(1, 'Dummy title 2'),
+		new CourseModel(uuid(), 'Dummy title 1'),
+		new CourseModel(uuid(), 'Dummy title 2'),
 	];
 
 	it('create an instance', () => {

@@ -17,7 +17,6 @@ export class JwtService {
 	}
 
 	public getToken(): string {
-		const result = localStorage.getItem(this.key);
-		return result;
+		return localStorage.getItem(this.key);
 	}
 }

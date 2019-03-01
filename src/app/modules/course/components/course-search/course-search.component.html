@@ -1,7 +1,7 @@
 <div class="course-search">
 	<form class="course-search-form" (ngSubmit)="onSubmit()">
 		<app-label for="search" [icon]="icons.get('search')"></app-label>
-		<app-input class="course-search-form__input" className="course-search-form" (inputEvent)="onSearch($event)" [defaultValue]="query" placeholder="Search by name, description or date ..." name="query"></app-input>
+		<app-input class="course-search-form__input" className="course-search-form" (inputEvent)="onSearch($event)" [value]="query" placeholder="Search by name, description or date ..." name="query"></app-input>
 		<app-button className="button-course-search" text="Search" type="submit"></app-button>
 	</form>
 </div>

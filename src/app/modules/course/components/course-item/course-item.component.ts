@@ -1,3 +1,4 @@
+import * as uuid from 'uuid/v4';
 import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 
@@ -12,11 +13,12 @@ import { CourseModel } from 'src/app/shared/models';
 })
 export class CourseItemComponent {
 	// TODO: RL: move courseItem, and e.t.c like a DI
-	@Input() public courseItem: CourseModel = new CourseModel(1, 'temp');
+	private ops: string = './new';
+	@Input() public courseItem: CourseModel = new CourseModel(uuid(), 'temp');
 	@Input() public icons: Map<string, IconDefinition> = Config.icons;
 
-	@Output() public editEvent: EventEmitter<number> = new EventEmitter<number>();
-	@Output() public removeEvent: EventEmitter<number> = new EventEmitter<number>();
+	@Output() public editEvent: EventEmitter<string> = new EventEmitter<string>();
+	@Output() public removeEvent: EventEmitter<string> = new EventEmitter<string>();
 
 	constructor() {	}
 

@@ -1,9 +1,18 @@
 import { CommonModule } from '@angular/common';
 import { NgModule, ModuleWithProviders, SkipSelf, Optional } from '@angular/core';
 
-import { AuthService } from './services/auth.service';
-import { JwtService } from './services/jwt.service';
-import { UserService } from './services/user.service';
+import {
+	JwtService,
+	AuthService,
+	UserService,
+} from './services';
+
+import {
+	AuthGuardService,
+	LoadGuardService,
+	AuthFailGuardService,
+	LoadFailGuardService,
+} from './guards';
 
 @NgModule({
 	imports: [
@@ -24,6 +33,11 @@ export class AuthModule {
 				AuthService,
 				JwtService,
 				UserService,
+
+				AuthGuardService,
+				LoadGuardService,
+				AuthFailGuardService,
+				LoadFailGuardService,
 			],
 		};
 	}

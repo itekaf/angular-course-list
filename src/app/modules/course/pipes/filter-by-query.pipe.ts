@@ -7,15 +7,13 @@ import { CourseModel } from 'src/app/shared/models';
 })
 export class FilterByQueryPipe implements PipeTransform {
 	public transform(courses: CourseModel[], query: string): CourseModel[] {
-		const result = (!query || !courses) ? courses : this.getClearItems(courses, query);
-		return result;
+		return (!query || !courses) ? courses : this.getClearItems(courses, query);
 	}
 
 	// tslint:disable-next-line: prefer-function-over-method
-	private getClearItems(courses: CourseModel[], query: string): CourseModel[] {
-		const result = courses.filter((course: CourseModel) => {
+	public getClearItems(courses: CourseModel[], query: string): CourseModel[] {
+		return courses.filter((course: CourseModel) => {
 			return course.title.toLocaleLowerCase().includes(query.toLocaleLowerCase());
 		});
-		return result;
 	}
 }

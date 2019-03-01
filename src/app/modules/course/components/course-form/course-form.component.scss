@@ -1,0 +1,23 @@
+.course-form {
+	border: 1px solid rgba(128, 128, 128, 0.5);
+	padding: 10px;
+	border-radius: 5px;
+	min-width: 50%;
+	box-shadow: 0px 0px 10px rgba(128, 128, 128, 0.5);
+}
+.course-form__item  {
+	margin: 15px 5px;
+}
+.course-form__footer {
+	display: flex;
+}
+.course-form__header {
+	padding: 20px 0;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.5);
+    text-align: center;
+    margin-bottom: 30px;
+}
+.course-form__title {
+	font-size: 1em;
+	text-align: center;
+}

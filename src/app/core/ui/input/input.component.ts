@@ -19,13 +19,11 @@ export class InputComponent {
 	@Input() public label: LabelConfig;
 	@Input() public name: string;
 	@Input() public type: string = 'text';
-	@Input() public placeholder: string = 'Enter value ...';
-	@Input() public defaultValue: string = '';
+	@Input() public value: string;
 	@Input() public className: string;
+	@Input() public placeholder: string = 'Enter value ...';
 
 	@Output() public inputEvent: EventEmitter<InputResultModel> = new EventEmitter<InputResultModel>();
-
-	public value: string = this.defaultValue;
 
 	constructor() { }
 

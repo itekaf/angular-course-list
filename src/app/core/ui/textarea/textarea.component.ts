@@ -12,17 +12,16 @@ export class TextareaComponent {
 	@Input() public rows: number = 10;
 	@Input() public cols: number = 45;
 	@Input() public name: string;
+	@Input() public value: string = '';
+	@Input() public className: string;
 	@Input() public placeholder: string;
-	@Input() public defaultValue: string = '';
 
 	@Output() public inputEvent: EventEmitter<InputResultModel> = new EventEmitter<InputResultModel>();
-
-	public text: string = this.defaultValue;
 
 	constructor() { }
 
 	public onInput(): void {
-		const result = new InputResultModel(this.name, this.text);
+		const result = new InputResultModel(this.name, this.value);
 		this.inputEvent.emit(result);
 	}
 }

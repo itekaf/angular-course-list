@@ -18,7 +18,7 @@ const dummyData = {
 		<app-input
 			[type]="type"
 			[name]="name"
-			[defaultValue]="defaultValue"
+			[value]="value"
 			[placeholder]="placeholder"
 			(inputEvent)="onInput($event)"
 		></app-input>
@@ -27,7 +27,7 @@ const dummyData = {
 class TestHostComponent {
 	public type: string = dummyData.type;
 	public name: string = dummyData.name;
-	public defaultValue: string = dummyData.value;
+	public value: string = dummyData.value;
 	public placeholder: string = dummyData.placeholder;
 
 	public hasInputEvent: InputResultModel;

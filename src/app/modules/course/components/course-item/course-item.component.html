@@ -11,7 +11,7 @@
 	<div class=" box-course-item__content">
 		<div class="box-course-item__info">
 			<div class="box-course-item__wrapper">
-				<div class="box-course-item__top-rated">
+				<div *ngIf="courseItem.topRated" class="box-course-item__top-rated">
 					<app-icon [icon]="icons.get('star')"></app-icon>
 				</div>
 				<div class="box-course-item__title">

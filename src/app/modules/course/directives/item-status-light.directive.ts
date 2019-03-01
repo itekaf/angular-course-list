@@ -21,8 +21,9 @@ export class ItemStatusLightDirective {
 		const lastDateForNewItem: Date = new Date();
 		lastDateForNewItem.setDate(-1 * maxDaysForNewItem);
 
-		const isNew = creationDate < this.currentDate && creationDate.getDate() >= lastDateForNewItem.getDate();
-		const isFuture = creationDate > this.currentDate;
+		const correctDate = creationDate instanceof Date ? creationDate : new Date(creationDate);
+		const isNew = correctDate < this.currentDate && correctDate.getDate() >= lastDateForNewItem.getDate();
+		const isFuture = correctDate > this.currentDate;
 		return isNew ? ItemStatusLightEnum.new
 			: isFuture ? ItemStatusLightEnum.future : ItemStatusLightEnum.default;
 	}

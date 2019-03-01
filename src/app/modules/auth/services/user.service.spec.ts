@@ -1,10 +1,11 @@
+import * as uuid from 'uuid/v4';
 import { TestBed } from '@angular/core/testing';
 
 import { UserService } from './user.service';
 import { UserModel } from 'src/app/shared/models';
 
 const dummyData = {
-	userData: new UserModel(1, 'dummy', 'dummy password'),
+	userData: new UserModel(uuid(), 'dummy', 'dummy password'),
 };
 
 describe('UserService', () => {
@@ -25,7 +26,7 @@ describe('UserService', () => {
 			const defaultData = dummyData.userData;
 
 			// Act
-			service.userData = defaultData;
+			service.setData(defaultData);
 			const output = service.getData();
 
 			// Arrange

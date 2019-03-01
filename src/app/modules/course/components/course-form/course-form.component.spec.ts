@@ -1,13 +1,14 @@
+import { By } from '@angular/platform-browser';
+import * as uuid from 'uuid/v4';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { CourseFormComponent } from './course-form.component';
 import { NO_ERRORS_SCHEMA, Component, DebugElement } from '@angular/core';
+
 import { CourseModel } from 'src/app/shared/models';
 import { InputResultModel } from 'src/app/shared/models/input-result.model';
-import { By } from '@angular/platform-browser';
+import { CourseFormComponent } from './course-form.component';
 
 const dummyData = {
-	item: new CourseModel(1, 'Dummy')
+	item: new CourseModel(uuid(), 'Dummy')
 };
 
 @Component({

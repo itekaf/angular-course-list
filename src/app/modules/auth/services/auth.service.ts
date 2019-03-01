@@ -1,4 +1,6 @@
+import * as uuid from 'uuid/v4';
 import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 import { UserModel } from 'src/app/shared/models';
 import { JwtService } from './jwt.service';
@@ -10,49 +12,46 @@ import { UserService } from './user.service';
 export class AuthService {
 
 	private token: string = 'token';
-	private defaultData: UserModel = new UserModel(1, 'username', 'password');
-	public isAuth: boolean;
+	private isAuthObj: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
 	constructor(
 		private jwtService: JwtService,
 		private userService: UserService,
-	) { }
+	) {	}
 
-	public isAuthenticated(): boolean {
-		return this.isAuth;
+	get isAuth(): boolean {
+		return this.isAuthObj.value;
 	}
 
-	public getUserInfo(): UserModel {
-		const result = this.userService.getData();
-		return result;
+	public isAuthenticated(): Observable<boolean> {
+		const token = this.jwtService.getToken();
+		this.isAuthObj.next(!!token);
+		return this.isAuthObj;
 	}
 
-	public login(username: string, password: string): boolean {
-		if (this.isAuth) {
+	public login(username: string, password: string): Observable<boolean> {
+		if (this.isAuthObj.value) {
 			throw new Error(
 				'You are already logged. Please, log out first!');
 		}
 
-		this.isAuth = true;
-		this.jwtService.setToken(this.token);
-		this.userService.setData(this.defaultData);
+		const userModel = new UserModel(uuid(), username, password);
 
-		const resultAuth = this.isAuthenticated();
-		console.log(`Login: ${resultAuth}`);
-		return resultAuth;
+		this.isAuthObj.next(true);
+		// TODO: RL: Get From Back
+		this.jwtService.setToken(this.token);
+		this.userService.setData(userModel);
+		return this.isAuthObj;
 	}
 
-	public logout(): boolean {
-		if (!this.isAuth) {
+	public logout(): Observable<boolean> {
+		if (!this.isAuthObj.value) {
 			throw new Error(
 				'You are not auth. Please, login first!');
 		}
-		this.isAuth = false;
+		this.isAuthObj.next(false);
 		this.jwtService.removeToken();
 		this.userService.removeData();
-
-		const resultAuth = this.isAuthenticated();
-		console.log(`Logout: ${!resultAuth}`);
-		return resultAuth;
+		return this.isAuthObj;
 	}
 }

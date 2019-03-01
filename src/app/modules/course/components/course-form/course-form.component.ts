@@ -1,6 +1,8 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { CourseModel } from 'src/app/shared/models';
+import * as uuid from 'uuid/v4';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+
 import { Config } from 'src/app/shared';
+import { CourseModel } from 'src/app/shared/models';
 import { InputResultModel } from 'src/app/shared/models/input-result.model';
 
 @Component({
@@ -10,8 +12,10 @@ import { InputResultModel } from 'src/app/shared/models/input-result.model';
 })
 export class CourseFormComponent {
 	// TODO: RL: DI
+	@Input() public title: string;
 	@Input() public icons = Config.icons;
-	@Input() public courseItem: CourseModel = new CourseModel(1, 'title');
+	@Input() public className: string = 'course-form';
+	@Input() public courseItem: CourseModel = new CourseModel(uuid(), 'title');
 
 	@Output() public submitEvent: EventEmitter<CourseModel> = new EventEmitter<CourseModel>();
 	@Output() public cancelEvent: EventEmitter<void> = new EventEmitter<void>();

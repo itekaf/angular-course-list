@@ -5,13 +5,13 @@
 			<!-- TODO: RL: Move it later to separate component `form-item` which should be included an element with a result of input validation  -->
 			<div class="login-form__item login-form__wrapper">
 				<app-label className="login-form" [icon]="icons.get('at')" text="Username" for="username">
-					<app-input className="login-form" (inputEvent)="onChange($event)" [defaultValue]="username" placeholder="Please enter email ..." name="username"></app-input>
+					<app-input className="login-form" (inputEvent)="onChange($event)" [value]="username" placeholder="Please enter email ..." name="username"></app-input>
 				</app-label>
 			</div>
 			<!-- TODO: RL: Move it later to separate component `form-item` which should be included an element with a result of input validation  -->
 			<div class="login-form__item login-form__wrapper">
 				<app-label className="login-form" [icon]="icons.get('key')" text="Password" for="password">
-					<app-input type="password" className="login-form" (inputEvent)="onChange($event)" [defaultValue]="password" placeholder="Please enter password ..." name="password"></app-input>
+					<app-input type="password" className="login-form" (inputEvent)="onChange($event)" [value]="password" placeholder="Please enter password ..." name="password"></app-input>
 				</app-label>
 			</div>
 			<app-button type="submit" className="button-blue" text="Login"></app-button>

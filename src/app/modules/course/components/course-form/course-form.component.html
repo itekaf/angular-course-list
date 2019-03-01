@@ -1,0 +1,39 @@
+<form class="{{className}}" (submit)="onSubmit()">
+	<div *ngIf="title" class="{{className}}__header">
+		<h1 class="{{className}}__title">{{title}}</h1>
+	</div>
+	<div class="{{className}}__content">
+		<div class="{{className}}__item">
+			<app-label className="{{className}}" [icon]="icons.get('key')" text="Title" for="title">
+				<app-input className="{{className}}" [value]="courseItem.title" (inputEvent)="onChange($event)" placeholder="Please enter title ..." name="title"></app-input>
+			</app-label>
+		</div>
+		<div class="{{className}}__item">
+			<app-label className="{{className}}" [icon]="icons.get('listAlt')" text="Description" for="description">
+				<app-textarea [value]="courseItem.description" className="{{className}}" (inputEvent)="onChange($event)" placeholder="Please enter description ..." name="description"></app-textarea>
+			</app-label>
+		</div>
+		<div class="{{className}}__item">
+			<app-label className="{{className}}" [icon]="icons.get('calendar')" text="Publish date" for="date">
+				<app-input className="{{className}}" [value]="courseItem.creationDate | date:'yyyy-MM-dd' " (inputEvent)="onChange($event)" type="date" placeholder="Please enter publish date ..." name="creationDate"></app-input>
+			</app-label>
+		</div>
+		<div class="{{className}}__item">
+			<app-label className="{{className}}" [icon]="icons.get('clock')" text="Duration" for="duration">
+				<app-input className="{{className}}" [value]="courseItem.duration" (inputEvent)="onChange($event)" type="number" placeholder="Please enter duration ..." name="duration" ></app-input>
+				<p>{{courseItem.duration | itemDuration}}</p>
+			</app-label>
+
+		</div>
+		<div class="{{className}}__item">
+			<!-- TODO: RL: Labels -->
+			<app-label className="{{className}}" [icon]="icons.get('users')" text="Authors" for="authors">
+				<app-input className="{{className}}" placeholder="Please enter authors ..."  (inputEvent)="onChange($event)" name="authors"></app-input>
+			</app-label>
+		</div>
+	</div>
+	<div class="{{className}}__footer {{className}}__item ">
+		<app-button type="submit" className="button-blue" text="Save"></app-button>
+		<app-button type="button" (clickButton)="onCancel()" className="button-blue" text="Cancel"></app-button>
+	</div>
+</form>

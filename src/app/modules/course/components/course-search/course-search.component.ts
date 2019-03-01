@@ -16,8 +16,8 @@ export class CourseSearchComponent {
 	@Output() public searchItem: EventEmitter<InputResultModel> = new EventEmitter<InputResultModel>();
 
 	public onSearch($event: InputResultModel): void {
-		const { name, value }: { name: string, value: string } = $event;
-		this[name] = value;
+		const { value }: { value: string } = $event;
+		this.query = value;
 		this.triggerEvent();
 	}
 

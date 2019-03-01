@@ -7,48 +7,53 @@ import { ModuleWithProviders } from '@angular/compiler/src/core';
 
 import { UiModule } from '../../core/ui/ui.module';
 
-import { SortedItemComponent } from './sorted-item/sorted-item.component';
-import { CourseFormComponent } from './course-form/course-form.component';
-import { CourseListComponent } from './course-list/course-list.component';
-import { CourseItemComponent } from './course-item/course-item.component';
-import { CourseSearchComponent } from './course-search/course-search.component';
+import {
+	CourseFormComponent,
+	CourseItemComponent,
+	CourseListComponent,
+	CourseSearchComponent,
+	SortedItemComponent,
+} from './components';
 
-import { SortedByPipe } from './pipes/sorted-by.pipe';
-import { ItemDurationPipe } from './pipes/item-duration.pipe';
-import { FilterByQueryPipe } from './pipes/filter-by-query.pipe';
+import {
+	ItemRatedLightDirective,
+	ItemStatusLightDirective,
+} from './directives';
 
-import { ItemRatedLightDirective } from './directives/item-rated-light.directive';
-import { ItemStatusLightDirective } from './directives/item-status-light.directive';
+import {
+	SortedByPipe,
+	ItemDurationPipe,
+	FilterByQueryPipe,
+} from './pipes';
 
-import { CourseService } from './services/course.service';
+import {
+	CourseService
+} from './services';
+
+const angularDeclaration = [
+	CourseFormComponent,
+	CourseItemComponent,
+	CourseListComponent,
+	SortedItemComponent,
+	CourseSearchComponent,
+
+	ItemRatedLightDirective,
+	ItemStatusLightDirective,
+
+	SortedByPipe,
+	ItemDurationPipe,
+	FilterByQueryPipe,
+];
 
 @NgModule({
 	imports: [
+		CommonModule,
 		UiModule,
 		FormsModule,
-		CommonModule,
-		BrowserModule,
 		FontAwesomeModule,
 	],
-	declarations: [
-		CourseFormComponent,
-		SortedItemComponent,
-		CourseItemComponent,
-		CourseListComponent,
-		CourseSearchComponent,
-
-		ItemRatedLightDirective,
-		ItemStatusLightDirective,
-
-		SortedByPipe,
-		ItemDurationPipe,
-		FilterByQueryPipe,
-	],
-	exports: [
-		CourseListComponent,
-		CourseFormComponent,
-		CourseSearchComponent,
-	]
+	declarations: angularDeclaration,
+	exports: angularDeclaration
 })
 export class CourseListModule {
 	public static forRoot(): ModuleWithProviders {

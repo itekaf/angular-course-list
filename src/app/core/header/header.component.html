@@ -5,10 +5,17 @@
 				<app-logo></app-logo>
 			</div>
 			<article class="user-article">
-				<p *ngIf="userData && userData.firstName" class="user-article__username">{{userData.firstName}}</p>
-				<app-button *ngIf="userData" (clickButton)="onLogOff()" text="Log Off"></app-button>
+				<ng-container *ngTemplateOutlet="userAuth ? isAuth : isNotAuth"></ng-container>
 			</article>
 		</div>
 	</div>
 </header>
+
+<ng-template #isAuth>
+	<p *ngIf="userData && userData.name" class="user-article__username">{{userData.name}}</p>
+	<app-button (clickButton)="onLogout()" text="Logout"></app-button>
+</ng-template>
+<ng-template #isNotAuth>
+	<app-button (clickButton)="onLogin()" text="Login"></app-button>
+</ng-template>
 

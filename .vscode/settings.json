@@ -6,8 +6,7 @@
         "markdown",
         "latex",
         "plaintext",
-        "html",
-        "typescript"
+        "html"
     ],
 	"todo.embedded.exclude": ["**/coverage/**", "**/node_modules/**", "**/.git/**"]
 }

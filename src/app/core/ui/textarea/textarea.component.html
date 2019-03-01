@@ -1,1 +1,9 @@
-<textarea [rows]="rows" [cols]="cols" [name]="name" [(ngModel)]="text" (input)="onInput()"></textarea>
+<textarea
+	class="{{className}}__textarea"
+	[rows]="rows"
+	[cols]="cols"
+	[name]="name"
+	[(ngModel)]="value"
+	(input)="onInput()"
+	[placeholder]="placeholder"
+></textarea>

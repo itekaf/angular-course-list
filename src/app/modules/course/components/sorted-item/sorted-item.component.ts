@@ -2,7 +2,7 @@ import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 import { Config } from 'src/app/shared';
-import { ItemSortedIconsEnum } from '../enums/item-sorted-icons.enum';
+import { ItemSortedIconsEnum } from '../../enums/item-sorted-icons.enum';
 
 @Component({
 	selector: 'app-sorted-item',

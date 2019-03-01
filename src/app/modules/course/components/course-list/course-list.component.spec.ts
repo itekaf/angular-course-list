@@ -1,3 +1,4 @@
+import * as uuid from 'uuid/v4';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FormsModule } from '@angular/forms';
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
@@ -6,12 +7,10 @@ import { NO_ERRORS_SCHEMA, Component } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CourseModel } from 'src/app/shared/models';
+import { CourseService } from '../../services';
 import { CourseListComponent } from './course-list.component';
-
-import { SortedByPipe } from '../pipes/sorted-by.pipe';
-import { FilterByQueryPipe } from '../pipes/filter-by-query.pipe';
-
-import { CourseService } from '../services/course.service';
+import { FilterByQueryPipe, SortedByPipe } from '../../pipes';
+import { InputResultModel } from 'src/app/shared/models/input-result.model';
 
 const dummyData = {
 	title: 'Dummy title',
@@ -19,9 +18,8 @@ const dummyData = {
 		['plus', faTrash ]
 	]),
 	items: [
-		new CourseModel(1, 'Dummy title 1'),
-		// tslint:disable-next-line: no-magic-numbers
-		new CourseModel(2, 'Dummy title 2'),
+		new CourseModel(uuid(), 'Dummy title 1'),
+		new CourseModel(uuid(), 'Dummy title 2'),
 	],
 	moreText: 'Dummy more',
 };
@@ -130,7 +128,7 @@ describe('CourseListComponent', () => {
 
 		it('should doesn\'t edit an item if item with input id does not exist', () => {
 			// Arrange
-			const falseId = 100;
+			const falseId = '100';
 
 			// Act
 			component.onEditItem(falseId);
@@ -149,7 +147,7 @@ describe('CourseListComponent', () => {
 
 		it('should search item', () => {
 			// Arrange
-			const inputQuery = '1';
+			const inputQuery: InputResultModel = new InputResultModel('name', '1');
 			const outputCount = 1;
 			const itemsSelector = '.block-course-list';
 			component.courses = dummyData.items;
