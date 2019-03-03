@@ -6,6 +6,8 @@ import { Config } from 'src/app/shared';
 import { CourseModel } from 'src/app/shared/models';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { ApiClient } from 'src/app/shared/services/api.service';
+import { AnswerModel } from 'src/app/shared/models/answer.model';
 
 const BASE_URL: string = 'http://localhost:3004/courses';
 
@@ -17,10 +19,26 @@ export class CourseService {
 	public items: CourseModel[];
 
 	constructor(
-		private http: HttpClient
+		private http: HttpClient,
+		private apiClient: ApiClient,
 	) {	}
 
-	public read(textFragment: string = '', start: string = '0', count: string = '5'): Observable<CourseModel[]> {
+	public read(
+		textFragment: string = '',
+		start: string = '0',
+		count: string = '5'
+	): Observable<CourseModel[]> {
+		const result = this.apiClient.get<AnswerModel>('playlists/')
+			.subscribe(
+				// tslint:disable-next-line:typedef
+				(res) => {
+					console.log(res);
+				},
+				// tslint:disable-next-line:typedef
+				(err) => {
+					console.log(err);
+				}
+			);
 		return this.http.get<CourseModel[]>(BASE_URL, { params: {
 			start,
 			count,

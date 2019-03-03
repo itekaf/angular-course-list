@@ -5,6 +5,7 @@ import { LoginComponent } from './pages/login/login.component';
 
 import { NoContentComponent } from './pages/no-content/no-content.component';
 import { LoadGuardService, AuthGuardService, AuthFailGuardService } from './modules/auth/guards';
+import { RegistryComponent } from './pages/registry/registry.component';
 
 const routes: Routes = [
 	{
@@ -19,6 +20,14 @@ const routes: Routes = [
 		canActivate: [ AuthFailGuardService ],
 		data: {
 			label: 'Login'
+		}
+	},
+	{
+		path: 'signup',
+		component: RegistryComponent,
+		canActivate: [ AuthFailGuardService ],
+		data: {
+			label: 'Registry'
 		}
 	},
 	{

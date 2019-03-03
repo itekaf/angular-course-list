@@ -5,6 +5,7 @@ import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { Config } from 'src/app/shared';
 import { AuthService } from 'src/app/modules/auth/services/auth.service';
 import { InputResultModel } from 'src/app/shared/models/input-result.model';
+import { LoginModel } from './login.model';
 
 @Component({
 	selector: 'app-login',
@@ -25,9 +26,14 @@ export class LoginComponent {
 
 	public onSubmit(): void {
 		try {
-			// TODO: RL: subsribe
-			this.authService.login(this.username, this.password);
-			this.router.navigate([this.redirectPage]);
+			const loginData = new LoginModel(
+				this.username,
+				this.password,
+			);
+			this.authService.login(loginData)
+				.subscribe((res: boolean) => {
+					if (res) { this.router.navigate([this.redirectPage]); }
+				});
 		} catch (e) {
 			console.error(e);
 		}

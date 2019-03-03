@@ -8,6 +8,8 @@ import { ModulesModule } from '../modules/modules.module';
 
 import { LoginComponent } from './login/login.component';
 import { NoContentComponent } from './no-content/no-content.component';
+import { RegistryComponent } from './registry/registry.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
 	imports: [
@@ -16,10 +18,12 @@ import { NoContentComponent } from './no-content/no-content.component';
 		CommonModule,
 		ModulesModule,
 		CoursesModule,
+		RouterModule,
 	],
 	declarations: [
 		LoginComponent,
 		NoContentComponent,
+		RegistryComponent,
 	],
 })
 export class PagesModule { }

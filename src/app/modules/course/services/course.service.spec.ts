@@ -2,6 +2,8 @@ import uuid from 'uuid/v4';
 import { CourseService } from './course.service';
 import { CourseModel } from 'src/app/shared/models';
 import { Config } from 'src/app/shared';
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 const dummyData = [
 	new CourseModel(uuid(), 'Dummy 1'),
@@ -29,7 +31,7 @@ describe('CourseService', () => {
 			});
 
 			// Act
-			const output: CourseModel[] = service.read();
+			const output: Observable<CourseModel[]> = service.read();
 
 			// Assert
 			expect(output).toEqual(resultItems);

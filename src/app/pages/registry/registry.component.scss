@@ -1,0 +1,24 @@
+.page-registry {
+	margin-top: 50px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.registry-form {
+	border: 1px solid rgba(128, 128, 128, 0.5);
+	padding: 10px;
+	border-radius: 5px;
+	min-width: 50%;
+	box-shadow: 0px 0px 10px rgba(128, 128, 128, 0.5);
+}
+.registry-form__item  {
+	margin: 15px 5px;
+}
+.registry-form__input {
+	width: calc(100% - 30px);
+	border-radius: 5px;
+	border: 1px solid rgba(128, 128, 128, 0.2);
+	padding: 10px 15px;
+	margin-top: 10px;
+}
