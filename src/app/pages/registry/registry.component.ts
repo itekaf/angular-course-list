@@ -1,10 +1,12 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Config } from 'src/app/shared';
+import { finalize } from 'rxjs/operators';
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
-import { Router } from '@angular/router';
+import { Component, Input } from '@angular/core';
+
+import { Config } from 'src/app/shared';
 import { AuthService } from 'src/app/modules/auth/services';
+import { RegistryModel } from '../../shared/models/registry.model';
+import { HistoryService } from 'src/app/modules/routers/history.service';
 import { InputResultModel } from 'src/app/shared/models/input-result.model';
-import { RegistryModel } from './registry.model';
 
 @Component({
 	selector: 'app-registry',
@@ -13,41 +15,33 @@ import { RegistryModel } from './registry.model';
 })
 export class RegistryComponent {
 	private redirectPage = '/login';
+	@Input() public className: string = 'registry-form';
 	@Input() public icons: Map<string, IconDefinition> = Config.icons;
 
-	public username: string;
-	public password: string;
-	public lastName: string;
-	public firstName: string;
-	public passwordConfirmation: string;
+	public data: RegistryModel = new RegistryModel();
+	public loading: boolean;
 
 	constructor(
-		private router: Router,
+		private history: HistoryService,
 		private authService: AuthService
 	) { }
 
 	public onSubmit(): void {
-		try {
-			const registryData = new RegistryModel(
-				this.username,
-				this.password,
-				this.passwordConfirmation,
-				this.lastName,
-				this.firstName,
-			);
-			this.authService.registry(registryData)
-				.subscribe(
-					() => {
-						this.router.navigate([this.redirectPage]);
-					}
-				);
-		} catch (e) {
-			console.error(e);
-		}
+		this.loading = true;
+		this.authService
+			.registry(this.data)
+			.pipe(
+				finalize(() => { this.loading = false; }),
+			)
+			.subscribe(() => {
+				this.history.goTo(this.redirectPage);
+			});
 	}
 
 	public onChange($event: InputResultModel): void {
 		const { name, value }: { name: string, value: string } = $event;
-		this[name] = value;
+		this.data[name] = value;
 	}
+
+	public onBack(): void { this.history.goBack(); }
 }

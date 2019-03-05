@@ -9,6 +9,8 @@
 					(searchItem)="onSearchItem($event)"
 				></app-course-search>
 				<app-button text="Add Course" [icon]="icons.get('plus')" (clickButton)="onAdd()"></app-button>
+				<!-- TODO: RL: Change this shit to select tag -->
+				<!-- <app-input type="number" [value]="pageStep"  (inputEvent)="onPageStep($event)"></app-input> -->
 			</div>
 		</div>
 	</div>
@@ -22,8 +24,7 @@
 				<app-sorted-item (clickEvent)="onSortedByDuration()">duration</app-sorted-item>
 			</div>
 		</div>
-
-		<div class="block-course-list container">
+		<div class="block-course-list container" [appLoading]="loading">
 			<ng-container *ngIf="(courses
 				| filterByQuery: query
 				| sortedBy: 'name': sortedByTitle

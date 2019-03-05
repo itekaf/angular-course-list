@@ -1,7 +1,7 @@
 export interface IUser {
 	id: string;
-	userName: string;
+	username: string;
 
-	lastName?: string;
-	firstName?: string;
+	lastname: string;
+	firstname: string;
 }

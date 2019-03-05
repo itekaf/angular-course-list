@@ -1,11 +1,12 @@
 import { Observable } from 'rxjs';
 import * as uuid from 'uuid/v4';
 
-import { UserModel } from 'src/app/shared/models';
+import { UserModel, LoginModel, AnswerModel } from 'src/app/shared/models';
 import { AuthService } from './auth.service';
 
 const dummyData = {
 	userData: new UserModel(uuid(), 'dummy', 'dummy'),
+	password: '123',
 };
 
 describe('AuthService', () => {
@@ -18,7 +19,7 @@ describe('AuthService', () => {
 		userServiceSpy = jasmine.createSpyObj('UserService', ['setData', 'removeData', 'getData']);
 		userServiceSpy.getData.and.returnValue(dummyData.userData);
 
-		service = new AuthService(jwtServiceSpy, userServiceSpy);
+		// service = new AuthService(jwtServiceSpy, userServiceSpy);
 	});
 
 	describe('Service alone', () => {
@@ -28,11 +29,12 @@ describe('AuthService', () => {
 
 		it('should login user', () => {
 			// Arrange
-			const username = dummyData.userData.userName;
-			const password = dummyData.userData.password;
+			const username = dummyData.userData.username;
+			const password = dummyData.password;
+			const loginData = new LoginModel(username, password);
 
 			// Act
-			const output = service.login(username, password);
+			const output = service.login(loginData);
 
 			// Assert
 			expect(output).toBeTruthy();
@@ -42,12 +44,13 @@ describe('AuthService', () => {
 
 		it('should return throw if the user is already login', () => {
 			// Arrange
-			const username = dummyData.userData.userName;
-			const password = dummyData.userData.password;
+			const username = dummyData.userData.username;
+			const password = dummyData.password;
+			const loginData = new LoginModel(username, password);
 
 			// Act
-			service.login(username, password);
-			const loginError = (): Observable<boolean> => service.login(username, password);
+			service.login(loginData);
+			const loginError = (): Observable<AnswerModel> => service.login(loginData);
 
 			// Assert
 			expect(loginError).toThrow();
@@ -55,11 +58,12 @@ describe('AuthService', () => {
 
 		it('should logout user', () => {
 			// Arrange
-			const username = dummyData.userData.userName;
-			const password = dummyData.userData.password;
+			const username = dummyData.userData.username;
+			const password = dummyData.password;
+			const loginData = new LoginModel(username, password);
 
 			// Act
-			service.login(username, password);
+			service.login(loginData);
 			const output = service.logout();
 
 			// Assert

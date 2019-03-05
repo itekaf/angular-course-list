@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { BrowserModule } from '@angular/platform-browser';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ModuleWithProviders } from '@angular/compiler/src/core';
 
 import { UiModule } from '../../core/ui/ui.module';
+import { LoadingDirective } from 'src/app/core/loading/loading.directive';
+import { LoadingComponent } from 'src/app/core/loading/loading.component';
 
 import {
 	CourseFormComponent,
@@ -35,10 +36,12 @@ const angularDeclaration = [
 	CourseItemComponent,
 	CourseListComponent,
 	SortedItemComponent,
+	LoadingComponent,
 	CourseSearchComponent,
 
 	ItemRatedLightDirective,
 	ItemStatusLightDirective,
+	LoadingDirective,
 
 	SortedByPipe,
 	ItemDurationPipe,
@@ -53,7 +56,10 @@ const angularDeclaration = [
 		FontAwesomeModule,
 	],
 	declarations: angularDeclaration,
-	exports: angularDeclaration
+	exports: angularDeclaration,
+	entryComponents: [
+		LoadingComponent,
+	]
 })
 export class CourseListModule {
 	public static forRoot(): ModuleWithProviders {

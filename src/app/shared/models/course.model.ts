@@ -6,6 +6,7 @@ export class CourseModel implements ICourse {
 	public name: string;
 	public length: number;
 	public date: Date;
+	public playlist: string;
 
 	public authors?: IUser[];
 	public isTopRated?: boolean;
@@ -21,6 +22,7 @@ export class CourseModel implements ICourse {
 		description?: string,
 		date?: Date,
 		authors?: IUser[],
+		playlist?: string,
 	) {
 		this.id = id;
 		this.name = name;
@@ -30,5 +32,6 @@ export class CourseModel implements ICourse {
 		this.imagePath = imagePath || Config.default.imagePath;
 		this.description = description;
 		this.date = date;
+		this.playlist = playlist;
 	}
 }

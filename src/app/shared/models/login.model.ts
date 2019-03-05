@@ -1,12 +1,12 @@
-import { SecurityModel } from 'src/app/shared/models/security.model';
+import { SecurityModel } from './security.model';
 
 export class LoginModel extends SecurityModel {
 	public username: string;
 	public password: string;
 
 	constructor(
-		username: string,
-		password: string,
+		username?: string,
+		password?: string,
 		token?: string,
 		provider?: string,
 	) {

@@ -4,15 +4,15 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './pages/login/login.component';
 
 import { NoContentComponent } from './pages/no-content/no-content.component';
-import { LoadGuardService, AuthGuardService, AuthFailGuardService } from './modules/auth/guards';
 import { RegistryComponent } from './pages/registry/registry.component';
+import { AuthSuccessGuardService, AuthFailGuardService, AuthCheckGuardService, AuthLoadSuccessGuardService } from './modules/auth/guards';
 
 const routes: Routes = [
 	{
 		path: 'courses',
 		loadChildren: './pages/pages.module#PagesModule',
-		canLoad: [ LoadGuardService ],
-		canActivate: [ AuthGuardService ],
+		canLoad: [ AuthLoadSuccessGuardService ],
+		canActivate: [ AuthSuccessGuardService ],
 	},
 	{
 		path: 'login',
@@ -38,6 +38,7 @@ const routes: Routes = [
 	{
 		path: '**',
 		component: NoContentComponent,
+		canActivate: [ AuthCheckGuardService ],
 		data: {
 			label: 'Error'
 		}

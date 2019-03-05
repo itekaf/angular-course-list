@@ -11,7 +11,7 @@ export class UserService {
 
 	constructor() { }
 
-	get userData(): UserModel {
+	get userValue(): UserModel {
 		return this.userDataObj.value;
 	}
 	public getData(): BehaviorSubject<UserModel> {

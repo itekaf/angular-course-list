@@ -1,16 +1,16 @@
 import { SecurityModel } from 'src/app/shared/models/security.model';
 
 export class RegistryModel extends SecurityModel {
+	public lastName: string;
 	public username: string;
 	public password: string;
-	public passwordConfirmation: string;
 	public firstName: string;
-	public lastName: string;
+	public passwordConfirmation: string;
 
 	constructor(
-		username: string,
-		password: string,
-		passwordConfirmation: string,
+		username?: string,
+		password?: string,
+		passwordConfirmation?: string,
 
 		firstName?: string,
 		lastName?: string,
@@ -22,8 +22,8 @@ export class RegistryModel extends SecurityModel {
 
 		this.username = username;
 		this.password = password;
-		this.passwordConfirmation = passwordConfirmation;
 		this.lastName = lastName;
 		this.firstName = firstName;
+		this.passwordConfirmation = passwordConfirmation;
 	}
 }

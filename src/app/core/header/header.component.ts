@@ -17,27 +17,29 @@ export class HeaderComponent implements OnInit {
 	public userData: UserModel;
 
 	constructor(
-		private userService: UserService,
-		private authService: AuthService,
-		private historyService: HistoryService,
+		private user: UserService,
+		private auth: AuthService,
+		private history: HistoryService,
 	) { }
 
 	public ngOnInit(): void {
-		this.authService
-			.isAuthenticated()
-			.subscribe((isAuth: boolean) => {
-				this.userAuth = isAuth;
-			});
-		this.userService
+		this.user
 			.getData()
-			.subscribe((userData: UserModel) => {
-				this.userData = userData;
+			.subscribe((data: UserModel) => {
+				this.userAuth = !!data;
+				this.userData = data;
 			});
 	}
 
-	public onLogin(): void { this.historyService.goTo(this.loginPageUrl); }
+	public onLogin(): void { this.redirect(); }
 	public onLogout(): void {
-		this.authService.logout();
-		this.historyService.goTo(this.loginPageUrl);
+		this.auth
+			.logout()
+			.subscribe(() => { this.redirect(); });
+
+	}
+
+	private redirect(): void {
+		this.history.goTo(this.loginPageUrl);
 	}
 }

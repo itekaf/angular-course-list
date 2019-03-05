@@ -1,5 +1,5 @@
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
-import { faPlus, faEdit, faClock, faTrashAlt, faCalendarAlt, faSearch, faSortAmountDown, faSortAmountUp, faSortNumericDown, faSortNumericUp, faStar, faAt, faKey, faSmile, faMinus, faUsers, faSignature, faListAlt } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faEdit, faClock, faTrashAlt, faCalendarAlt, faSearch, faSortAmountDown, faSortAmountUp, faSortNumericDown, faSortNumericUp, faStar, faAt, faKey, faSmile, faMinus, faUsers, faSignature, faListAlt, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 export class Config {
 	// TODO: RL: Need to refactor this
@@ -17,6 +17,7 @@ export class Config {
 		['trash', faTrashAlt],
 		['listAlt', faListAlt],
 		['calendar', faCalendarAlt],
+		['arrowLeft', faArrowLeft ],
 		['signature', faSignature],
 		['sortAmountUp', faSortAmountUp],
 		['sortNumericUp', faSortNumericUp],
@@ -32,6 +33,11 @@ export class Config {
 				code: 404,
 				message: 'Page Not Found. Sorry :('
 			}
-		}
+		},
+		api: {
+			uri: 'http://localhost:4000',
+			prefix: 'api',
+			version: 'v1',
+		},
 	};
 }

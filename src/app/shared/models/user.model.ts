@@ -2,25 +2,36 @@ import { IUser } from '../interface/user.interface';
 
 export class UserModel implements IUser {
 	public id: string;
-	public userName: string;
+	public username: string;
 
-	public lastName?: string;
-	public firstName?: string;
+	public lastname: string;
+	public firstname: string;
+
+	public static create(jsonObj: object): UserModel {
+		const model = new UserModel();
+		const entries = Object.entries(jsonObj);
+		entries.forEach((item: string[]) => {
+			const propName = item[0];
+			const propValue = item[1];
+			model[propName] = propValue;
+		});
+		return model;
+	}
 
 	constructor(
-		id: string,
-		userName: string,
-		firstName?: string,
-		lastName?: string
+		id?: string,
+		username?: string,
+		firstname?: string,
+		lastname?: string
 	) {
 		this.id = id;
-		this.userName = userName,
+		this.username = username,
 
-		this.lastName = lastName;
-		this.firstName = firstName;
+		this.lastname = lastname;
+		this.firstname = firstname;
 	}
 
 	get name(): string {
-		return this.firstName || this.userName;
+		return this.firstname || this.username;
 	}
 }

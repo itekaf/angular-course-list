@@ -1,12 +1,18 @@
+import * as jwtDecode from 'jwt-decode';
 import { Injectable } from '@angular/core';
 
 @Injectable({
 	providedIn: 'root'
 })
 export class JwtService {
-	public key: string = 'jwtToken';
+	private key: string = 'jwtToken';
+	public schema: string = 'Bearer';
 
 	constructor() {	}
+
+	public decodeToken<T>(token: string): T {
+		return jwtDecode(token) as T;
+	}
 
 	public setToken(token: string): void {
 		localStorage.setItem(this.key, token);

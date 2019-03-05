@@ -41,7 +41,7 @@ describe('UserService', () => {
 			service.setData(inputData);
 
 			// Arrange
-			expect(service.userData).toEqual(resultData);
+			expect(service.userValue).toEqual(resultData);
 		});
 		it('should remove user data', () => {
 			// Arrange
@@ -53,7 +53,7 @@ describe('UserService', () => {
 			service.removeData();
 
 			// Assert
-			expect(service.userData).toEqual(resultData);
+			expect(service.userValue).toEqual(resultData);
 		});
 		it('should update user data', () => {
 			// Arrange
@@ -64,7 +64,7 @@ describe('UserService', () => {
 			service.updateData(inputData);
 
 			// Assert
-			expect(service.userData).toEqual(resultData);
+			expect(service.userValue).toEqual(resultData);
 		});
 	});
 });

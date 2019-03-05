@@ -27,6 +27,6 @@ import { UiModule } from './ui/ui.module';
 		FooterComponent,
 		HeaderComponent,
 		BreadcrumbsComponent,
-	]
+	],
 })
 export class CoreModule { }

@@ -1,14 +1,14 @@
-import * as jwtDecode from 'jwt-decode';
+import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 import { UserModel } from 'src/app/shared/models';
-import { JwtService } from './jwt.service';
-import { UserService } from './user.service';
-import { LoginModel } from 'src/app/pages/login/login.model';
 import { ApiClient } from 'src/app/shared/services/api.service';
+import { JwtService } from './jwt.service';
+import { LoginModel } from 'src/app/shared/models/login.model';
 import { AnswerModel } from 'src/app/shared/models/answer.model';
-import { RegistryModel } from 'src/app/pages/registry/registry.model';
+import { UserService } from './user.service';
+import { RegistryModel } from 'src/app/shared/models/registry.model';
 
 @Injectable({
 	providedIn: 'root'
@@ -26,9 +26,23 @@ export class AuthService {
 		return this.isAuthObj.value;
 	}
 
-	public isAuthenticated(): Observable<boolean> {
+	public checkAuth(): Observable<boolean> {
 		const token = this.jwtService.getToken();
-		this.isAuthObj.next(!!token);
+		if (token) {
+			// TODO: RL: Refactor this with RxJS
+			if (!this.isAuthObj.value) {
+				const jwtData = this.jwtService.decodeToken(token);
+				const userData = UserModel.create(jwtData);
+
+				this.isAuthObj.next(true);
+				this.userService.setData(userData);
+			}
+		} else {
+			if (this.isAuthObj.value) {
+				this.isAuthObj.next(false);
+				this.userService.removeData();
+			}
+		}
 		return this.isAuthObj;
 	}
 
@@ -36,27 +50,26 @@ export class AuthService {
 		return this.apiClient.post<AnswerModel>('signup/local/', data);
 	}
 
-	public login(data: LoginModel): BehaviorSubject<boolean> {
+	public login(data: LoginModel): Observable<AnswerModel> {
 		if (this.isAuthObj.value) {
 			throw new Error(
 				'You are already logged. Please, log out first!');
 		}
 
-		this.apiClient.post<AnswerModel>('signin/local/', data)
-			.subscribe(
-				(res: AnswerModel) => {
+		return this.apiClient.post<AnswerModel>('signin/local/', data)
+			.pipe(
+				map((answer: AnswerModel): AnswerModel => {
+					const token = answer.token;
+					if (!token) { return answer; }
+					const jwtData = this.jwtService.decodeToken(token);
+					const userData = UserModel.create(jwtData);
+
 					this.isAuthObj.next(true);
-					const decode = jwtDecode(res.token);
-					const userModel = new UserModel(decode.id, decode.username);
-					this.jwtService.setToken(res.token);
-					this.userService.setData(userModel);
-				},
-				// tslint:disable-next-line:no-any
-				(err: any) => {
-					console.error(err);
-				}
+					this.jwtService.setToken(token);
+					this.userService.setData(userData);
+					return answer;
+				})
 			);
-		return this.isAuthObj;
 	}
 
 	public logout(): Observable<boolean> {

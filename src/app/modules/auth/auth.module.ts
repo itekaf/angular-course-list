@@ -8,10 +8,11 @@ import {
 } from './services';
 
 import {
-	AuthGuardService,
-	LoadGuardService,
+	AuthSuccessGuardService,
+	AuthLoadSuccessGuardService,
 	AuthFailGuardService,
-	LoadFailGuardService,
+	AuthLoadFailGuardService,
+	AuthCheckGuardService,
 } from './guards';
 
 @NgModule({
@@ -34,10 +35,12 @@ export class AuthModule {
 				JwtService,
 				UserService,
 
-				AuthGuardService,
-				LoadGuardService,
 				AuthFailGuardService,
-				LoadFailGuardService,
+				AuthCheckGuardService,
+				AuthSuccessGuardService,
+
+				AuthLoadFailGuardService,
+				AuthLoadSuccessGuardService,
 			],
 		};
 	}

@@ -1,5 +1,8 @@
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
-import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+import { fromEvent, Observable, Subscription } from 'rxjs';
+import { map, debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy, ViewChild, ElementRef, OnInit, OnDestroy } from '@angular/core';
+
 import { InputResultModel } from 'src/app/shared/models/input-result.model';
 
 class LabelConfig {
@@ -14,7 +17,7 @@ class LabelConfig {
 	styleUrls: ['./input.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class InputComponent {
+export class InputComponent implements OnInit, OnDestroy {
 	// TODO: RL: Implement Label Config
 	@Input() public label: LabelConfig;
 	@Input() public name: string;
@@ -25,10 +28,29 @@ export class InputComponent {
 
 	@Output() public inputEvent: EventEmitter<InputResultModel> = new EventEmitter<InputResultModel>();
 
+	@ViewChild('inputElement') public inputRef: ElementRef;
+
+	private debounceMs: number = 250;
+	private inputObserable: Observable<any>;
+	private inputObserableSub: Subscription;
+
 	constructor() { }
 
-	public onInput(): void {
-		const result = new InputResultModel(this.name, this.value);
-		this.inputEvent.emit(result);
+	public ngOnInit(): void {
+		this.inputObserable = fromEvent(this.inputRef.nativeElement, 'input');
+		this.inputObserableSub = this.inputObserable
+				.pipe(
+					map((event) => event.target.value),
+					debounceTime(this.debounceMs),
+					distinctUntilChanged()
+				)
+				.subscribe((value: string) => {
+					const result = new InputResultModel(this.name, value);
+					this.inputEvent.emit(result);
+				});
+	}
+
+	public ngOnDestroy(): void {
+		if (this.inputObserableSub) { this.inputObserableSub.unsubscribe(); }
 	}
 }

@@ -1,8 +1,8 @@
 export class InputResultModel {
 	public name: string;
-	public value: string;
+	public value: any;
 
-	constructor(name: string, value: string) {
+	constructor(name: string, value: any) {
 		this.name = name;
 		this.value = value;
 	}

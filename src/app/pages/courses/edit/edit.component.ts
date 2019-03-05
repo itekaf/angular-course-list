@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { finalize } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 import { ActivatedRoute, Params } from '@angular/router';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { CourseModel } from 'src/app/shared/models';
 import { CourseService } from 'src/app/modules/course/services';
@@ -10,8 +12,11 @@ import { HistoryService } from 'src/app/modules/routers/history.service';
 	templateUrl: './edit.component.html',
 	styleUrls: ['./edit.component.scss']
 })
-export class EditComponent implements OnInit {
-	public item: CourseModel;
+export class EditComponent implements OnInit, OnDestroy {
+	public item: CourseModel = new CourseModel();
+	public loading: boolean = false;
+
+	private routerParamsSub: Subscription;
 
 	constructor(
 		private history: HistoryService,
@@ -20,25 +25,44 @@ export class EditComponent implements OnInit {
 	) { }
 
 	public ngOnInit(): void {
-		this.activatedRouter.params.subscribe((data: Params) => {
-			this.setItem(data);
-		});
+		this.routerParamsSub = this.activatedRouter.params
+			.subscribe((data: Params) => {
+				this.setItem(data);
+			});
+	}
+
+	public ngOnDestroy(): void {
+		if (this.routerParamsSub) { this.routerParamsSub.unsubscribe(); }
 	}
 
 	public onSubmit($event: CourseModel): void {
-		// TODO: RL: rxjs
-		this.courseService.update($event.id, $event);
-		this.history.goBack();
+		this.loading = true;
+		this.courseService
+			.update($event.id, $event)
+			.pipe(
+				finalize(() => { this.loading = false; }),
+			)
+			.subscribe(() => {
+				this.history.goBack();
+			});
 	}
 
 	public onCancel(): void { this.history.goBack(); }
 
 	public setItem(data: Params): void {
-		const itemId = data['id'];
-		const itemData = itemId ? this.courseService.getById(itemId) : null;
-
-		itemData
-			? this.item = itemData
-			: this.history.goToError();
+		this.loading = true;
+		this.courseService
+			.getById(data['id'])
+			.pipe(
+				finalize(() => { this.loading = false; }),
+			)
+			.subscribe(
+				(result: CourseModel) => {
+					this.item = result;
+				},
+				() => {
+					this.history.goToError();
+				},
+			);
 	}
 }

@@ -1,6 +1,6 @@
 import { filter } from 'rxjs/operators';
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { Injectable, OnDestroy } from '@angular/core';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import { Router, NavigationEnd, Event, ActivatedRoute, NavigationExtras } from '@angular/router';
 
 import { HistoryRouterModel } from 'src/app/shared/models/history.router.model';
@@ -8,16 +8,21 @@ import { HistoryRouterModel } from 'src/app/shared/models/history.router.model';
 @Injectable({
 	providedIn: 'root'
 })
-export class HistoryService {
+export class HistoryService implements OnDestroy {
 	private historyObj: BehaviorSubject<HistoryRouterModel[]> = new BehaviorSubject([]);
+	private routerEventsSub: Subscription;
 
 	constructor(
 		private router: Router,
 		private activatedRoute: ActivatedRoute,
 	) { }
 
+	public ngOnDestroy(): void {
+		if (this.routerEventsSub) { this.routerEventsSub.unsubscribe(); }
+	}
+
 	public loadHistory(): void {
-		this.router.events
+		this.routerEventsSub = this.router.events
 			.pipe(
 				filter((event: Event) => event instanceof NavigationEnd),
 			)
@@ -42,11 +47,8 @@ export class HistoryService {
 	public goBack(): void {
 		const currentHistory = this.historyObj.value;
 		const lastRouterNumber = -2;
-		if (currentHistory.length <= 1) {
-			throw Error(`Don't have a previous page`);
-		}
-		const lastRouterItem: HistoryRouterModel = currentHistory.slice(lastRouterNumber)[0];
-
+		const lastRouterIndex = currentHistory.length <= 1 ? 0 : lastRouterNumber;
+		const lastRouterItem: HistoryRouterModel = currentHistory.slice(lastRouterIndex)[0];
 		this.router.navigate([lastRouterItem.url]);
 	}
 
@@ -58,5 +60,4 @@ export class HistoryService {
 		if (!url) { return; }
 		this.router.navigate([url], extras);
 	}
-
 }
