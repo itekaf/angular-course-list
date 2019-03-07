@@ -4,7 +4,6 @@ import { NgModule, ModuleWithProviders, SkipSelf, Optional } from '@angular/core
 import {
 	JwtService,
 	AuthService,
-	UserService,
 } from './services';
 
 import {
@@ -14,10 +13,11 @@ import {
 	AuthLoadFailGuardService,
 	AuthCheckGuardService,
 } from './guards';
+import { SingletonModule } from 'src/app/shared/abstract/singleton.module';
 
 @NgModule({
 	imports: [
-		CommonModule
+		CommonModule,
 	],
 	declarations: [
 
@@ -26,14 +26,13 @@ import {
 
 	]
 })
-export class AuthModule {
+export class AuthModule implements SingletonModule<AuthModule> {
 	public static forRoot(): ModuleWithProviders {
 		return {
 			ngModule: AuthModule,
 			providers: [
 				AuthService,
 				JwtService,
-				UserService,
 
 				AuthFailGuardService,
 				AuthCheckGuardService,
@@ -43,12 +42,5 @@ export class AuthModule {
 				AuthLoadSuccessGuardService,
 			],
 		};
-	}
-
-	constructor(@Optional() @SkipSelf() parentModule: AuthModule) {
-		if (parentModule) {
-			throw new Error(
-				'AuthModule is already loaded. Import it in the AppModule only');
-		}
 	}
 }

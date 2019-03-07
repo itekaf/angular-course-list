@@ -1,9 +1,11 @@
 First of all:
 		[ ] - DI for all components
-		[ ] - (click)="fns.toggle()" for component without @Input decorator
+		[ ] - (click)="fns.toggle()" for component without @Input decorator where it is possible
 		[x] - WARNING in Circular dependency detected
+		[ ] - Fix linting
 
 After all:
+		[ ] - Check fresh of jwt token
 		[x] - Add `hucky`
 		[ ] - Fix all styles
 		[ ] - Create all test + JSON generated data
@@ -12,20 +14,20 @@ After all:
 		[ ] - Create shared modules !!!
 		[ ] - Create modal window
 		[ ] - Clear history of git
-		[ ] - Reconect API
+		[x] - Reconnect API
 		[ ] - Toast
 		[ ] - Create Playlist page
 
 Bugs:
-		[ ] - Need to auto redirect if user login/logout
+		[x] - Need to auto redirect if user login/logout
 		[x] - User Data in header is reset after rebuild
 		[ ] - If we loaded new items, we need to sort they
-		[x] - Unsubsribes
-		[ ] - Fast animation (need to implamate it to slow or missing)
+		[x] - Unsubscribes
+		[ ] - Fast animation (need to implement it to slow or missing)
 
 Probable:
 		[ ] - JSDoc
-		[ ] - Pull Apruve
+		[ ] - Pull Approve
 		[ ] - Deploy process
 		[ ] - Semantic messages bot
 		[ ] - improving package.json file
@@ -71,13 +73,13 @@ Probable:
 		[x] - Since we don’t want to spam our service add filter by input value and do not call API until user enter at least 3 chars.
 		[x] - Add debounce to prevent API calls until user stop typing.
 		[x] - Reveal user data using RxJs from service. Subscribe in header component to user data to show actual info in the header.
-		[ ] - Change logic of auth guard. Now use Observable as a return value in canActivate.
+		[x] - Change logic of auth guard. Now use Observable as a return value in canActivate.
 		[x] - Create global loading block component. It’s purpose to prevent user from any actions. Should be overlay covers whole page with loader animation in the center.
 				This feature will consist of two items:
 				[x] - Loading-block component
 				[x] - Service that keeps actual condition of block (show: true/false)
 		[x] - Add using loading block for every api call (load courses, delete, login...)
-		[ ] - Refactor all code for 8 and 9 task
+		[x] - Refactor all code for 8 and 9 task
 
 [ ] - TASK #10: NgRx
 

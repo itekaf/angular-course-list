@@ -14,7 +14,7 @@
 	"private": true,
 	"husky": {
 		"hooks": {
-			"pre-commit": "npm run build"
+			"pre-commit": ""
 		}
 	},
 	"dependencies": {
@@ -29,6 +29,13 @@
 		"@fortawesome/angular-fontawesome": "^0.3.0",
 		"@fortawesome/fontawesome-svg-core": "^1.2.15",
 		"@fortawesome/free-solid-svg-icons": "^5.7.2",
+		"@ngrx/core": "^1.2.0",
+		"@ngrx/effects": "^7.3.0",
+		"@ngrx/entity": "^7.3.0",
+		"@ngrx/router-store": "^7.3.0",
+		"@ngrx/schematics": "^7.3.0",
+		"@ngrx/store": "^7.3.0",
+		"@ngrx/store-devtools": "^7.3.0",
 		"core-js": "^2.5.4",
 		"jwt-decode": "^2.2.0",
 		"rxjs": "~6.3.3",

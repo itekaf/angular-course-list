@@ -5,14 +5,15 @@
 				<app-logo></app-logo>
 			</div>
 			<article class="user-article">
-				<ng-container *ngTemplateOutlet="userAuth ? isAuth : isNotAuth"></ng-container>
+					{{userData$ | async | json }}
+				<ng-container *ngTemplateOutlet="(userAuth$ | async) ? isAuth : isNotAuth"></ng-container>
 			</article>
 		</div>
 	</div>
 </header>
 
 <ng-template #isAuth>
-	<p *ngIf="userData && userData.name" class="user-article__username">{{userData.name}}</p>
+	<p *ngIf="userData$ | async" class="user-article__username">{{(userData$ | async).name}}</p>
 	<app-button (clickButton)="onLogout()" text="Logout"></app-button>
 </ng-template>
 <ng-template #isNotAuth>

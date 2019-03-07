@@ -1,11 +1,14 @@
 import { finalize } from 'rxjs/operators';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { CourseModel } from 'src/app/shared/models';
 import { CourseService } from 'src/app/modules/course/services';
 import { HistoryService } from 'src/app/modules/routers/history.service';
+import { Store } from '@ngrx/store';
+import { ICourseState } from 'src/app/modules/course/store/course.reduces';
+import { Update } from 'src/app/modules/course/store/course.actions';
 
 @Component({
 	selector: 'app-edit',
@@ -18,13 +21,18 @@ export class EditComponent implements OnInit, OnDestroy {
 
 	private routerParamsSub: Subscription;
 
+	private courses$: Observable<ICourseState>;
+
 	constructor(
+		private store$: Store<{ courses: ICourseState}>,
 		private history: HistoryService,
 		private courseService: CourseService,
 		private activatedRouter: ActivatedRoute,
 	) { }
 
 	public ngOnInit(): void {
+		// TODO: RL: Move to effects
+		this.courses$ = this.store$.select('courses');
 		this.routerParamsSub = this.activatedRouter.params
 			.subscribe((data: Params) => {
 				this.setItem(data);
@@ -37,19 +45,25 @@ export class EditComponent implements OnInit, OnDestroy {
 
 	public onSubmit($event: CourseModel): void {
 		this.loading = true;
-		this.courseService
-			.update($event.id, $event)
-			.pipe(
-				finalize(() => { this.loading = false; }),
-			)
-			.subscribe(() => {
-				this.history.goBack();
-			});
+		// this.courseService
+		// 	.update($event.id, $event)
+		// 	.pipe(
+		// 		finalize(() => { this.loading = false; }),
+		// 	)
+		// 	.subscribe(() => {
+		// 		this.history.goBack();
+		// 	});
+		const data = {
+			id: $event.id,
+			data: $event,
+		};
+		this.store$.dispatch(new Update(data))
 	}
 
 	public onCancel(): void { this.history.goBack(); }
 
 	public setItem(data: Params): void {
+		// TODO: RL: Move to effects
 		this.loading = true;
 		this.courseService
 			.getById(data['id'])

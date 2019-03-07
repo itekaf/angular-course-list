@@ -7,7 +7,8 @@
         "latex",
         "plaintext",
         "html",
-        "todo"
+        "todo",
+        "typescript"
     ],
 	"todo.embedded.exclude": ["**/coverage/**", "**/node_modules/**", "**/.git/**"]
 }

@@ -8,6 +8,10 @@ import { RegistryModel } from '../../shared/models/registry.model';
 import { HistoryService } from 'src/app/modules/routers/history.service';
 import { InputResultModel } from 'src/app/shared/models/input-result.model';
 
+import { Store } from '@ngrx/store';
+import { IAuthState } from 'src/app/modules/auth/store/auth.reducer';
+import { Registry } from 'src/app/modules/auth/store/auth.actions';
+
 @Component({
 	selector: 'app-registry',
 	templateUrl: './registry.component.html',
@@ -22,20 +26,22 @@ export class RegistryComponent {
 	public loading: boolean;
 
 	constructor(
+		private store: Store<{auth: IAuthState}>,
 		private history: HistoryService,
 		private authService: AuthService
 	) { }
 
 	public onSubmit(): void {
 		this.loading = true;
-		this.authService
-			.registry(this.data)
-			.pipe(
-				finalize(() => { this.loading = false; }),
-			)
-			.subscribe(() => {
-				this.history.goTo(this.redirectPage);
-			});
+		// this.authService
+		// 	.registry(this.data)
+		// 	.pipe(
+		// 		finalize(() => { this.loading = false; }),
+		// 	)
+		// 	.subscribe(() => {
+		// 		this.history.goTo(this.redirectPage);
+		// 	});
+		this.store.dispatch(new Registry(this.data));
 	}
 
 	public onChange($event: InputResultModel): void {

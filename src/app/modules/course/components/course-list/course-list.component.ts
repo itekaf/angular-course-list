@@ -1,4 +1,4 @@
-import { map, finalize } from 'rxjs/operators';
+import { map, finalize, pluck } from 'rxjs/operators';
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit, Input } from '@angular/core';
@@ -8,6 +8,10 @@ import { CourseModel } from 'src/app/shared/models';
 import { CourseService } from '../../services/course.service';
 import { InputResultModel } from 'src/app/shared/models/input-result.model';
 import { HistoryService } from 'src/app/modules/routers/history.service';
+import { Store } from '@ngrx/store';
+import { ICourseState } from '../../store/course.reduces';
+import { Observable } from 'rxjs';
+import { Delete, Read } from '../../store/course.actions';
 
 // TODO: RL: Refactor this + create test
 @Component({
@@ -22,18 +26,37 @@ export class CourseListComponent implements OnInit {
 	@Input() public loadMoreText: string = 'Load More';
 	@Input() public noDataMessage: string = 'NO DATA. FELL FREE TO ADD NEW COURSE';
 
-	public loading: boolean = true;
+	public loading: boolean = false;
 	public query: string;
 	public courses: CourseModel[] = [];
 	public sortedByDate: boolean = true;
 	public sortedByTitle: boolean = true;
 	public sortedByDuration: boolean = true;
 
+	private data$: Observable<ICourseState>;
+
 	constructor(
+		private store$: Store<{ courses: ICourseState }>,
 		private history: HistoryService,
 		private courseService: CourseService,
 		private activatedRouter: ActivatedRoute,
-	) { }
+	) {
+		this.store$.select('courses')
+			.pipe(
+				pluck('data'),
+				map((items: CourseModel[]) => {
+					return items.map((item: CourseModel) => {
+						const itemImagePath = item.imagePath || Config.default.imagePath;
+						item.imagePath = itemImagePath;
+						return item;
+					});
+				}),
+			)
+			.subscribe((items: CourseModel[]) => {
+				this.loading = false;
+				this.courses = items;
+			}, null, () => { this.loading = false; });
+	}
 
 	public ngOnInit(): void {
 		this.updateItems();
@@ -63,14 +86,15 @@ export class CourseListComponent implements OnInit {
 
 	public onRemoveItem(id: string): void {
 		this.loading = true;
-		this.courseService
-			.delete(id)
-			.pipe(
-				finalize(() => { this.loading = false; }),
-			)
-			.subscribe(() => {
-				this.courses = this.courses.filter((x: CourseModel) => x.id !== id);
-			});
+		// this.courseService
+		// 	.delete(id)
+		// 	.pipe(
+		// 		finalize(() => { this.loading = false; }),
+		// 	)
+		// 	.subscribe(() => {
+		// 		this.courses = this.courses.filter((x: CourseModel) => x.id !== id);
+		// 	});
+		this.store$.dispatch(new Delete(id));
 	}
 
 	public onLoadMore(): void {
@@ -92,20 +116,24 @@ export class CourseListComponent implements OnInit {
 		join: boolean = false,
 	): void {
 		this.loading = true;
-		this.courseService
-			.read(query, from, count)
-			.pipe(
-				map((items: CourseModel[]) => {
-					return items.map((item: CourseModel) => {
-						const itemImagePath = item.imagePath || Config.default.imagePath;
-						item.imagePath = itemImagePath;
-						return item;
-					});
-				}),
-				finalize(() => { this.loading = false; }),
-			)
-			.subscribe((items: CourseModel[]) => {
-				this.courses = join ? this.courses.concat(items) : items;
-			});
+		const data = {
+			query, from, count, join
+		};
+		this.store$.dispatch(new Read(data));
+		// this.courseService
+		// 	.read(query, from, count)
+		// 	.pipe(
+		// 		map((items: CourseModel[]) => {
+		// 			return items.map((item: CourseModel) => {
+		// 				const itemImagePath = item.imagePath || Config.default.imagePath;
+		// 				item.imagePath = itemImagePath;
+		// 				return item;
+		// 			});
+		// 		}),
+		// 		finalize(() => { this.loading = false; }),
+		// 	)
+		// 	.subscribe((items: CourseModel[]) => {
+		// 		this.courses = join ? this.courses.concat(items) : items;
+		// 	});
 	}
 }

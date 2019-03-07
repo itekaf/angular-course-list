@@ -7,7 +7,7 @@ import { ApiClient } from 'src/app/shared/services/api.service';
 import { JwtService } from './jwt.service';
 import { LoginModel } from 'src/app/shared/models/login.model';
 import { AnswerModel } from 'src/app/shared/models/answer.model';
-import { UserService } from './user.service';
+import { UserService } from '../../user/services/user.service';
 import { RegistryModel } from 'src/app/shared/models/registry.model';
 
 @Injectable({
@@ -50,15 +50,14 @@ export class AuthService {
 		return this.apiClient.post<AnswerModel>('signup/local/', data);
 	}
 
-	public login(data: LoginModel): Observable<AnswerModel> {
+	public login(data: LoginModel): Observable<AnswerModel | UserModel> {
 		if (this.isAuthObj.value) {
-			throw new Error(
-				'You are already logged. Please, log out first!');
+			throw new Error('You are already logged. Please, log out first!');
 		}
 
 		return this.apiClient.post<AnswerModel>('signin/local/', data)
 			.pipe(
-				map((answer: AnswerModel): AnswerModel => {
+				map((answer: AnswerModel): AnswerModel | UserModel  => {
 					const token = answer.token;
 					if (!token) { return answer; }
 					const jwtData = this.jwtService.decodeToken(token);
@@ -67,15 +66,14 @@ export class AuthService {
 					this.isAuthObj.next(true);
 					this.jwtService.setToken(token);
 					this.userService.setData(userData);
-					return answer;
+					return userData;
 				})
 			);
 	}
 
 	public logout(): Observable<boolean> {
 		if (!this.isAuthObj.value) {
-			throw new Error(
-				'You are not auth. Please, login first!');
+			throw new Error('You are not auth. Please, login first!');
 		}
 
 		this.isAuthObj.next(false);

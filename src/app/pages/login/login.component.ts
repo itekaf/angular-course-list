@@ -7,6 +7,10 @@ import { LoginModel } from '../../shared/models/login.model';
 import { AuthService } from 'src/app/modules/auth/services/auth.service';
 import { HistoryService } from 'src/app/modules/routers/history.service';
 import { InputResultModel } from 'src/app/shared/models/input-result.model';
+import { Store } from '@ngrx/store';
+import { IAuthState } from 'src/app/modules/auth/store/auth.reducer';
+import { Observable } from 'rxjs';
+import { Login } from 'src/app/modules/auth/store/auth.actions';
 
 @Component({
 	selector: 'app-login',
@@ -14,7 +18,6 @@ import { InputResultModel } from 'src/app/shared/models/input-result.model';
 	styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
-	private redirectPage = '/courses';
 	@Input() public className: string = 'login-form';
 	@Input() public icons: Map<string, IconDefinition> = Config.icons;
 
@@ -22,20 +25,14 @@ export class LoginComponent {
 	public data: LoginModel = new LoginModel();
 
 	constructor(
+		private store: Store<{ auth: IAuthState }>,
 		private history: HistoryService,
 		private authService: AuthService
-	) { }
+	) {	}
 
 	public onSubmit(): void {
 		this.loading = true;
-		this.authService
-			.login(this.data)
-			.pipe(
-				finalize(() => { this.loading = false; }),
-			)
-			.subscribe(() => {
-				this.history.goTo(this.redirectPage);
-			});
+		this.store.dispatch(new Login(this.data));
 	}
 
 	public onChange($event: InputResultModel): void {
