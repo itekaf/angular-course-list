@@ -1,5 +1,6 @@
 import { CourseModel } from 'src/app/shared/models';
-import { CourseActionTypes, CourseActionEnum } from './course.actions';
+import { CourseActionTypes, CourseActionEnum, UpdateSuccess, DeleteSuccess, CreateSuccess, ReadSuccess } from './course.actions';
+import { Update } from '../../user/store/user.actions';
 
 export interface IPlaylist {
 	id: string;
@@ -42,12 +43,12 @@ export function courseReducer(state: ICourseState = initState, action: CourseAct
 		case CourseActionEnum.ReadSuccess: {
 			return {
 				...state,
-				data: action.payload
+				data: (action as ReadSuccess).payload
 			};
 		}
 
 		case CourseActionEnum.CreateSuccess: {
-			const createdItem = action.payload as CourseModel;
+			const createdItem = (action as CreateSuccess).payload;
 			return {
 				...state,
 				data: [...state.data, createdItem]
@@ -55,7 +56,7 @@ export function courseReducer(state: ICourseState = initState, action: CourseAct
 		}
 
 		case CourseActionEnum.DeleteSuccess: {
-			const removedId = action.payload;
+			const removedId = (action as DeleteSuccess).payload;
 			return {
 				...state,
 				data: state.data.filter((item: CourseModel) => item.id !== removedId)
@@ -63,7 +64,7 @@ export function courseReducer(state: ICourseState = initState, action: CourseAct
 		}
 
 		case CourseActionEnum.UpdateSuccess: {
-			const updatedItem = action.payload as CourseModel;
+			const updatedItem = (action as UpdateSuccess).payload;
 			return {
 				...state,
 				data: state.data.map((item: CourseModel) => item.id === updatedItem.id ? updatedItem : item)
@@ -73,7 +74,7 @@ export function courseReducer(state: ICourseState = initState, action: CourseAct
 		case CourseActionEnum.Concat: {
 			return {
 				...state,
-				data: state.data.concat(action.payload)
+				data: state.data.concat((action as ReadSuccess).payload)
 			};
 		}
 

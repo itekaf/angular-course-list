@@ -1,4 +1,5 @@
 import { Action } from '@ngrx/store';
+import { CourseModel } from 'src/app/shared/models';
 
 export enum CourseActionEnum {
 	ReadSuccess = '[Course] Read Success',
@@ -18,58 +19,55 @@ export enum CourseActionEnum {
 
 export class Redirect implements Action {
 	public readonly type: CourseActionEnum =  CourseActionEnum.CourseRedirect;
-	constructor(public payload: any) {}
 }
 
-export class RequestError implements Action {
+export class CourseError implements Action {
 	public readonly type: CourseActionEnum =  CourseActionEnum.CourseError;
-	constructor(public payload: any) {}
 }
 
 export class ReadSuccess implements Action {
 	public readonly type: CourseActionEnum =  CourseActionEnum.ReadSuccess;
-	constructor(public payload: any) {}
+	constructor(public payload: CourseModel[]) {}
 }
 
 export class DeleteSuccess implements Action {
 	public readonly type: CourseActionEnum =  CourseActionEnum.DeleteSuccess;
-	constructor(public payload: any) {}
+	constructor(public payload: string) {}
 }
 
 export class CreateSuccess implements Action {
 	public readonly type: CourseActionEnum =  CourseActionEnum.CreateSuccess;
-	constructor(public payload: any) {}
+	constructor(public payload: CourseModel) {}
 }
 
 export class UpdateSuccess implements Action {
 	public readonly type: CourseActionEnum = CourseActionEnum.UpdateSuccess;
-	constructor(public payload: any) {}
+	constructor(public payload: CourseModel) {}
 }
 
 export class Read implements Action {
 	public readonly type: CourseActionEnum = CourseActionEnum.Read;
-
-	constructor(public payload: any) {}
+	constructor(public payload: { query: string, from: number, count: number }) {}
 }
 
 export class Create implements Action {
 	public readonly type: CourseActionEnum =  CourseActionEnum.Create;
-	constructor(public payload: any) {}
+	constructor(public payload: CourseModel) {}
 }
 
 export class Delete implements Action {
 	public readonly type: CourseActionEnum =  CourseActionEnum.Delete;
-	constructor(public payload: any) {}
+	constructor(public payload: string) {}
 }
 
 export class Update implements Action {
 	public readonly type: CourseActionEnum = CourseActionEnum.Update;
-	constructor(public payload: any) {}
+	constructor(public payload: { id: string, data: CourseModel }) {}
 }
 
 export class Concat implements Action {
 	public readonly type: CourseActionEnum = CourseActionEnum.Concat;
-	constructor(public payload: any) {}
+	constructor(public payload: CourseModel[]) {}
 }
 
 export type CourseActionTypes =
@@ -82,4 +80,4 @@ export type CourseActionTypes =
 	CreateSuccess |
 	DeleteSuccess |
 	UpdateSuccess |
-	RequestError;
+	CourseError;

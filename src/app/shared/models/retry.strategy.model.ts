@@ -3,7 +3,7 @@ export class RetryStrategyModel {
 	public duration?: number;
 
 	constructor(
-		maxRetry: number = 3,
+		maxRetry: number = 1,
 		duration: number = 1000,
 	) {
 		this.maxRetry = maxRetry;

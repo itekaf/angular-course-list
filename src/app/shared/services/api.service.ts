@@ -4,7 +4,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { Config } from '..';
-import { genericRetryStrategy } from '../strategy/genericRetryStrategy';
+import { genericRetryStrategy } from '../strategy/generic-retry-strategy';
+import { AnswerModel } from '../models';
 
 @Injectable({
 	providedIn: 'root'
@@ -20,7 +21,7 @@ export class ApiClient {
 		return this.http
 			.get<T>(this.createApiUri(url), options)
 			.pipe(
-				retryWhen((err: Observable<any>) => genericRetryStrategy(err))
+				retryWhen(genericRetryStrategy)
 			);
 	}
 
@@ -28,7 +29,7 @@ export class ApiClient {
 		return this.http
 			.put<T>(this.createApiUri(url), body, options)
 			.pipe(
-				retryWhen((err: Observable<any>) => genericRetryStrategy(err))
+				retryWhen((err: Observable<AnswerModel>) => genericRetryStrategy(err))
 			);
 	}
 
@@ -36,7 +37,7 @@ export class ApiClient {
 		return this.http
 			.delete<T>(this.createApiUri(url), options)
 			.pipe(
-				retryWhen((err: Observable<any>) => genericRetryStrategy(err))
+				retryWhen((err: Observable<AnswerModel>) => genericRetryStrategy(err))
 			);
 	}
 
@@ -44,7 +45,7 @@ export class ApiClient {
 		return this.http
 			.post<T>(this.createApiUri(url), body, options)
 			.pipe(
-				retryWhen((err: Observable<any>) => genericRetryStrategy(err))
+				retryWhen((err: Observable<AnswerModel>) => genericRetryStrategy(err))
 			);
 	}
 

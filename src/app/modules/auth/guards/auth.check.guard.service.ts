@@ -14,7 +14,6 @@ import { getAuthStatus } from '../store/auth.selectors';
 export class AuthCheckGuardService implements CanActivate {
 	constructor(
 		private store$: Store<{ auth: IAuthState}>,
-		private authService: AuthService,
 	) { }
 
 	public canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | boolean {

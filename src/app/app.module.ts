@@ -22,6 +22,9 @@ import { authReducer } from './modules/auth/store/auth.reducer';
 import { AuthEffects } from './modules/auth/store/auth.effects';
 import { courseReducer } from './modules/course/store/course.reduces';
 import { CoursesEffect } from './modules/course/store/course.effects';
+import { ReactiveFormsModule } from '@angular/forms';
+import { loadingReducer } from './core/loading/store/loading.reducer';
+import { LoadingEffects } from './core/loading/store/loading.effects';
 
 const httpInterceptors = [
 	{
@@ -46,11 +49,13 @@ const httpInterceptors = [
 		AppComponent,
 	],
 	imports: [
+		ReactiveFormsModule,
 		StoreModule.forRoot({
+			loading: loadingReducer,
 			auth: authReducer,
 			courses: courseReducer,
 		}),
-		EffectsModule.forRoot([ AuthEffects, CoursesEffect ]),
+		EffectsModule.forRoot([ AuthEffects, CoursesEffect, LoadingEffects ]),
 		HttpClientModule,
 		BrowserModule,
 		AppRoutingModule,
@@ -59,8 +64,8 @@ const httpInterceptors = [
 		PagesModule,
 
 		StoreDevtoolsModule.instrument({
-			maxAge: 25, // Retains last 25 states
-			logOnly: environment.production, // Restrict extension to log-only mode
+			maxAge: 25,
+			logOnly: environment.production,
 		}),
 	],
 	providers: [

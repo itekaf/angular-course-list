@@ -21,7 +21,7 @@ export function authReducer(state: IAuthState = initState, action: AuthActionsTy
 			};
 		}
 
-		case AuthActionsEnum.Logout : {
+		case AuthActionsEnum.LogoutSucces : {
 			return initState;
 		}
 		default: {

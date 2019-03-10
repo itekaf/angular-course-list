@@ -44,20 +44,11 @@ export class EditComponent implements OnInit, OnDestroy {
 	}
 
 	public onSubmit($event: CourseModel): void {
-		this.loading = true;
-		// this.courseService
-		// 	.update($event.id, $event)
-		// 	.pipe(
-		// 		finalize(() => { this.loading = false; }),
-		// 	)
-		// 	.subscribe(() => {
-		// 		this.history.goBack();
-		// 	});
 		const data = {
 			id: $event.id,
 			data: $event,
 		};
-		this.store$.dispatch(new Update(data))
+		this.store$.dispatch(new Update(data));
 	}
 
 	public onCancel(): void { this.history.goBack(); }

@@ -1,5 +1,35 @@
 <div class="container">
 	<div class="page-login">
+		<form [formGroup]="loginForm" (ngSubmit)="onSubmitNew()">
+			<input className="{{className}}" formControlName="login" placeholder="Please enter email ..." name="username"/>
+			<div *ngIf="login.invalid && (login.dirty || login.touched)"
+				class="alert alert-danger">
+				<div *ngIf="login.errors.required">
+					Login is required.
+				</div>
+				<div *ngIf="login.errors.email">
+					Login must be a email.
+				</div>
+			</div>
+
+
+			<input id="password" className="{{className}}" formControlName="password"  placeholder="Please enter password ..." name="password"/>
+			<div *ngIf="password.invalid && (password.dirty || password.touched)"
+				class="alert alert-danger">
+				<div *ngIf="password.errors.required">
+					Password is required.
+				</div>
+				<div *ngIf="password.errors.minlength">
+					Password must be at least 5 characters long.
+				</div>
+				<div *ngIf="password.errors.maxlength">
+					Password must be at max 50 characters long.
+				</div>
+			</div>
+			<button [disabled]="!loginForm.valid">Submit</button>
+		</form>
+
+
 		<!-- TODO: RL: Implementing it later with separate form component -->
 		<form class="{{className}}" (submit)="onSubmit()" [appLoading]="loading">
 			<!-- TODO: RL: Move it later to separate component `form-item` which should be included an element with a result of input validation  -->

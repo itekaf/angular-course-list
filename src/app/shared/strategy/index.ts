@@ -1,4 +1,4 @@
-import { genericRetryStrategy } from './genericRetryStrategy';
+import { genericRetryStrategy } from './generic-retry-strategy';
 
 export {
 	genericRetryStrategy

@@ -1,12 +1,12 @@
 import { mergeMap } from 'rxjs/operators';
 import { Observable, throwError, timer } from 'rxjs';
 
-import { RetryStrategyModel } from '../models';
+import { RetryStrategyModel, AnswerModel } from '../models';
 
 export const genericRetryStrategy =
-	(errors: Observable<any>, data: RetryStrategyModel = new RetryStrategyModel()): Observable<any> => {
+	(errors: Observable<AnswerModel>, data: RetryStrategyModel = new RetryStrategyModel()): Observable<AnswerModel | number> => {
 		return errors.pipe(
-			mergeMap((error: any, i: number) => {
+			mergeMap((error: AnswerModel, i: number) => {
 				const retryCounter = i + 1;
 				if (retryCounter > data.maxRetry) {
 					return throwError(error);

@@ -4,6 +4,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Config } from 'src/app/shared';
 import { CourseModel } from 'src/app/shared/models';
 import { InputResultModel } from 'src/app/shared/models/input-result.model';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
 	selector: 'app-course-form',
@@ -11,6 +12,17 @@ import { InputResultModel } from 'src/app/shared/models/input-result.model';
 	styleUrls: ['./course-form.component.scss']
 })
 export class CourseFormComponent {
+	private maxDescriptionLength = 500;
+	private maxNameLength = 50;
+
+	public item = new FormGroup({
+		name: new FormControl('', [ Validators.required, Validators.maxLength(this.maxNameLength) ]),
+		date: new FormControl(new Date()),
+		length: new FormControl(0, [ Validators.pattern('^\d+$')]),
+		authors: new FormControl(),
+		description: new FormControl('', [ Validators.maxLength(this.maxDescriptionLength) ]),
+	});
+
 	// TODO: RL: DI
 	@Input() public title: string;
 	@Input() public icons = Config.icons;

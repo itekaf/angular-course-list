@@ -12,6 +12,7 @@ import { Store } from '@ngrx/store';
 import { ICourseState } from '../../store/course.reduces';
 import { Observable } from 'rxjs';
 import { Delete, Read } from '../../store/course.actions';
+import { getIsLoading } from 'src/app/core/loading/store/loading.selectors';
 
 // TODO: RL: Refactor this + create test
 @Component({
@@ -40,7 +41,14 @@ export class CourseListComponent implements OnInit {
 		private history: HistoryService,
 		private courseService: CourseService,
 		private activatedRouter: ActivatedRoute,
-	) {
+	) { }
+
+	public ngOnInit(): void {
+		this.store$
+			.select(getIsLoading)
+			.subscribe((value: boolean) => {
+				this.loading = value;
+			});
 		this.store$.select('courses')
 			.pipe(
 				pluck('data'),
@@ -53,12 +61,8 @@ export class CourseListComponent implements OnInit {
 				}),
 			)
 			.subscribe((items: CourseModel[]) => {
-				this.loading = false;
 				this.courses = items;
-			}, null, () => { this.loading = false; });
-	}
-
-	public ngOnInit(): void {
+			});
 		this.updateItems();
 	}
 
@@ -85,15 +89,6 @@ export class CourseListComponent implements OnInit {
 	}
 
 	public onRemoveItem(id: string): void {
-		this.loading = true;
-		// this.courseService
-		// 	.delete(id)
-		// 	.pipe(
-		// 		finalize(() => { this.loading = false; }),
-		// 	)
-		// 	.subscribe(() => {
-		// 		this.courses = this.courses.filter((x: CourseModel) => x.id !== id);
-		// 	});
 		this.store$.dispatch(new Delete(id));
 	}
 
@@ -120,20 +115,5 @@ export class CourseListComponent implements OnInit {
 			query, from, count, join
 		};
 		this.store$.dispatch(new Read(data));
-		// this.courseService
-		// 	.read(query, from, count)
-		// 	.pipe(
-		// 		map((items: CourseModel[]) => {
-		// 			return items.map((item: CourseModel) => {
-		// 				const itemImagePath = item.imagePath || Config.default.imagePath;
-		// 				item.imagePath = itemImagePath;
-		// 				return item;
-		// 			});
-		// 		}),
-		// 		finalize(() => { this.loading = false; }),
-		// 	)
-		// 	.subscribe((items: CourseModel[]) => {
-		// 		this.courses = join ? this.courses.concat(items) : items;
-		// 	});
 	}
 }

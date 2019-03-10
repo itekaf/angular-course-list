@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { IAuthState } from 'src/app/modules/auth/store/auth.reducer';
 import { Logout, LoginRedirect } from 'src/app/modules/auth/store/auth.actions';
-import { getAuthUserData, getAuthStatus } from 'src/app/modules/auth/store/auth.selectors';
+import { getAuthUserData, getAuthStatus, getAllAuth } from 'src/app/modules/auth/store/auth.selectors';
 import { UserModel } from 'src/app/shared/models';
 
 @Component({
@@ -13,8 +13,8 @@ import { UserModel } from 'src/app/shared/models';
 	styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-	public userAuth$: Observable<boolean>;
-	public userData$: Observable<UserModel>;
+	public userAuth: boolean;
+	public userData: UserModel;
 
 	constructor(
 		private store$: Store<{ auth: IAuthState }>,
@@ -23,8 +23,11 @@ export class HeaderComponent implements OnInit {
 	}
 
 	public ngOnInit(): void {
-		this.userData$ = this.store$.pipe(select(getAuthUserData));
-		this.userAuth$ = this.store$.pipe(select(getAuthStatus));
+		this.store$.pipe(select(getAllAuth))
+			.subscribe((state: IAuthState) => {
+				this.userData = state.data;
+				this.userAuth = state.isAuth;
+			});
 	}
 
 	public onLogin(): void { this.store$.dispatch(new LoginRedirect()); }

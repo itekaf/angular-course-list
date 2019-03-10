@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
@@ -13,6 +13,7 @@ import { NoContentComponent } from './no-content/no-content.component';
 
 @NgModule({
 	imports: [
+		ReactiveFormsModule,
 		CoreModule,
 		FormsModule,
 		CommonModule,
