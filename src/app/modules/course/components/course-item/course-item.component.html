@@ -1,0 +1,47 @@
+<div class="box-course-item" [appItemStatusLight]="courseItem.date" [appItemRatedLight]="courseItem.isTopRated">
+	<div class="box-course-item__img">
+		<a class="box-course-item__link">
+			<img
+				width="100%"
+				alt="{{courseItem.name}}"
+				src="{{courseItem.imagePath }}"
+			/>
+		</a>
+	</div>
+	<div class=" box-course-item__content">
+		<div class="box-course-item__info">
+			<div class="box-course-item__wrapper">
+				<div *ngIf="courseItem.isTopRated" class="box-course-item__top-rated">
+					<app-icon [icon]="icons.get('star')"></app-icon>
+				</div>
+				<div class="box-course-item__title">
+					{{courseItem.name }}
+				</div>
+			</div>
+		</div>
+		<div class="box-course-item__description">
+			{{courseItem.description}}
+		</div>
+		<div class="box-course-item__footer box-course-item__additionall-info">
+			<div class="box-course-item__wrapper">
+				<app-icon
+					title="Length"
+					*ngIf="courseItem.length"
+					[icon]="icons.get('clock')"
+					text="{{courseItem.length | itemDuration}}"
+				></app-icon>
+				<app-icon
+					title="Date"
+					*ngIf="courseItem.date"
+					[icon]="icons.get('calendar')"
+					[text]="courseItem.date | date:'dd.MM.yyyy'"
+				></app-icon>
+			</div>
+		</div>
+	</div>
+	<div class="box-course-item__buttons">
+		<app-button className="button-course-item" (clickButton)="onEdit()" [icon]="icons.get('edit')"></app-button>
+		<app-button className="button-course-item" (clickButton)="onRemove()" [icon]="icons.get('trash')"></app-button>
+	</div>
+</div>
+

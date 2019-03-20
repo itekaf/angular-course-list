@@ -1,0 +1,30 @@
+.breadcrumbs {
+	background: linear-gradient(to right, #e67586 0%, #f8964e 100%);
+	border-top: 1px solid rgba($color: #fff, $alpha: 0.5);
+	border-bottom: 1px solid rgba($color: #fff, $alpha: 0.5);
+}
+.breadcrumbs__text {
+	padding: 5px 0;
+}
+.breadcrumb__list {
+    list-style: none;
+    display: flex;
+}
+.breadcrumb__link {
+	color: white;
+}
+.breadcrumb__item {
+	display: flex;
+	padding: 5px 0;
+	align-items: center;
+	justify-content: center;
+}
+.breadcrumb__item::after {
+	content: '/';
+	display: block;
+	color: white;
+	margin: 0 5px;
+}
+.breadcrumb__item:last-child::after {
+	display: none;
+}

@@ -3,9 +3,6 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FooterComponent } from './footer.component';
 
 describe('FooterComponent', () => {
-	let component: FooterComponent;
-	let fixture: ComponentFixture<FooterComponent>;
-
 	beforeEach(async(() => {
 		TestBed.configureTestingModule({
 			declarations: [ FooterComponent ]
@@ -13,13 +10,31 @@ describe('FooterComponent', () => {
 		.compileComponents();
 	}));
 
-	beforeEach(() => {
-		fixture = TestBed.createComponent(FooterComponent);
-		component = fixture.componentInstance;
-		fixture.detectChanges();
-	});
+	describe('Component Alone', () => {
+		let component: FooterComponent;
+		let fixture: ComponentFixture<FooterComponent>;
 
-	it('should create', () => {
-		expect(component).toBeTruthy();
+		beforeEach(() => {
+			fixture = TestBed.createComponent(FooterComponent);
+			component = fixture.componentInstance;
+			fixture.detectChanges();
+		});
+
+		it('should create', () => {
+			expect(component).toBeTruthy();
+		});
+
+		it('should have default current year', () => {
+			// Arrange
+			const currentYear = new Date().getFullYear();
+			const selectorCopy = '.footer__copy';
+
+			// Act
+			const nativeElement = fixture.nativeElement;
+			const copyTextElement = nativeElement.querySelector(selectorCopy);
+
+			// Assert
+			expect(copyTextElement.textContent).toContain(currentYear);
+		});
 	});
 });

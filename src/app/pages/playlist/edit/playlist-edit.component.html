@@ -1,0 +1,12 @@
+<div class="container">
+	<div class="page-{{className}}" [appLoading]="loading$ | async">
+		<app-playlist-form
+			*ngIf="item$ | async"
+			[item]="item$ | async"
+			(submitEvent)="onSubmit($event)"
+			(cancelEvent)="onCancel()"
+			title="Edit Course: {{(item$ | async).name}}"
+		></app-playlist-form>
+	</div>
+</div>
+

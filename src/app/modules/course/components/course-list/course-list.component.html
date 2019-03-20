@@ -1,0 +1,49 @@
+<div class="course-list">
+	<div class="course-list_header">
+		<div class="container">
+			<h2 class="course-list__title">{{title}}</h2>
+			<div class="course-list_search">
+				<app-course-search
+					class="course-search"
+					[query]="query"
+					(searchItem)="onSearchItem($event)"
+				></app-course-search>
+				<app-button text="Add Course" [icon]="icons.get('plus')" (clickButton)="onAdd()"></app-button>
+			</div>
+		</div>
+	</div>
+
+	<div class="course-list_content">
+		<div class="container">
+			<div class="course-list_filter">
+				<!-- TODO: RL: Refactor this + create test -->
+				<app-sorted-item (clickEvent)="onSortedByTitle()">name</app-sorted-item>
+				<app-sorted-item (clickEvent)="onSortedByDate()">date</app-sorted-item>
+				<app-sorted-item (clickEvent)="onSortedByDuration()">duration</app-sorted-item>
+			</div>
+		</div>
+		<div class="block-course-list container" [appLoading]="loading$ | async">
+			<ng-container *ngIf="((items$ | async)
+				| filterByQuery: query
+				| sortedBy: 'name': sortedByTitle
+				| sortedBy: 'date': sortedByDate
+				| sortedBy: 'length': sortedByDuration
+			) as sortedItems">
+				<app-course-item
+					*ngFor="let item of sortedItems"
+					[courseItem]="item"
+					(editEvent)="onEditItem($event)"
+					(removeEvent)="onRemoveItem($event)"
+				></app-course-item>
+				<div *ngIf="!(items$ | async).length" class="block-course-list__empty">
+					{{ noDataMessage | uppercase }}
+				</div>
+			</ng-container>
+		</div>
+	</div>
+	<div class="course-list_footer container">
+		<app-button [text]="loadMoreText" className="button-blue" (clickButton)="onLoadMore()"></app-button>
+	</div>
+</div>
+
+

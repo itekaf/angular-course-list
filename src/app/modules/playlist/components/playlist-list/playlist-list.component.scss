@@ -1,0 +1,27 @@
+.playlist-list_header {
+	background: linear-gradient(to right, rgba(230,117,134,1) 0%,rgba(248,150,78,1) 100%);
+	padding: 20px;
+}
+
+.playlist-list__title {
+	color: white;
+	margin-bottom: 20px;
+	font-size: 1.5em;
+}
+.playlist-list_search {
+	display: flex;
+	align-items: center;
+}
+.playlist-search {
+	min-width: 50%;
+	margin-right: 20px;
+}
+.block-playlist-list__empty {
+	padding: 10px 10px;
+	text-align: center;
+	border: 2px solid #30b6dd;
+	font-weight: bold;
+	border-radius: 5px;
+	margin: 10px 0;
+}
+

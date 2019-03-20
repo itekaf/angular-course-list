@@ -27,7 +27,8 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+			  "src/styles.scss",
+			  "node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": [],
             "es5BrowserSupport": true
@@ -90,7 +91,12 @@
             "assets": [
               "src/favicon.ico",
               "src/assets"
-            ]
+			],
+			"codeCoverageExclude": [
+				"/**/*.module.ts",
+				"/**/*.model.ts",
+				"/**/config.ts"
+			]
           }
         },
         "lint": {
@@ -101,7 +107,11 @@
               "src/tsconfig.spec.json"
             ],
             "exclude": [
-              "**/node_modules/**"
+			  "**/node_modules/**",
+			  "**/coverage/**",
+			  "src/environments/**",
+			  "src/main.ts",
+			  "src/test.ts"
             ]
           }
         }
@@ -129,7 +139,8 @@
           "options": {
             "tsConfig": "e2e/tsconfig.e2e.json",
             "exclude": [
-              "**/node_modules/**"
+			  "**/node_modules/**",
+			  "**/e2e/**"
             ]
           }
         }
