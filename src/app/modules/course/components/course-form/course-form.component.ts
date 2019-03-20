@@ -12,16 +12,16 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 	styleUrls: ['./course-form.component.scss']
 })
 export class CourseFormComponent {
-	private maxDescriptionLength = 500;
-	private maxNameLength = 50;
+	// private maxDescriptionLength = 500;
+	// private maxNameLength = 50;
 
-	public item = new FormGroup({
-		name: new FormControl('', [ Validators.required, Validators.maxLength(this.maxNameLength) ]),
-		date: new FormControl(new Date()),
-		length: new FormControl(0, [ Validators.pattern('^\d+$')]),
-		authors: new FormControl(),
-		description: new FormControl('', [ Validators.maxLength(this.maxDescriptionLength) ]),
-	});
+	// public item = new FormGroup({
+	// 	name: new FormControl('', [ Validators.required, Validators.maxLength(this.maxNameLength) ]),
+	// 	date: new FormControl(new Date()),
+	// 	length: new FormControl(0, [ Validators.pattern('^\d+$')]),
+	// 	authors: new FormControl(),
+	// 	description: new FormControl('', [ Validators.maxLength(this.maxDescriptionLength) ]),
+	// });
 
 	// TODO: RL: DI
 	@Input() public title: string;
@@ -43,7 +43,7 @@ export class CourseFormComponent {
 	}
 
 	public onChange($event: InputResultModel): void {
-		const { name, value }: {name: string, value: string} = $event;
+		const { name, value }: {name: string, value: string | number } = $event;
 		this.courseItem[name] = value;
 	}
 }

@@ -1,7 +1,7 @@
 <div class="container">
 	<div class="page-registry">
 		<!-- TODO: RL: Implementing it later with separate form component -->
-		<form class="{{className}}" (submit)="onSubmit()" [appLoading]="loading">
+		<form class="{{className}}" (submit)="onSubmit()" [appLoading]="loading$ | async">
 			<div class="{{className}}__item {{className}}__wrapper registry-from__header">
 				<app-button type="button" className="button-blue" text="Back" [icon]="icons.get('arrowLeft')" (clickButton)="onBack()"></app-button>
 			</div>

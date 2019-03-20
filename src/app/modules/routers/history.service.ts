@@ -1,6 +1,6 @@
 import { filter } from 'rxjs/operators';
 import { Injectable, OnDestroy } from '@angular/core';
-import { BehaviorSubject, Subscription } from 'rxjs';
+import { BehaviorSubject, Subscription, Observable } from 'rxjs';
 import { Router, NavigationEnd, Event, ActivatedRoute, NavigationExtras } from '@angular/router';
 
 import { HistoryRouterModel } from 'src/app/shared/models/history.router.model';
@@ -40,7 +40,10 @@ export class HistoryService implements OnDestroy {
 			});
 	}
 
-	public getHistory(): HistoryRouterModel[] {
+	get getHistory(): Observable<HistoryRouterModel[]> {
+		return this.historyObj;
+	}
+	get getHistoryValue(): HistoryRouterModel[] {
 		return this.historyObj.value;
 	}
 

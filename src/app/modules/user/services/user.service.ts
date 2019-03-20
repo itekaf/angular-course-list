@@ -18,15 +18,18 @@ export class UserService {
 		return this.userDataObj;
 	}
 
-	public setData(model: UserModel): void {
+	public setData(model: UserModel): BehaviorSubject<UserModel> {
 		this.userDataObj.next(model);
+		return this.userDataObj;
 	}
 
-	public updateData(model: UserModel): void {
+	public updateData(model: UserModel): BehaviorSubject<UserModel> {
 		this.userDataObj.next(model);
+		return this.userDataObj;
 	}
 
-	public removeData(): void {
+	public removeData(): BehaviorSubject<UserModel> {
 		this.userDataObj.next(null);
+		return this.userDataObj;
 	}
 }

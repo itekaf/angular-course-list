@@ -1,22 +1,26 @@
-import { map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, RouterStateSnapshot, CanActivate } from '@angular/router';
+import { Observable, of } from 'rxjs';
+import { CanActivate, CanLoad } from '@angular/router';
 
-import { AuthService } from '../services';
+import { AuthCheck } from '../store/auth.actions';
 import { IAuthState } from '../store/auth.reducer';
-import { Store, select } from '@ngrx/store';
-import { getAuthStatus } from '../store/auth.selectors';
 
 @Injectable({
 	providedIn: 'root'
 })
-export class AuthCheckGuardService implements CanActivate {
+export class AuthCheckGuardService implements CanActivate, CanLoad {
 	constructor(
 		private store$: Store<{ auth: IAuthState}>,
 	) { }
 
-	public canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | boolean {
-		return this.store$.pipe(select(getAuthStatus));
+	public canLoad(): Observable<boolean> {
+		this.store$.dispatch(new AuthCheck());
+		return of(true);
+	}
+
+	public canActivate(): Observable<boolean> {
+		this.store$.dispatch(new AuthCheck());
+		return of(true);
 	}
 }

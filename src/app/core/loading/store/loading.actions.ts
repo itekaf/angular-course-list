@@ -1,15 +1,15 @@
-import { Action } from '@ngrx/store';
+import { IAction } from 'src/app/shared/interface/action.interface';
 
 export enum LoadingActionsEnum {
 	LoadingShow = '[Loading] Show',
 	LoadingHide = '[Loading] Hide',
 }
 
-export class LoadingHide implements Action {
+export class LoadingHide implements IAction {
 	public readonly type: LoadingActionsEnum = LoadingActionsEnum.LoadingHide;
 }
 
-export class LoadingShow implements Action {
+export class LoadingShow implements IAction {
 	public readonly type: LoadingActionsEnum = LoadingActionsEnum.LoadingShow;
 }
 

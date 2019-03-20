@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { NgModule, ModuleWithProviders, SkipSelf, Optional } from '@angular/core';
+import { NgModule, ModuleWithProviders } from '@angular/core';
 
 import {
 	JwtService,
@@ -8,9 +8,7 @@ import {
 
 import {
 	AuthSuccessGuardService,
-	AuthLoadSuccessGuardService,
 	AuthFailGuardService,
-	AuthLoadFailGuardService,
 	AuthCheckGuardService,
 } from './guards';
 import { SingletonModule } from 'src/app/shared/abstract/singleton.module';
@@ -37,9 +35,6 @@ export class AuthModule implements SingletonModule<AuthModule> {
 				AuthFailGuardService,
 				AuthCheckGuardService,
 				AuthSuccessGuardService,
-
-				AuthLoadFailGuardService,
-				AuthLoadSuccessGuardService,
 			],
 		};
 	}

@@ -19,10 +19,10 @@ describe('FilterByQueryPipe', () => {
 
 	it('should find courses by title by the query without letter case', () => {
 		// Arrange
+		const getCourseCount = 2;
 		const query = dummyData.query;
 		const inputItems = dummyData.coruses;
-		// tslint:disable-next-line: no-magic-numbers
-		const resultItem = dummyData.coruses.slice(0, 2);
+		const resultItem = dummyData.coruses.slice(0, getCourseCount);
 
 		// Act
 		const result = pipe.transform(inputItems, query);

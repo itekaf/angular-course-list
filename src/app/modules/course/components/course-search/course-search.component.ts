@@ -10,13 +10,13 @@ import { InputResultModel } from 'src/app/shared/models/input-result.model';
 	styleUrls: ['./course-search.component.scss']
 })
 export class CourseSearchComponent {
-	@Input() public query: string;
+	@Input() public query: string | number;
 	@Input() public icons: Map<string, IconDefinition> = Config.icons;
 
 	@Output() public searchItem: EventEmitter<InputResultModel> = new EventEmitter<InputResultModel>();
 
 	public onSearch($event: InputResultModel): void {
-		const { value }: { value: string } = $event;
+		const { value }: { value: string | number } = $event;
 		this.query = value;
 		this.triggerEvent();
 	}

@@ -30,18 +30,17 @@ import {
 import {
 	CourseService
 } from './services';
+import { CoreModule } from 'src/app/core/core.module';
 
 const angularDeclaration = [
 	CourseFormComponent,
 	CourseItemComponent,
 	CourseListComponent,
 	SortedItemComponent,
-	LoadingComponent,
 	CourseSearchComponent,
 
 	ItemRatedLightDirective,
 	ItemStatusLightDirective,
-	LoadingDirective,
 
 	SortedByPipe,
 	ItemDurationPipe,
@@ -51,15 +50,13 @@ const angularDeclaration = [
 @NgModule({
 	imports: [
 		CommonModule,
+		CoreModule,
 		UiModule,
 		FormsModule,
 		FontAwesomeModule,
 	],
 	declarations: angularDeclaration,
 	exports: angularDeclaration,
-	entryComponents: [
-		LoadingComponent,
-	]
 })
 export class CourseListModule {
 	public static forRoot(): ModuleWithProviders {

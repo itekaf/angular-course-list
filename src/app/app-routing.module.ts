@@ -5,19 +5,23 @@ import { LoginComponent } from './pages/login/login.component';
 
 import { NoContentComponent } from './pages/no-content/no-content.component';
 import { RegistryComponent } from './pages/registry/registry.component';
-import { AuthSuccessGuardService, AuthFailGuardService, AuthCheckGuardService, AuthLoadSuccessGuardService } from './modules/auth/guards';
+import {
+	AuthSuccessGuardService,
+	AuthFailGuardService,
+	AuthCheckGuardService,
+} from './modules/auth/guards';
 
 const routes: Routes = [
 	{
-		path: 'courses',
-		loadChildren: './pages/pages.module#PagesModule',
-		canLoad: [ AuthLoadSuccessGuardService ],
+		path: 'playlists',
+		loadChildren: './pages/playlist/playlist.module#PlaylistPageModule',
+		canLoad: [ AuthSuccessGuardService ],
 		canActivate: [ AuthSuccessGuardService ],
 	},
 	{
 		path: 'login',
 		component: LoginComponent,
-		canActivate: [ AuthFailGuardService ],
+		canActivate: [ AuthCheckGuardService, AuthFailGuardService ],
 		data: {
 			label: 'Login'
 		}
@@ -25,14 +29,14 @@ const routes: Routes = [
 	{
 		path: 'signup',
 		component: RegistryComponent,
-		canActivate: [ AuthFailGuardService ],
+		canActivate: [ AuthCheckGuardService, AuthFailGuardService ],
 		data: {
 			label: 'Registry'
 		}
 	},
 	{
 		path: '',
-		redirectTo: 'courses',
+		redirectTo: 'playlists',
 		pathMatch: 'full',
 	},
 	{

@@ -1,27 +1,32 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { filter, distinctUntilChanged, map } from 'rxjs/operators';
 import { Router, Event, NavigationEnd, ActivatedRoute, UrlSegment } from '@angular/router';
 
 import { BreadCrumbModel } from 'src/app/shared/models/breadcrumb.model';
+import { Observable } from 'rxjs';
 
 @Component({
 	selector: 'app-breadcrumbs',
 	templateUrl: './breadcrumbs.component.html',
 	styleUrls: ['./breadcrumbs.component.scss'],
 })
-export class BreadcrumbsComponent {
+export class BreadcrumbsComponent implements OnInit {
 	private urlSeparator: string = '/';
-	public breadcrumbs = this.router.events
-		.pipe(
-			filter((event: Event) => event instanceof NavigationEnd),
-			distinctUntilChanged(),
-			map(() => this.createBreadcrumb(this.activatedRouter.root))
-		);
+	public breadcrumbs$: Observable<BreadCrumbModel[]>;
 
 	constructor(
 		private router: Router,
 		private activatedRouter: ActivatedRoute,
 	) { }
+
+	public ngOnInit(): void {
+		this.breadcrumbs$ = this.router.events
+			.pipe(
+				filter((event: Event) => event instanceof NavigationEnd),
+				distinctUntilChanged(),
+				map(() => this.createBreadcrumb(this.activatedRouter.root))
+			);
+	}
 
 	public createBreadcrumb(
 		route: ActivatedRoute,

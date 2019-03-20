@@ -12,7 +12,7 @@ export class HeadersHttpMiddelware implements HttpInterceptor {
 
 	constructor() {}
 
-	public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+	public intercept(req: HttpRequest<object>, next: HttpHandler): Observable<HttpEvent<object>> {
 		const modifiedRequest = req.clone({ setHeaders: this.customHeaders} );
 		return next.handle(modifiedRequest);
 	}

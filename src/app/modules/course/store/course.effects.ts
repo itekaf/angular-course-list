@@ -1,21 +1,38 @@
+import { Observable, of } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { Effect, Actions, ofType } from '@ngrx/effects';
-import { CourseService } from '../services';
-import { HistoryService } from '../../routers/history.service';
-import { pipe, Observable, of } from 'rxjs';
-import { CourseActionEnum, CreateSuccess, UpdateSuccess, Concat, Read, ReadSuccess, DeleteSuccess, CourseError } from './course.actions';
-import { map, exhaustMap, tap, catchError, pluck, switchMap } from 'rxjs/operators';
+import { map, catchError, pluck, switchMap, tap } from 'rxjs/operators';
+
 import { CourseModel } from 'src/app/shared/models';
+import { CourseService } from '../services';
+import { HistoryGoBack, HistoryGoToError } from '../../routers/store/history.actions';
+import { CourseActionEnum, CourseCreateSuccess, CourseUpdateSuccess, CourseReadSuccess, CourseDeleteSuccess, CourseError, CourseReadByIdSuccess } from './course.actions';
+import { ToastrService } from 'ngx-toastr';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Injectable()
 export class CoursesEffect {
+	@Effect()
+	public readById$ = this.actions$
+		.pipe(
+			ofType(CourseActionEnum.ReadById),
+			pluck('payload'),
+			switchMap((id: string) => {
+				return this.courseService
+					.getById(id)
+					.pipe(
+						map((data: CourseModel) => new CourseReadByIdSuccess(data)),
+						catchError(() => of(new HistoryGoToError()))
+					);
+			})
+		);
 
 	@Effect()
 	public read$ = this.actions$
 		.pipe(
 			ofType(CourseActionEnum.Read),
 			pluck('payload'),
-			switchMap((data: { query: string, from: number, count: number }): Observable<ReadSuccess | CourseError> => {
+			switchMap((data: { query: string, from: number, count: number }): Observable<CourseReadSuccess | CourseError> => {
 				return this.courseService
 					.read(
 						data.query,
@@ -23,9 +40,8 @@ export class CoursesEffect {
 						data.count
 					)
 					.pipe(
-						// TODO: RL: Join
-						map((value: CourseModel[]) => new ReadSuccess(value)),
-						catchError(() => of(new CourseError())),
+						map((value: CourseModel[]) => new CourseReadSuccess(value)),
+						catchError((err) => of(new CourseError(err))),
 					);
 			})
 		);
@@ -39,8 +55,8 @@ export class CoursesEffect {
 				return this.courseService
 					.create(data)
 					.pipe(
-						map((item: CourseModel) => new CreateSuccess(item)),
-						catchError(() => of(new CourseError())),
+						map((item: CourseModel) => new CourseCreateSuccess(item)),
+						catchError((err) => of(new CourseError(err))),
 					);
 			})
 		);
@@ -54,8 +70,8 @@ export class CoursesEffect {
 				return this.courseService
 					.delete(removedId)
 					.pipe(
-						map(() => new DeleteSuccess(removedId)),
-						catchError(() => of(new CourseError())),
+						map(() => new CourseDeleteSuccess(removedId)),
+						catchError((err) => of(new CourseError(err))),
 					);
 			})
 		);
@@ -72,22 +88,34 @@ export class CoursesEffect {
 						data.data
 					)
 					.pipe(
-						map((answer: CourseModel) => new UpdateSuccess(answer)),
-						catchError(() => of(new CourseError())),
+						map((answer: CourseModel) => new CourseUpdateSuccess(answer)),
+						catchError((err) => of(new CourseError(err))),
 					);
 			})
 		);
 
-	@Effect({ dispatch: false })
+	@Effect()
 	public courseRedirect$ = this.actions$
 			.pipe(
 				ofType(CourseActionEnum.CreateSuccess, CourseActionEnum.UpdateSuccess, CourseActionEnum.CourseRedirect),
-				tap(() => { this.historyService.goBack(); })
+				switchMap(() => [
+					new HistoryGoBack()
+				])
+			);
+
+	@Effect({ dispatch: false })
+	public error$ = this.actions$
+			.pipe(
+				ofType(CourseActionEnum.CourseError),
+				pluck('payload'),
+				tap((err: HttpErrorResponse) => {
+					this.toastrService.error(err.statusText, 'Course Error');
+				})
 			);
 
 	constructor(
 		private actions$: Actions,
+		private toastrService: ToastrService,
 		private courseService: CourseService,
-		private historyService: HistoryService,
 	) {}
 }

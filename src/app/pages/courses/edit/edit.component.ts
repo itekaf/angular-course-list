@@ -1,14 +1,14 @@
-import { finalize } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
 import { Subscription, Observable } from 'rxjs';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { CourseModel } from 'src/app/shared/models';
-import { CourseService } from 'src/app/modules/course/services';
-import { HistoryService } from 'src/app/modules/routers/history.service';
-import { Store } from '@ngrx/store';
 import { ICourseState } from 'src/app/modules/course/store/course.reduces';
-import { Update } from 'src/app/modules/course/store/course.actions';
+import { getIsLoading } from 'src/app/core/loading/store/loading.selectors';
+import { HistoryGoBack } from 'src/app/modules/routers/store/history.actions';
+import { getCurrentCourse } from 'src/app/modules/course/store/course.selectors';
+import { CourseUpdate, CourseReadById } from 'src/app/modules/course/store/course.actions';
 
 @Component({
 	selector: 'app-edit',
@@ -16,23 +16,19 @@ import { Update } from 'src/app/modules/course/store/course.actions';
 	styleUrls: ['./edit.component.scss']
 })
 export class EditComponent implements OnInit, OnDestroy {
-	public item: CourseModel = new CourseModel();
-	public loading: boolean = false;
+	public item$: Observable<CourseModel>;
+	public loading$: Observable<boolean>;
 
 	private routerParamsSub: Subscription;
 
-	private courses$: Observable<ICourseState>;
-
 	constructor(
 		private store$: Store<{ courses: ICourseState}>,
-		private history: HistoryService,
-		private courseService: CourseService,
 		private activatedRouter: ActivatedRoute,
 	) { }
 
 	public ngOnInit(): void {
-		// TODO: RL: Move to effects
-		this.courses$ = this.store$.select('courses');
+		this.item$ = this.store$.select(getCurrentCourse);
+		this.loading$ = this.store$.select(getIsLoading);
 		this.routerParamsSub = this.activatedRouter.params
 			.subscribe((data: Params) => {
 				this.setItem(data);
@@ -44,30 +40,15 @@ export class EditComponent implements OnInit, OnDestroy {
 	}
 
 	public onSubmit($event: CourseModel): void {
-		const data = {
+		this.store$.dispatch(new CourseUpdate({
 			id: $event.id,
 			data: $event,
-		};
-		this.store$.dispatch(new Update(data));
+		}));
 	}
 
-	public onCancel(): void { this.history.goBack(); }
+	public onCancel(): void { this.store$.dispatch(new HistoryGoBack()); }
 
 	public setItem(data: Params): void {
-		// TODO: RL: Move to effects
-		this.loading = true;
-		this.courseService
-			.getById(data['id'])
-			.pipe(
-				finalize(() => { this.loading = false; }),
-			)
-			.subscribe(
-				(result: CourseModel) => {
-					this.item = result;
-				},
-				() => {
-					this.history.goToError();
-				},
-			);
+		this.store$.dispatch(new CourseReadById(data['courseId']));
 	}
 }

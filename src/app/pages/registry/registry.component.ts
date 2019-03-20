@@ -1,53 +1,44 @@
-import { finalize } from 'rxjs/operators';
-import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
-import { Component, Input } from '@angular/core';
-
+import { Store } from '@ngrx/store';
 import { Config } from 'src/app/shared';
-import { AuthService } from 'src/app/modules/auth/services';
+import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
+import { Component, Input, OnInit } from '@angular/core';
+
 import { RegistryModel } from '../../shared/models/registry.model';
-import { HistoryService } from 'src/app/modules/routers/history.service';
 import { InputResultModel } from 'src/app/shared/models/input-result.model';
 
-import { Store } from '@ngrx/store';
+import { AuthRegistry } from 'src/app/modules/auth/store/auth.actions';
 import { IAuthState } from 'src/app/modules/auth/store/auth.reducer';
-import { Registry } from 'src/app/modules/auth/store/auth.actions';
+import { getIsLoading } from 'src/app/core/loading/store/loading.selectors';
+import { HistoryGoBack } from 'src/app/modules/routers/store/history.actions';
+import { Observable } from 'rxjs';
 
 @Component({
 	selector: 'app-registry',
 	templateUrl: './registry.component.html',
 	styleUrls: ['./registry.component.scss']
 })
-export class RegistryComponent {
-	private redirectPage = '/login';
+export class RegistryComponent implements OnInit {
 	@Input() public className: string = 'registry-form';
 	@Input() public icons: Map<string, IconDefinition> = Config.icons;
 
 	public data: RegistryModel = new RegistryModel();
-	public loading: boolean;
+	public loading$: Observable<boolean>;
 
 	constructor(
-		private store: Store<{auth: IAuthState}>,
-		private history: HistoryService,
-		private authService: AuthService
+		private store$: Store<{auth: IAuthState}>,
 	) { }
 
+	public ngOnInit(): void {
+		this.loading$ = this.store$.select(getIsLoading);
+	}
 	public onSubmit(): void {
-		this.loading = true;
-		// this.authService
-		// 	.registry(this.data)
-		// 	.pipe(
-		// 		finalize(() => { this.loading = false; }),
-		// 	)
-		// 	.subscribe(() => {
-		// 		this.history.goTo(this.redirectPage);
-		// 	});
-		this.store.dispatch(new Registry(this.data));
+		this.store$.dispatch(new AuthRegistry(this.data));
 	}
 
 	public onChange($event: InputResultModel): void {
-		const { name, value }: { name: string, value: string } = $event;
-		this.data[name] = value;
+		const { name, value }: { name: string, value: string | number } = $event;
+		this.data[name] = value.toString();
 	}
 
-	public onBack(): void { this.history.goBack(); }
+	public onBack(): void { this.store$.dispatch(new HistoryGoBack()); }
 }

@@ -1,15 +1,26 @@
-import { Component } from '@angular/core';
-import { HistoryService } from './modules/routers/history.service';
+import { Store } from '@ngrx/store';
+import { Component, ViewChild, OnInit } from '@angular/core';
+import { ToastrService, ToastContainerDirective } from 'ngx-toastr';
+
+import { IHistoryState } from './modules/routers/store/history.reducers';
+import { HistoryLoading } from './modules/routers/store/history.actions';
 
 @Component({
 	selector: 'app-root',
 	templateUrl: './app.component.html',
 	styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
+
+	@ViewChild(ToastContainerDirective) public toastContainer: ToastContainerDirective;
 	constructor(
-		private histrory: HistoryService,
+		private store$: Store<{ history: IHistoryState }>,
+		private toastrService: ToastrService,
 	) {
-		this.histrory.loadHistory();
+		this.store$.dispatch(new HistoryLoading());
+	}
+
+	public ngOnInit(): void {
+		this.toastrService.overlayContainer = this.toastContainer;
 	}
 }

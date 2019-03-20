@@ -1,12 +1,16 @@
-import { Observable, of } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 import { Injectable } from '@angular/core';
+import { Observable, of } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Effect, Actions, ofType } from '@ngrx/effects';
-import { map, tap, switchMap, pluck, catchError, finalize } from 'rxjs/operators';
+import { map, switchMap, pluck, catchError } from 'rxjs/operators';
 
 import { AuthService } from '../services';
-import { HistoryService } from '../../routers/history.service';
-import { AuthActionsEnum, LoginSuccess, RegistrySuccess, AuthError, LogoutSucces } from './auth.actions';
-import { LoginModel, UserModel, AnswerModel, RegistryModel } from 'src/app/shared/models';
+import { UserService } from '../../user/services/user.service';
+import { HistoryGoToUrl } from '../../routers/store/history.actions';
+import { LoginModel, UserModel, RegistryModel, AnswerModel } from 'src/app/shared/models';
+import { AuthActionsEnum, AuthLoginSuccess, AuthRegistrySuccess, AuthError, AuthLogoutSucces } from './auth.actions';
+
 
 @Injectable()
 export class AuthEffects {
@@ -14,11 +18,15 @@ export class AuthEffects {
 	public check$ = this.actions$
 		.pipe(
 			ofType(AuthActionsEnum.AuthCheck),
-			map(() => {
+			switchMap(() => {
 				return this.authService
 					.checkAuth()
 					.pipe(
-						catchError(() => of(new AuthError())),
+						map((isAuth: boolean): AuthLoginSuccess | AuthLogoutSucces => {
+							const userData = this.userService.userValue;
+							return isAuth ? new AuthLoginSuccess(userData) : new AuthLogoutSucces();
+						}),
+						catchError((err: AnswerModel) => of(new AuthError(err))),
 					);
 			}),
 		);
@@ -26,13 +34,13 @@ export class AuthEffects {
 	@Effect()
 	public logout$ = this.actions$
 		.pipe(
-			ofType(AuthActionsEnum.Logout),
+			ofType(AuthActionsEnum.AuthLogout),
 			switchMap(() => {
 				return this.authService
 					.logout()
 					.pipe(
-						map(() => new LogoutSucces()),
-						catchError(() => of(new AuthError()))
+						map(() => new AuthLogoutSucces()),
+						catchError((err: AnswerModel) => of(new AuthError(err)))
 					);
 			}),
 		);
@@ -40,16 +48,14 @@ export class AuthEffects {
 	@Effect()
 	public registry$ = this.actions$
 		.pipe(
-			ofType(
-				AuthActionsEnum.Registry
-			),
+			ofType(AuthActionsEnum.AuthRegistry),
 			pluck('payload'),
-			switchMap((data: RegistryModel): Observable<RegistrySuccess | AuthError> => {
+			switchMap((data: RegistryModel): Observable<AuthRegistrySuccess | AuthError> => {
 				return this.authService
 					.registry(data)
 					.pipe(
-						map(() => new RegistrySuccess()),
-						catchError(() => of(new AuthError()))
+						map(() => new AuthRegistrySuccess()),
+						catchError((err: AnswerModel) => of(new AuthError(err)))
 					);
 			})
 		);
@@ -57,50 +63,51 @@ export class AuthEffects {
 	@Effect()
 	public login$ = this.actions$
 		.pipe(
-			ofType(
-				AuthActionsEnum.Login
-			),
+			ofType(AuthActionsEnum.AuthLogin),
 			pluck('payload'),
-			switchMap((data: LoginModel): Observable<LoginSuccess | AuthError> => {
+			switchMap((data: LoginModel): Observable<AuthLoginSuccess | AuthError> => {
 				return this.authService
 					.login(data)
 					.pipe(
-						map((answer: UserModel) => new LoginSuccess(answer)),
-						catchError(() => of(new AuthError())),
+						map((answer: UserModel) => new AuthLoginSuccess(answer)),
+						catchError((err: AnswerModel) => of(new AuthError(err))),
 					);
 			}),
 		);
 
-	@Effect({ dispatch: false })
-	public loginSuccess$ = this.actions$
-		.pipe(
-			ofType(AuthActionsEnum.LoginSuccess),
-			tap(() => { this.historyService.goTo('/'); })
-		);
-
-	@Effect({ dispatch: false })
+	@Effect()
 	public loginRedirect$ = this.actions$
 		.pipe(
 			ofType(
-				AuthActionsEnum.Logout,
-				AuthActionsEnum.LoginRedirect,
-				AuthActionsEnum.RegistrySuccess,
+				AuthActionsEnum.AuthLogout,
+				AuthActionsEnum.AuthLoginRedirect,
+				AuthActionsEnum.AuthRegistrySuccess,
 			),
-			tap(() => { this.historyService.goTo('/login'); })
+			switchMap(() => [ new HistoryGoToUrl({ url: '/login' }) ])
 		);
 
-	@Effect({ dispatch: false })
+	@Effect()
 	public registryRedirect$ = this.actions$
 			.pipe(
 				ofType(
-					AuthActionsEnum.RegistryRedirect
+					AuthActionsEnum.AuthRegistryRedirect
 				),
-				tap(() => { this.historyService.goTo('/signup'); })
+				switchMap(() => [ new HistoryGoToUrl({ url: '/signup' }) ])
 			);
 
+	@Effect({ dispatch: false })
+	public authError = this.actions$
+		.pipe(
+			ofType(AuthActionsEnum.AuthError),
+			pluck('payload'),
+			map((err: HttpErrorResponse) => {
+				this.toatsService.error(err.statusText, 'Auth Error');
+			})
+		);
 	constructor(
 		private actions$: Actions,
 		private authService: AuthService,
-		private historyService: HistoryService,
+		private toatsService: ToastrService,
+		private userService: UserService,
 	) { }
 }

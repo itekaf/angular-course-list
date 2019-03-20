@@ -23,4 +23,4 @@ export class UserModules implements SingletonModule<UserModules> {
 			],
 		};
 	}
-};
+}

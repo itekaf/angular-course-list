@@ -25,12 +25,6 @@
 			</app-label>
 
 		</div>
-		<div class="{{className}}__item">
-			<!-- TODO: RL: Labels -->
-			<app-label className="{{className}}" [icon]="icons.get('users')" text="Authors" for="authors">
-				<app-input className="{{className}}" placeholder="Please enter authors ..."  (inputEvent)="onChange($event)" name="authors"></app-input>
-			</app-label>
-		</div>
 	</div>
 	<div class="{{className}}__footer {{className}}__item ">
 		<app-button type="submit" className="button-blue" text="Save"></app-button>

@@ -31,7 +31,7 @@ export class InputComponent implements OnInit, OnDestroy {
 	@ViewChild('inputElement') public inputRef: ElementRef;
 
 	private debounceMs: number = 250;
-	private inputObserable: Observable<any>;
+	private inputObserable: Observable<object>;
 	private inputObserableSub: Subscription;
 
 	constructor() { }
@@ -40,7 +40,7 @@ export class InputComponent implements OnInit, OnDestroy {
 		this.inputObserable = fromEvent(this.inputRef.nativeElement, 'input');
 		this.inputObserableSub = this.inputObserable
 				.pipe(
-					map((event) => event.target.value),
+					map((event: object) => event['target'].value),
 					debounceTime(this.debounceMs),
 					distinctUntilChanged()
 				)

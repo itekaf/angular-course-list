@@ -1,5 +1,5 @@
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
-import { faPlus, faEdit, faClock, faTrashAlt, faCalendarAlt, faSearch, faSortAmountDown, faSortAmountUp, faSortNumericDown, faSortNumericUp, faStar, faAt, faKey, faSmile, faMinus, faUsers, faSignature, faListAlt, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faEdit, faClock, faTrashAlt, faCalendarAlt, faSearch, faSortAmountDown, faSortAmountUp, faSortNumericDown, faSortNumericUp, faStar, faAt, faKey, faSmile, faMinus, faUsers, faSignature, faListAlt, faArrowLeft, faFire } from '@fortawesome/free-solid-svg-icons';
 
 export class Config {
 	// TODO: RL: Need to refactor this
@@ -7,6 +7,7 @@ export class Config {
 		['at', faAt],
 		['key', faKey],
 		['star', faStar],
+		['fire', faFire],
 		['plus', faPlus],
 		['edit', faEdit],
 		['minus', faMinus],

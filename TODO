@@ -6,17 +6,19 @@ First of all:
 
 After all:
 		[ ] - Check fresh of jwt token
-		[x] - Add `hucky`
+		[ ] - Add `hucky`
 		[ ] - Fix all styles
 		[ ] - Create all test + JSON generated data
 		[x] - Fix coverage
 		[ ] - `ng-template` and `ng-container`
 		[ ] - Create shared modules !!!
 		[ ] - Create modal window
+		[ ] - Naming of components and pages
 		[ ] - Clear history of git
 		[x] - Reconnect API
-		[ ] - Toast
+		[ ] - Toast for all request
 		[ ] - Create Playlist page
+		[ ] - Refactor Auth service
 
 Bugs:
 		[x] - Need to auto redirect if user login/logout
@@ -24,6 +26,10 @@ Bugs:
 		[ ] - If we loaded new items, we need to sort they
 		[x] - Unsubscribes
 		[ ] - Fast animation (need to implement it to slow or missing)
+		[x] - Don't check auth before each router and request
+		[ ] - Error Handler
+		[ ] - Если заходим на подстраницу нету проверки авторизации
+		[ ] - Добавление нового playlist
 
 Probable:
 		[ ] - JSDoc
@@ -83,4 +89,15 @@ Probable:
 
 [ ] - TASK #10: NgRx
 
+		[x] - Install ngrx/core, ngrx/store
+		[x] - Install ngrx/store-devtools.
+		[x] - Use ngrx for authentication service.
+		[x] - Use ngrx for courses list.
+		[x] - Use ngrx for edit/add new course.
+
 [ ] - TASK #11: Forms
+
+		[ ] - Implement all inputs as a form controls
+		[ ] - Authors control:
+		[ ] - Rework login page to have form controls
+		[ ] - Rework search on listing to form control

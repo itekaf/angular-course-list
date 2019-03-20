@@ -1,5 +1,5 @@
 <div class="container">
-	<div class="page-course-new" [appLoading]="loading">
+	<div class="page-course-new" [appLoading]="loading$ | async">
 		<app-course-form
 			[courseItem]="item"
 			[title]="title"

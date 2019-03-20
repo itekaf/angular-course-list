@@ -3,7 +3,7 @@ export class AnswerModel {
 
 	public data?: object;
 	public token?: string;
-	public errors?: object[] = [];
+	public errors?: string[] = [];
 	public message?: string;
 	public hasErrors?: boolean = false;
 
@@ -11,7 +11,7 @@ export class AnswerModel {
 		status: number,
 		data?: object,
 		token?: string,
-		errors?: object[],
+		errors?: string[],
 		message?: string,
 		hasErrors?: boolean,
 	) {

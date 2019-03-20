@@ -13,7 +13,6 @@ import { CourseModel } from 'src/app/shared/models';
 })
 export class CourseItemComponent {
 	// TODO: RL: move courseItem, and e.t.c like a DI
-	private ops: string = './new';
 	@Input() public courseItem: CourseModel = new CourseModel(uuid(), 'temp');
 	@Input() public icons: Map<string, IconDefinition> = Config.icons;
 

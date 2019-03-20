@@ -7,7 +7,6 @@ import { HttpClient } from '@angular/common/http';
 
 const dummyData = [
 	new CourseModel(uuid(), 'Dummy 1'),
-	// tslint:disable-next-line: no-magic-numbers
 	new CourseModel(uuid(), 'Dummy 2'),
 ];
 

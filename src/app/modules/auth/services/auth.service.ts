@@ -29,9 +29,8 @@ export class AuthService {
 	public checkAuth(): Observable<boolean> {
 		const token = this.jwtService.getToken();
 		if (token) {
-			// TODO: RL: Refactor this with RxJS
 			if (!this.isAuthObj.value) {
-				const jwtData = this.jwtService.decodeToken(token);
+				const jwtData = JwtService.decodeToken(token);
 				const userData = UserModel.create(jwtData);
 
 				this.isAuthObj.next(true);
@@ -52,7 +51,7 @@ export class AuthService {
 
 	public login(data: LoginModel): Observable<AnswerModel | UserModel> {
 		if (this.isAuthObj.value) {
-			throw new Error('You are already logged. Please, log out first!');
+			this.isAuthObj.error(new Error('You are already logged. Please, log out first!'));
 		}
 
 		return this.apiClient.post<AnswerModel>('signin/local/', data)
@@ -60,7 +59,7 @@ export class AuthService {
 				map((answer: AnswerModel): AnswerModel | UserModel  => {
 					const token = answer.token;
 					if (!token) { return answer; }
-					const jwtData = this.jwtService.decodeToken(token);
+					const jwtData = JwtService.decodeToken(token);
 					const userData = UserModel.create(jwtData);
 
 					this.isAuthObj.next(true);

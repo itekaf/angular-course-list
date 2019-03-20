@@ -8,11 +8,13 @@ import { NewComponent } from './new/new.component';
 import { EditComponent } from './edit/edit.component';
 import { ListComponent } from './list/list.component';
 import { CoursesComponent } from './courses.component';
+import { CoreModule } from 'src/app/core/core.module';
 
 @NgModule({
 	imports: [
 		CourseListModule,
 		CommonModule,
+		CoreModule,
 		CoursesRoutes
 	],
 	declarations: [

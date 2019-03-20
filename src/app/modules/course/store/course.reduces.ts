@@ -1,70 +1,51 @@
 import { CourseModel } from 'src/app/shared/models';
-import { CourseActionTypes, CourseActionEnum, UpdateSuccess, DeleteSuccess, CreateSuccess, ReadSuccess } from './course.actions';
-import { Update } from '../../user/store/user.actions';
-
-export interface IPlaylist {
-	id: string;
-	name: string;
-	description: string;
-	courses: CourseModel[];
-}
-
-export class PlaylistModel implements IPlaylist {
-	public id: string;
-	public name: string;
-	public description: string;
-	public courses: CourseModel[];
-
-	constructor(
-		id: string,
-		name: string,
-		description: string,
-		courses: CourseModel[],
-	) {
-		this.id = id;
-		this.name = name;
-		this.description = description;
-		this.courses = courses;
-	}
-}
+import { CourseActionEnum } from './course.actions';
+import { IAction } from 'src/app/shared/interface/action.interface';
 
 export interface ICourseState {
-	playlist: string;
+	playlist: string | null;
+	current: CourseModel | null;
 	data: CourseModel[];
 }
 
 export const initState: ICourseState = {
 	playlist: '5c7d005a7eb44210640fc739',
+	current: null,
 	data: [],
 };
 
-export function courseReducer(state: ICourseState = initState, action: CourseActionTypes): ICourseState {
+export function courseReducer(state: ICourseState = initState, action: IAction): ICourseState {
 	switch (action.type) {
+		case CourseActionEnum.ReadByIdSuccess: {
+			return {
+				...state,
+				current: action.payload,
+			};
+		}
+
 		case CourseActionEnum.ReadSuccess: {
 			return {
 				...state,
-				data: (action as ReadSuccess).payload
+				data: action.payload
 			};
 		}
 
 		case CourseActionEnum.CreateSuccess: {
-			const createdItem = (action as CreateSuccess).payload;
 			return {
 				...state,
-				data: [...state.data, createdItem]
+				data: [...state.data, action.payload]
 			};
 		}
 
 		case CourseActionEnum.DeleteSuccess: {
-			const removedId = (action as DeleteSuccess).payload;
 			return {
 				...state,
-				data: state.data.filter((item: CourseModel) => item.id !== removedId)
+				data: state.data.filter((item: CourseModel) => item.id !== action.payload)
 			};
 		}
 
 		case CourseActionEnum.UpdateSuccess: {
-			const updatedItem = (action as UpdateSuccess).payload;
+			const updatedItem = action.payload as CourseModel;
 			return {
 				...state,
 				data: state.data.map((item: CourseModel) => item.id === updatedItem.id ? updatedItem : item)
@@ -74,7 +55,7 @@ export function courseReducer(state: ICourseState = initState, action: CourseAct
 		case CourseActionEnum.Concat: {
 			return {
 				...state,
-				data: state.data.concat((action as ReadSuccess).payload)
+				data: state.data.concat(action.payload)
 			};
 		}
 

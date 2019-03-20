@@ -25,6 +25,7 @@
 	background: darken($color: #30b6dd, $amount: 10)
 }
 
+.button-playlist-item,
 .button-course-item {
 	color: white;
 	background: #30b6dd;
@@ -36,14 +37,18 @@
 	height: 40px;
 	margin: 10px 0;
 }
+.button-playlist-item:hover,
 .button-course-item:hover {
 	background: darken(#30b6dd, 10);
 }
 
+.button-playlist-search,
 .button-course-search {
 	color: white;
 	background: #9bc837;
 }
+
+.button-playlist-search:hover,
 .button-course-search:hover {
 	background: darken(#9bc837, 10)
 }

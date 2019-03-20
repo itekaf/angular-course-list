@@ -1,6 +1,4 @@
-import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
-import { LoadingDirective } from './loading.directive';
-import { ComponentFactoryResolver } from '@angular/core/src/render3';
+import { Component, ViewContainerRef } from '@angular/core';
 
 @Component({
 	selector: 'app-loading',
@@ -8,8 +6,6 @@ import { ComponentFactoryResolver } from '@angular/core/src/render3';
 	styleUrls: ['./loading.component.scss']
 })
 export class LoadingComponent {
-	private dynamicComponent: any;
-
 	constructor(
 		public vcRef: ViewContainerRef
 	) { }

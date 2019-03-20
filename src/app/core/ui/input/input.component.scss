@@ -1,3 +1,4 @@
+.playlist-search-form__input,
 .course-search-form__input {
 	border: none;
 	padding: 10px;
@@ -6,6 +7,7 @@
 }
 
 .login-form__input,
+.playlist-form__input,
 .course-form__input,
 .registry-form__input {
 	width: calc(100% - 30px);

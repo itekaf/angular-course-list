@@ -1,34 +1,41 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, CanLoad } from '@angular/router';
 
-import { AuthService } from '../services/auth.service';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { HistoryService } from '../../routers/history.service';
+import { map, take } from 'rxjs/operators';
+import { Store, select } from '@ngrx/store';
+import { IAuthState } from '../store/auth.reducer';
+import { getAuthStatus } from '../store/auth.selectors';
+import { AuthLoginRedirect, AuthCheck } from '../store/auth.actions';
 
 @Injectable({
 	providedIn: 'root'
 })
-export class AuthSuccessGuardService implements CanActivate {
-	private redirectUrl: string = '/login';
-
+export class AuthSuccessGuardService implements CanActivate, CanLoad {
 	constructor(
-		private historyService: HistoryService,
-		private authService: AuthService,
+		private store$: Store<{ auth: IAuthState }>,
 	) { }
 
-	public canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | boolean {
-		return this.authService
-			.checkAuth()
-			.pipe(
-				map((isAuth: boolean): boolean => {
-					if (isAuth) {
-						return true;
-					}
+	public canActivate(): Observable<boolean>  {
+		return this.validateAuthStatus(this.getAuthStatus());
+	}
 
-					this.historyService.goTo(this.redirectUrl);
-					return false;
-				})
-			);
+	public canLoad(): Observable<boolean> {
+		return this.validateAuthStatus(this.getAuthStatus());
+	}
+
+	private getAuthStatus(): Observable<boolean> {
+		return this.store$.pipe(select(getAuthStatus), take(1));
+	}
+
+	private validateAuthStatus(authStatus: Observable<boolean>): Observable<boolean> {
+		return authStatus.pipe(
+			map((isAuth: boolean) => {
+				if (isAuth) { return true; }
+
+				this.store$.dispatch(new AuthLoginRedirect());
+				return false;
+			}),
+		);
 	}
 }

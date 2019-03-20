@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 
 import { IAuthState } from 'src/app/modules/auth/store/auth.reducer';
-import { Logout, LoginRedirect } from 'src/app/modules/auth/store/auth.actions';
+import { AuthLogout, AuthLoginRedirect } from 'src/app/modules/auth/store/auth.actions';
 import { getAuthUserData, getAuthStatus, getAllAuth } from 'src/app/modules/auth/store/auth.selectors';
 import { UserModel } from 'src/app/shared/models';
 
@@ -30,6 +30,6 @@ export class HeaderComponent implements OnInit {
 			});
 	}
 
-	public onLogin(): void { this.store$.dispatch(new LoginRedirect()); }
-	public onLogout(): void { this.store$.dispatch(new Logout()); }
+	public onLogin(): void { this.store$.dispatch(new AuthLoginRedirect()); }
+	public onLogout(): void { this.store$.dispatch(new AuthLogout()); }
 }

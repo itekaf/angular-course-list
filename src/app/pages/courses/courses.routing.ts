@@ -27,7 +27,7 @@ const routes: Routes = [
 				}
 			},
 			{
-				path: ':id',
+				path: ':courseId',
 				component: EditComponent,
 				data: {
 					label: 'Edit'

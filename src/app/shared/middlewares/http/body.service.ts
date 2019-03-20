@@ -8,12 +8,13 @@ import { SecurityModel } from '../../models/security.model';
 	providedIn: 'root'
 })
 export class BodyHttpMiddelware implements HttpInterceptor {
-	public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-		const modifiedRequest = req.clone({ body: this.convertBody(req.body)});
+	public intercept(req: HttpRequest<object>, next: HttpHandler): Observable<HttpEvent<object>> {
+		const modifiedRequest = req.clone({ body: this.createSecurityObject(req.body)});
 		return next.handle(modifiedRequest);
 	}
 
-	private convertBody(body: object): JSON {
-		return body ? JSON.parse(JSON.stringify(SecurityModel.create(body))) : body;
+	// tslint:disable-next-line: prefer-function-over-method
+	private createSecurityObject(obj: object): JSON {
+		return obj ? JSON.parse(JSON.stringify(SecurityModel.create(obj))) : obj;
 	}
 }

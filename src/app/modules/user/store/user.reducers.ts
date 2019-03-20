@@ -1,5 +1,6 @@
 import { UserModel } from 'src/app/shared/models';
-import { UserActionsTypes, UserActionsEnum } from './user.actions';
+import { UserActionsEnum } from './user.actions';
+import { IAction } from 'src/app/shared/interface/action.interface';
 
 export interface IUserState {
 	language: string;
@@ -11,14 +12,14 @@ export const initUserState: IUserState = {
 	data: null,
 };
 
-export function userReducer(state: IUserState = initUserState, action: UserActionsTypes): IUserState {
+export function userReducer(state: IUserState = initUserState, action: IAction<UserModel | null>): IUserState {
 	switch (action.type) {
 		case UserActionsEnum.Create:
 		case UserActionsEnum.Update:
 			{
 				return {
 					...state,
-					data: (state as IUserState).data
+					data: action.payload
 				};
 			}
 

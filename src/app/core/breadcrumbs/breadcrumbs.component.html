@@ -1,7 +1,7 @@
 <article class="breadcrumbs">
 	<div class="container">
 		<ol class="breadcrumb__list">
-			<li *ngFor="let breadcrumb of breadcrumbs | async; let isLast = last"
+			<li *ngFor="let breadcrumb of breadcrumbs$ | async; let isLast = last"
 				class="breadcrumb__item"
 				[ngClass]="{'active': isLast}"
 			>

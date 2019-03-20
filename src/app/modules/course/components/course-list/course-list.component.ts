@@ -1,18 +1,18 @@
-import { map, finalize, pluck } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
+import { map, pluck } from 'rxjs/operators';
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit, Input } from '@angular/core';
 
 import { Config } from 'src/app/shared';
 import { CourseModel } from 'src/app/shared/models';
-import { CourseService } from '../../services/course.service';
-import { InputResultModel } from 'src/app/shared/models/input-result.model';
-import { HistoryService } from 'src/app/modules/routers/history.service';
-import { Store } from '@ngrx/store';
 import { ICourseState } from '../../store/course.reduces';
-import { Observable } from 'rxjs';
-import { Delete, Read } from '../../store/course.actions';
 import { getIsLoading } from 'src/app/core/loading/store/loading.selectors';
+import { HistoryGoToUrl } from 'src/app/modules/routers/store/history.actions';
+import { InputResultModel } from 'src/app/shared/models/input-result.model';
+import { CourseDelete, CourseRead } from '../../store/course.actions';
+import { getCoursesList } from '../../store/course.selectors';
+import { Observable } from 'rxjs';
 
 // TODO: RL: Refactor this + create test
 @Component({
@@ -25,44 +25,24 @@ export class CourseListComponent implements OnInit {
 	@Input() public title: string = 'Find or add angular courses ...';
 	@Input() public icons: Map<string, IconDefinition> = Config.icons;
 	@Input() public loadMoreText: string = 'Load More';
-	@Input() public noDataMessage: string = 'NO DATA. FELL FREE TO ADD NEW COURSE';
+	@Input() public noDataMessage: string = 'NO DATA. FEEL FREE TO ADD NEW COURSE';
 
-	public loading: boolean = false;
+	public items$: Observable<CourseModel[]>;
+	public loading$: Observable<boolean>;
+
 	public query: string;
-	public courses: CourseModel[] = [];
 	public sortedByDate: boolean = true;
 	public sortedByTitle: boolean = true;
 	public sortedByDuration: boolean = true;
 
-	private data$: Observable<ICourseState>;
-
 	constructor(
 		private store$: Store<{ courses: ICourseState }>,
-		private history: HistoryService,
-		private courseService: CourseService,
 		private activatedRouter: ActivatedRoute,
 	) { }
 
 	public ngOnInit(): void {
-		this.store$
-			.select(getIsLoading)
-			.subscribe((value: boolean) => {
-				this.loading = value;
-			});
-		this.store$.select('courses')
-			.pipe(
-				pluck('data'),
-				map((items: CourseModel[]) => {
-					return items.map((item: CourseModel) => {
-						const itemImagePath = item.imagePath || Config.default.imagePath;
-						item.imagePath = itemImagePath;
-						return item;
-					});
-				}),
-			)
-			.subscribe((items: CourseModel[]) => {
-				this.courses = items;
-			});
+		this.items$ = this.store$.select(getCoursesList);
+		this.loading$ = this.store$.select(getIsLoading);
 		this.updateItems();
 	}
 
@@ -78,42 +58,38 @@ export class CourseListComponent implements OnInit {
 		this.sortedByDuration = !this.sortedByDuration;
 	}
 
-	public onPageStep($event: InputResultModel): void {
-		this.pageStep = ($event.value * 1);
+	public onSearchItem($event: InputResultModel): void {
+		this.query = $event.value.toString();
 		this.updateItems();
 	}
 
-	public onSearchItem($event: InputResultModel): void {
-		this.query = $event.value;
-		this.updateItems(this.query, 0);
-	}
-
 	public onRemoveItem(id: string): void {
-		this.store$.dispatch(new Delete(id));
+		this.store$.dispatch(new CourseDelete(id));
 	}
 
 	public onLoadMore(): void {
-		this.updateItems(null, null, null, true);
+		this.updateItems();
 	}
 
 	public onEditItem(id: string): void {
-		this.history.goTo(`./${id}`, {  relativeTo: this.activatedRouter });
+		const url = `./${id}`;
+		const extras = {  relativeTo: this.activatedRouter };
+		this.store$.dispatch(new HistoryGoToUrl({ url, extras }));
 	}
 
 	public onAdd(): void {
-		this.history.goTo('./new', {  relativeTo: this.activatedRouter });
+		const url = `./new`;
+		const extras = {  relativeTo: this.activatedRouter };
+		this.store$.dispatch(new HistoryGoToUrl({ url, extras }));
 	}
 
 	private updateItems(
-		query: string = this.query,
-		from: number = this.courses.length,
+		query: string  = this.query,
+		from: number = 0,
 		count: number = this.pageStep,
-		join: boolean = false,
 	): void {
-		this.loading = true;
-		const data = {
-			query, from, count, join
-		};
-		this.store$.dispatch(new Read(data));
+		this.store$.dispatch(new CourseRead({
+			query, from, count,
+		}));
 	}
 }
