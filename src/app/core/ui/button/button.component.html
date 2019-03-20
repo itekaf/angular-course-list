@@ -1,0 +1,5 @@
+<button class="app-button {{className}}" (click)="onClick()" [type]="type">
+	<app-icon *ngIf="icon" [icon]="icon" class="app-button__icon" className="{{className}}"></app-icon>
+	<span *ngIf="text" class="app-button__text {{className + '__text'}}">{{text}}</span>
+	<ng-content></ng-content>
+</button>

@@ -1,0 +1,11 @@
+<div class="container">
+	<div class="page-{{className}}" [appLoading]="loading$ | async">
+		<app-playlist-form
+			[item]="item"
+			[title]="title"
+			(submitEvent)="onSubmit($event)"
+			(cancelEvent)="onCancel()"
+		></app-playlist-form>
+	</div>
+</div>
+

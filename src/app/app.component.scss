@@ -1,0 +1,21 @@
+.content {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+}
+
+main {
+	flex: 3 0 100%;
+	height: 100%;
+}
+app-footer {
+	flex: 4 0 auto;
+	max-height: 40px;
+}
+
+@media screen and (max-width: 991px) {
+	app-header {
+		height: auto;
+		max-height: inherit;
+	}
+}

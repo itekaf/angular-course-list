@@ -1,0 +1,100 @@
+.box-playlist-item {
+	display: flex;
+	width: 100%;
+	height: 100%;
+	margin: 15px 0;
+	border-radius: 5px;
+	border: 1px solid #eaedf5;
+}
+.box-playlist-item__wrapper {
+	display: flex;
+	width: 100%;
+	margin: 15px 0;
+}
+.box-playlist-item__shadow {
+	border-radius: 5px;
+	border: 1px solid #eaedf5;
+}
+.box-playlist-item__img {
+	width: 25%;
+	margin-right: 70px;
+}
+.box-playlist-item__content {
+	flex: 0 1 75%;
+}
+.box-playlist-item__info {
+	flex: 1 0 auto;
+}
+.box-playlist-item__buttons {
+	width: 85px;
+	display: flex;
+	flex-direction: column;
+}
+.box-playlist-item__title {
+	color: #41424f;
+	flex: 1 0 auto;
+	font-size: 1.5em;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	text-transform: uppercase;
+}
+.box-playlist-item__description {
+	flex: 2 0 100%;
+	overflow: hidden;
+	color: #6c7283;
+}
+.box-playlist-item__additionall-info {
+	flex: 3 0 auto;
+}
+.box-playlist-item__duration {
+	display: flex;
+}
+
+
+@media screen and (max-width: 1169px) {
+	.box-playlist-item__img {
+		width: 40%;
+	}
+	.box-playlist-item__content {
+		width: 60%;
+	}
+}
+
+@media screen and (max-width: 991px) {
+	.box-playlist-item__img {
+		width: 60%;
+	}
+	.box-playlist-item__content {
+		width: 40%;
+	}
+
+	.box-playlist-item__content,
+	.box-playlist-item__additionall-info {
+		flex-direction: row;
+	}
+}
+
+@media screen and (max-width: 767px) {
+	.box-playlist-item__img {
+		width: 100%;
+	}
+	.box-playlist-item__content {
+		width: 100%;
+	}
+
+	.box-playlist-item__content,
+	.box-playlist-item__additionall-info,
+	.box-playlist-item {
+		flex-direction: column;
+	}
+	.box-playlist-item__info {
+		margin: 0 10px;
+	}
+	.box-playlist-item__buttons {
+		width: calc(100% - 20px);
+		margin: 10px;
+		flex-direction: row;
+		display: flex;
+		justify-content: space-around;
+	}
+}

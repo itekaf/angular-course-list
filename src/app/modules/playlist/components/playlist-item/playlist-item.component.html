@@ -1,0 +1,38 @@
+<div class="box-{{className}}">
+	<div class="box-{{className}}__img">
+		<a class="box-{{className}}__link">
+			<img
+				width="100%"
+				alt="{{item.name}}"
+				src="{{item.imagePath}}"
+			/>
+		</a>
+	</div>
+	<div class=" box-{{className}}__content">
+		<div class="box-{{className}}__info">
+			<div class="box-{{className}}__wrapper">
+				<div class="box-{{className}}__title">
+					<a routerLink="{{item.id}}/courses">{{item.name}}</a>
+				</div>
+			</div>
+		</div>
+		<div class="box-{{className}}__description">
+			{{item.description}}
+		</div>
+		<div class="box-{{className}}__footer box-{{className}}__additionall-info">
+			<div class="box-{{className}}__wrapper">
+				<app-icon
+					title="Courses count:"
+					*ngIf="item.courses.length"
+					[icon]="icons.get('fire')"
+					text="{{item.courses.length}}"
+				></app-icon>
+			</div>
+		</div>
+	</div>
+	<div class="box-{{className}}__buttons">
+		<app-button className="button-{{className}}" (clickButton)="onEdit()" [icon]="icons.get('edit')"></app-button>
+		<app-button className="button-{{className}}" (clickButton)="onRemove()" [icon]="icons.get('trash')"></app-button>
+	</div>
+</div>
+

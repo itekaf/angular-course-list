@@ -1,0 +1,12 @@
+<div class="container">
+	<div class="page-course-new" [appLoading]="loading$ | async">
+		<app-course-form
+			*ngIf="item$ | async"
+			[courseItem]="item$ | async"
+			(submitEvent)="onSubmit($event)"
+			(cancelEvent)="onCancel()"
+			title="Edit Course: {{item.name}}"
+		></app-course-form>
+	</div>
+</div>
+

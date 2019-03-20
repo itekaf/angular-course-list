@@ -1,0 +1,8 @@
+<div class="app-icon {{className && className + '-icon'}}">
+	<span *ngIf="icon" class="app-icon__icon {{className && className + '__icon'}}">
+		<fa-icon [icon]="icon"></fa-icon>
+	</span>
+	<span *ngIf="title" class="app-icon__title {{className && className + '__title'}}">{{title}}</span>
+	<span *ngIf="text" class="app-icon__text {{className && className + '__text'}}">{{text}}</span>
+	<ng-content></ng-content>
+</div>

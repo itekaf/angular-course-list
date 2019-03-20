@@ -1,0 +1,23 @@
+<article class="breadcrumbs">
+	<div class="container">
+		<ol class="breadcrumb__list">
+			<li *ngFor="let breadcrumb of breadcrumbs$ | async; let isLast = last"
+				class="breadcrumb__item"
+				[ngClass]="{'active': isLast}"
+			>
+				<a *ngIf="!isLast; else lastRoute"
+					[routerLink]="[breadcrumb.url]"
+					class="breadcrumb__link"
+					routerLinkActive="active"
+				>
+					<p class="breadcrumbs__text">{{ breadcrumb.label }}</p>
+				</a>
+				<ng-template #lastRoute>
+					<p class="breadcrumbs__text">
+						{{ breadcrumb.label }}
+					</p>
+				</ng-template>
+			</li>
+		</ol>
+	</div>
+</article>

@@ -1,0 +1,21 @@
+<form class="{{className}}" (submit)="onSubmit()">
+	<div *ngIf="title" class="{{className}}__header">
+		<h1 class="{{className}}__title">{{title}}</h1>
+	</div>
+	<div class="{{className}}__content">
+		<div class="{{className}}__item">
+			<app-label className="{{className}}" [icon]="icons.get('key')" text="Name" for="name">
+				<app-input className="{{className}}" [value]="item.name" (inputEvent)="onChange($event)" placeholder="Please enter name ..." name="name"></app-input>
+			</app-label>
+		</div>
+		<div class="{{className}}__item">
+			<app-label className="{{className}}" [icon]="icons.get('listAlt')" text="Description" for="description">
+				<app-textarea [value]="item.description" className="{{className}}" (inputEvent)="onChange($event)" placeholder="Please enter description ..." name="description"></app-textarea>
+			</app-label>
+		</div>
+	</div>
+	<div class="{{className}}__footer {{className}}__item ">
+		<app-button type="submit" className="button-blue" text="Save"></app-button>
+		<app-button type="button" (clickButton)="onCancel()" className="button-blue" text="Cancel"></app-button>
+	</div>
+</form>

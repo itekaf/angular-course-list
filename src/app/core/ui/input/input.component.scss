@@ -1,0 +1,22 @@
+.playlist-search-form__input,
+.course-search-form__input {
+	border: none;
+	padding: 10px;
+	margin-left: 5px;
+	width: calc(100% - 25px);
+}
+
+.login-form__input,
+.playlist-form__input,
+.course-form__input,
+.registry-form__input {
+	width: calc(100% - 30px);
+	border-radius: 5px;
+	border: 1px solid rgba(128, 128, 128, 0.2);
+	padding: 10px 15px;
+	margin-top: 10px;
+}
+
+input.ng-invalid {
+	border: red;
+}

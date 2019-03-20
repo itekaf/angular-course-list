@@ -1,0 +1,7 @@
+<div class="{{className}}">
+	<form class="{{className}}-form" (ngSubmit)="onSubmit()">
+		<app-label for="search" [icon]="icons.get('search')"></app-label>
+		<app-input class="{{className}}-form__input" className="{{className}}-form" (inputEvent)="onSearch($event)" [value]="query" placeholder="Search by name, description or date ..." name="query"></app-input>
+		<app-button className="button-{{className}}" text="Search" type="submit"></app-button>
+	</form>
+</div>

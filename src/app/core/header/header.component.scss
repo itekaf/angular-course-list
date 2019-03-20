@@ -1,0 +1,34 @@
+.header {
+	background: linear-gradient(to right, #e67586 0%, #f8964e 100%);
+	padding: 10px 0;
+}
+
+.header_wrapper {
+	display: flex;
+	justify-content: space-between;
+}
+
+.user-article {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.user-article__username {
+	color: white;
+	margin-right: 20px;
+}
+
+@media screen and (max-width: 991px) {
+	.user-article {
+		margin: 20px 0;
+	}
+}
+
+
+@media screen and (max-width: 991px) {
+	.header_wrapper {
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
+}

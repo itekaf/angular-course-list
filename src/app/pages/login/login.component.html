@@ -1,0 +1,21 @@
+<div class="container">
+	<div class="page-login">
+		<form class="{{className}}" (submit)="onSubmit()" [appLoading]="loading$ | async">
+			<div class="{{className}}__item {{className}}__wrapper">
+				<app-label className="{{className}}" [icon]="icons.get('at')" text="Username" for="username">
+					<app-input className="{{className}}" (inputEvent)="onChange($event)" [value]="data.username" placeholder="Please enter email ..." name="username"></app-input>
+				</app-label>
+			</div>
+			<div class="{{className}}__item {{className}}__wrapper">
+				<app-label className="{{className}}" [icon]="icons.get('key')" text="Password" for="password">
+					<app-input type="password" className="{{className}}" (inputEvent)="onChange($event)" [value]="data.password" placeholder="Please enter password ..." name="password"></app-input>
+				</app-label>
+			</div>
+			<div class="{{className}}__item {{className}}__wrapper">
+				<a routerLink="/signup" title="SignUp" class="{{className}}__link">SignUp</a>
+				<app-button type="submit" className="button-blue" text="Login"></app-button>
+			</div>
+		</form>
+	</div>
+</div>
+

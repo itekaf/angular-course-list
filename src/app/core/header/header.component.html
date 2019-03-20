@@ -1,0 +1,21 @@
+<header class="header">
+	<div class="container">
+		<div class="header_wrapper">
+			<div class="header_logo">
+				<app-logo></app-logo>
+			</div>
+			<article class="user-article">
+				<ng-container *ngTemplateOutlet="userAuth ? isAuth : isNotAuth"></ng-container>
+			</article>
+		</div>
+	</div>
+</header>
+
+<ng-template #isAuth>
+	<p *ngIf="userData" class="user-article__username">{{userData.username || userData.firstname }}</p>
+	<app-button (clickButton)="onLogout()" text="Logout"></app-button>
+</ng-template>
+<ng-template #isNotAuth>
+	<app-button (clickButton)="onLogin()" text="Login"></app-button>
+</ng-template>
+

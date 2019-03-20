@@ -1,0 +1,29 @@
+.playlist-search-form {
+	padding: 5px 5px 5px 15px;
+	border-radius: 5px;
+	display: flex;
+	align-items: center;
+	background: white;
+}
+.playlist-search-form__label {
+	color: #cccccc;
+	width: 100%;
+	justify-content: center;
+	align-items: center;
+	display: flex;
+}
+
+.playlist-search-form__input {
+	width: 100%;
+}
+.playlist-search-form__button {
+	padding: 10px;
+	background: #9bc837;
+	border-radius: 5px;
+	color: #fff;
+	font-weight: bold;
+	font-size: 12px;
+}
+.playlist-search-form__button:hover {
+	background: darken(#9bc837, 10)
+}
