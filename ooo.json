@@ -1,0 +1,438 @@
+{
+	"GLOBAL": {
+		"CONJUNCTION": {
+			"AND": "и",
+			"AT": "at",
+			"BUT": "но",
+			"OF": "из",
+			"OR": "или"
+		}
+	},
+	"LAYOUT": {
+		"FOOTER": {
+			"COPY": "© Coleman Exchange 2018. Все права защищены."
+		},
+		"HEADER": {
+			"ALREADY_HAVE_ACCOUNT": "Уже есть аккаунт?",
+			"LOGIN_BUTTON": "Войти"
+		}
+	},
+	"PAGES": {
+		"EVENT": {
+			"DETAILS": {
+				"ADDITIONAL_PARTICIPANTS": "Дополнительные участники",
+				"COMPANIES_TICKERS": "Компании",
+				"DESCRIPTION": "Описание",
+				"DURATION_MINUTES": "{{value}} <span>мин.</span>",
+				"EVENT_DESCRIPTION": "Описание события",
+				"EVENT_HOST": "Владелец события",
+				"EVENT_METRICS": "Статистика события",
+				"EVENT_NAME": "Название события",
+				"EVENT_OVERVIEW": "Описание события",
+				"EVENT_TYPE": "Тип события",
+				"HOST": "Владелец",
+				"INDUSTRIES": "Отрасли",
+				"INDUSTRY": "Отрасль",
+				"MEETING": {
+					"ADD_MEETING": "Добавить встречу",
+					"DURATION": "Продолжительность",
+					"LOCATION": "Место проведения",
+					"NAME": "Имя",
+					"PARTICIPANTS": "Участники",
+					"REGISTRATIONS": "Регистрация",
+					"STATUS": "Статус",
+					"TIME": "Время",
+					"TITLE": "Встречи",
+					"TYPE": "Тип"
+				},
+				"MEETINGS": "Встречи",
+				"PUBLISH": "Публикация",
+				"PUBLISH_TOOLTIP": "Используйте данную ссылку для публикации вашего события и всех ваших встреч",
+				"REGISTRATIONS": "Регистрация",
+				"TITLE": "Детали события",
+				"TYPE": "Тип"
+			},
+			"EDIT": {
+				"BACK_TO_EVENT_DETAILS": "Назад к описанию события",
+				"CANCEL": "Закрыть",
+				"TITLE": "О чем ваше событие?",
+				"TOOLTIP": "<span class=\"{{className}}\">Событие</span> - это организованный список состоящий из одной или нескольких <span class=\"{{className}}\">встреч</span> созданное для определенной цели."
+			},
+			"EDIT_FORM": {
+				"ADDITIONAL_PARTICIPANTS": {
+					"LABEL": "Дополнительные участники"
+				},
+				"COMPANIES_TICKERS": {
+					"LABEL": "Компании"
+				},
+				"DESCRIPTION": {
+					"LABEL": "Описание события",
+					"PLACEHOLDER": "Напишите описание для вашего события"
+				},
+				"HOST": {
+					"LABEL": "Владелец"
+				},
+				"INDUSTRY": {
+					"LABEL": "Отрасли",
+					"LEVEL": "Уровень",
+					"PLACEHOLDER": "",
+					"SUB_INDUSTRY_OF": "Под-отрасль"
+				},
+				"MEMBERS": {
+					"LABEL": "Участники"
+				},
+				"NAME": {
+					"LABEL": "Название события",
+					"PLACEHOLDER": "Название события, например: Тренды Медицины"
+				},
+				"TYPE": {
+					"LABEL": "Тип события",
+					"PLACEHOLDER": "Выберите один тип"
+				},
+				"VISIBILITY": {
+					"LABEL": "Доступность"
+				}
+			},
+			"FILTERS": {
+				"APPLY": "Применить фильтры",
+				"CLEAR": "Очистить фильтры",
+				"LEVEL": "Уровень",
+				"SUB_INDUSTRY": "Под-отрасль",
+				"TITLE": "Фильтры"
+			},
+			"LISTING": {
+				"BUTTON": "Загрузить ещё"
+			},
+			"NEW": {
+				"ANOTHER_MEETING": "Необходимо назначить ещё одну встречу для этого события?",
+				"BACK_TO_EVENTS": "Назад к событиям",
+				"BACK_TO_LAST_STEP": "Назад к предыдущему шагу",
+				"COPY_URL": "Для рекламы вашей встречи скопируйте URL.",
+				"CREATE_MEETING": "Назначить встречу",
+				"NEXT": "Дальше",
+				"SAVE_AND_PUBLISH": "Сохранить и назначить встречу",
+				"STEPS": {
+					"FOUR": {
+						"TITLE": "Пригласите ваших гостей принять участие."
+					},
+					"ONE": {
+						"TITLE": "О чем ваше событие?",
+						"TOOLTIP": "<span class=\"{{className}}\">Событие</span> - это организованный список состоящий из одной или нескольких <span class=\"{{className}}\">встреч</span> созданные для достижения одной цели."
+					},
+					"THREE": {
+						"TITLE": "Когда клиенты могут назначит встречу с вами?",
+						"TOOLTIP": "Для назначения встречи один-на-один выберите необходимую дату и время для вашего контакта. Для групповой встречи выберите дату и время встречи."
+					},
+					"TWO": {
+						"TITLE_HAS_MEETING": "Назначить встречу для этого события.",
+						"TITLE_NO_MEETING": "Назначьте вашу первую встречу для этого события.",
+						"TOOLTIP": "",
+						"TOOLTIP_PART_1": "<span class=\"{{className}}\">Митинг</span> - это взаимодействие между вами (поставщиком аналитических услуг) и вашим заказчиком",
+						"TOOLTIP_PART_2": "После создания встречи и публикации вы можете назначить дополнительные встречи для этого <span class=\"{{className}}\">события</span>."
+					}
+				}
+			},
+			"NO_EVENTS": {
+				"BUTTON": "Добавить событие",
+				"DESCRIPTION": "Здесь будут отображаться события которые были созданы вами или запланированы с вашим участием.",
+				"TITLE": "У вас ещё нету событий."
+			},
+			"PRODUCER_CARD": {
+				"BOOK": "Книга",
+				"BOOKED": "Зарезервировано",
+				"COMPANIES_TICKERS": "Компании",
+				"INDUSTRY": "Отрасль",
+				"MULTIPLE_TIMES": "Многократно",
+				"VIEW_DESCRIPTION": "Показать описание"
+			}
+		},
+		"FORGOT_PASSWORD": {
+			"BODY": "Введите ваш Email и мы отправил код подтверждения с помощью которого вы сможете восстановить ваш пароль.",
+			"BUTTON": "Выслать код для восстановления пароля",
+			"LOGIN_SCREEN": "странице авторизации",
+			"TITLE": "Забыли свой пароль?"
+		},
+		"INTERACTION": {
+			"CREATE_FORM": {
+				"ADDITIONAL_PARTICIPANTS": {
+					"LABEL": "Дополнительные участники",
+					"PLACEHOLDER": ""
+				},
+				"HOST": {
+					"LABEL": "Владелец",
+					"PLACEHOLDER": ""
+				},
+				"LOCATION": {
+					"INPUT_PLACEHOLDER": "Ссылка на встречу",
+					"LABEL": "Место проведения",
+					"SELECT_PLACEHOLDER": "Выберите один вариант"
+				},
+				"MAX_CLIENT": {
+					"LABEL": "Максимальное количество фирм",
+					"PLACEHOLDER": "Выберите один вариант",
+					"VALIDATION": {
+						"MAX_ATTENDEES": "Максимально количество посетителей",
+						"MAX_VALUE_IS": "Максимальное значение",
+						"MIN_VALUE_IS": "Минимальное значение"
+					}
+				},
+				"MODE": {
+					"LABEL": "Формат встречи",
+					"PLACEHOLDER": "Выберите один вариант"
+				},
+				"NAME": {
+					"LABEL": "Название встречи",
+					"PLACEHOLDER": "Название этой встречи. Например: Организационное Совещание "
+				},
+				"TYPE": {
+					"LABEL": "Тип встречи",
+					"PLACEHOLDER": "Выберите один вариант"
+				}
+			},
+			"PUBLISH": {
+				"DESCRIPTION": "<span>{{eventName}} уже доступен!</span>",
+				"INVITE": "Для приглашения ваших гостей по Email или через социальные сети, используйте эту ссылку",
+				"IS_LIVE": "уже доступен!",
+				"NONE_PROVIDED": "Еще не создана",
+				"TITLE": "Ваша ссылка на встречу",
+				"VIEW_DETAILS": "Посмотреть детали вашей встречи"
+			},
+			"TIME_CALENDAR": {
+				"ADD_NEW_SLOT": "Добавить новый слот",
+				"CLEAR_ALL": "Очистить выбранные слоты",
+				"MEETING_DURATION": "Продолжительность одной встречи",
+				"VALIDATION": {
+					"DATE_IN_PAST": "Дата меньше текущей",
+					"INVALID_RANGE": "Не правильный диапазон",
+					"OVERLAPPING_WITH_ANOTHER_RANGE": "Перекрытие с другим диапазоном"
+				},
+				"YOUR_TIME_ZONE": "Ваш часовой пояс"
+			}
+		},
+		"JOIN": {
+			"BODY": "За прошлую неделю более чем 100 экспертов присоединилось к нашей сети для улучшения своих проектов, сегодня твоя очередь.",
+			"BUTTON": "Создать",
+			"CAPABILITIES": {
+				"MARKET": "Площадка для ваших инвесторов",
+				"SCHEDULE_CLIENT_INTERACTIONS": "Планируйте взаимодействие с клиентами",
+				"TACK_YOUR_INTERACTIONS": "Отслеживайте свои операции",
+				"TITLE": "Возможности Coleman Exchange "
+			},
+			"COMPANY": {
+				"AGREE_TO": "Я подтверждаю, что я прочитал и согласен с <a href=\"{{termsAndConditionsUrl}}\" target=\"_blank\" >Правилами и Условиями</a> и <a href=\"{{privacyPolicyUrl}}\" target=\"_blank\" >Политикой безопасности</a>",
+				"BODY": "<div>Пожалуйста, выберите одну из компаний связанные с вашим доменом.</div><div>Вы ввели компанию в которой вы работаете.</div>",
+				"CONFIRM": "Пожалуйста подтвердите, что приведенная ниже информация является корректной. Это поможет нам адаптировать ваше программное обеспечение",
+				"EMPLOYER_NOT_FOUND_VAR_1": "Не нашли вашего заказчика? Нажмите здесь для поиска",
+				"EMPLOYER_NOT_FOUND_VAR_2": "Это не ваш заказчик? Нажмите здесь для поиска",
+				"REACHED": "Как бы вы хотели, чтобы мы с вами связались?",
+				"TITLE": "<span>Здравствуйте, </span>{{nameValue}}!",
+				"TYPE": "Форма собственности",
+				"TYPE_COMPANY_NAME": "Пожалуйста введите название компании ниже."
+			},
+			"QUOTE": {
+				"AUTHOR": "-Michael Scott, Эксперт с 40-летним опытом работы в нефтегазовой отрасли",
+				"BODY": "\"Сиситема и эксперт-портал Coleman позволяет легко получить консультацию и дает доступ к моим инвойсам. Помимо этого, звонки с Coleman являются для меня обучающими, потому что я понимаю, что они предназначены для клиентов Coleman\""
+			},
+			"TITLE": "Создать бесплатный аккаунт"
+		},
+		"LOGIN": {
+			"BODY_PHRASE": "<span class=\"{{spanClassName}}\">Делитесь своими знаниями.</span><br><span class=\"{{spanClassName}}\">Присоединяйтесь к нашей сети.</span>",
+			"BUTTON": "Войти",
+			"CREATE_ACCOUNT": "Создать аккаунт",
+			"CREATE_ACCOUNT_PREFIX": "Создание вашего аккаунта займет 2 минуты.",
+			"INFORMATION": "Coleman Exchange для встреч и событий",
+			"NOT_CUSTOMER": "У вас ещё нет аккаунта?",
+			"TITLE": "Войти"
+		},
+		"NOT_FOUND": {
+			"BODY": "<p class=\"{{paragraphClassName}}\">Страница которую вы ищите более не доступна или у вас нету прав.</p><p class=\"{{paragraphClassName}}\">Приносим свои извинения за причиненные неудобства.</p><p class=\"{{paragraphClassName}}\">Пожалуйста выберите другую страницу в меню.</p>",
+			"CONTENT_PART_1": "Страница которую вы ищите более не доступна или у вас нету прав.",
+			"CONTENT_PART_2": "Приносим свои извинения за причиненные неудобства",
+			"CONTENT_PART_3": "Пожалуйста выберите другую страницу в меню.",
+			"TITLE": "Страница не найдена"
+		},
+		"TERMS_CONDITION": {
+			"ACKNOWLEDGE": "Я прочитал, понял и соглашаюсь с Coleman Exchange",
+			"I_AGREE": "Я согласен с Coleman Exchange",
+			"PRIVACY_POICY": "Пожалуйста откройте \"Политику конфиденциальности\" для продолжения"
+		},
+		"VALIDATION_EMAIL": {
+			"ACCOUNT_CREATED": "Ваш аккаунт создан.",
+			"ACCOUNT_EXPOLORE": "Теперь вы можете, изучить ваш личный аккаунт.",
+			"BODY": "<span>Мы отправили шестизначный код на ваш</span><br><span class=\"{{emailClassName}}\">{{emailValue}}</span><br><span>Пожалуйста введите его ниже, чтобы подтвердить ваш Email.</span>",
+			"CHECK_EMAIL_AGAIN": "Проверьте ваш Email на наличие нового проверочного кода",
+			"GET_STARTED": "Давайте начнем",
+			"HAVENT_RECEIVED_PART_1": "Не пришел Email? Проверьте папку спам или",
+			"HAVENT_RECEIVED_PART_2": "Отправьте его снова",
+			"HAVENT_RECEIVED_PART_3": "или узнайте больше информации в",
+			"HAVENT_RECEIVED_PART_4": "Базе знаний",
+			"SEND_CODE_PART_1": "Мы отправили вам шестизначный код на ваш",
+			"SEND_CODE_PART_2": "Пожалуйста введите его ниже, чтобы подтвердить ваш Email.",
+			"TITLE": "Осталось немного! Теперь проверьте ваш email."
+		}
+	},
+	"SHARED": {
+		"FORMS": {
+			"CONFIRM": {
+				"AGREE_TO_THE": "Я подтверждаю, что я прочитал и согласен с"
+			},
+			"EMAIL": {
+				"LABEL_EMAIL": "Email",
+				"LABEL_WORK_EMAIL": "Ваш Email",
+				"PLACEHOLDER_EMAIL": "Введите ваш Email",
+				"PLACEHOLDER_WORK_EMAIL": "Введите ваш Email",
+				"VALIDATION": {
+					"ANOTHER_ACCOUNT": "Этот Email адрес уже используется в другом аккаунте. Он ваш?",
+					"CHECK_YOUR_EMAIL": "Проверьте ваш Email",
+					"INCORRECT_EMAIL": "Не правильный Email"
+				}
+			},
+			"FIRST_NAME": {
+				"LABEL": "Ваше имя",
+				"PLACEHOLDER": "Введите Ваше имя"
+			},
+			"LAST_NAME": {
+				"LABEL": "Ваша Фамилия",
+				"PLACEHOLDER": "Введите Вашу фамилия"
+			},
+			"PASSWORD": {
+				"FORGOT": "Забыли пароль?",
+				"HIDE": "Скрыть пароль",
+				"LABEL": "Пароль",
+				"PLACEHOLDER": "Введите пароль",
+				"SHOW": "Показать пароль",
+				"VALIDATION": {
+					"1_LOWER_CASE": "Минимум 1 маленькая буква",
+					"1_NUMBER": "Минимум 1 цифра (0-9)",
+					"1_UPPER_CASE": "Минимум 1 заглавная буква",
+					"8_CHARACTERS": "Минимум 8 символов",
+					"AT_LEAST": "Минимум",
+					"CHARACTERS": "символов"
+				}
+			},
+			"PHONE": {
+				"COUNTRY": {
+					"LABEL": "Код страны",
+					"PLACEHOLDER": "+"
+				},
+				"EXTENSION": {
+					"LABEL": "Расширение",
+					"PLACEHOLDER": "Расш."
+				},
+				"LABEL": "Телефон",
+				"PLACEHOLDER": "Введите телефон",
+				"VALIDATION": {
+					"INCORRECT": "Не правильный мобильный телефон",
+					"ONLY_NUMBERS": "Разрешены только цифры"
+				}
+			},
+			"REMEMBER_ME": "Запомнить меня",
+			"SEARCH": {
+				"LABEL": "Поиск",
+				"PLACEHOLDER": "Начните печатать ..."
+			},
+			"SELECT": {
+				"LABEL": "Выбрать"
+			},
+			"TITLE": {
+				"LABEL": "Ваш заголовок",
+				"PLACEHOLDER": "Введите заголовок"
+			},
+			"VERIFICATION_CODE": {
+				"LABEL": "Проверочный код",
+				"VALIDATION": {
+					"INCORRECT": "Не правильный проверочный код",
+					"INCORRECT_3_TIMES": "Вы ввели не правильно проверочный код три раза, необходимо сгенерировать его снова.",
+					"ONLY_NUMBERS": "Пожалуйста, убедитесь что поле содержит только цифры"
+				}
+			}
+		},
+		"MENU": {
+			"COMPLIANCE_POLICIES": "Политика компании",
+			"CONTACT": "Контакты",
+			"HELP": "Помощь",
+			"PRIVACY_POLICY": "Политика конфиденциальности",
+			"TERMS_CONDITIONS": "Правила и Условия",
+			"TERMS_OF_USE": "Правила использования"
+		},
+		"PAGING": {
+			"TITLE": ""
+		},
+		"PHRASES": {
+			"ADDITIONAL_PARTICIPANTS": "Дополнительные участники",
+			"ADD_NEW": "Создать новый",
+			"ADHOC": "AdHoc",
+			"APPLY": "Применить",
+			"APPLY_FILTERS": "Применить фильтры",
+			"BACK_TO": "Назад к",
+			"BACK_TO_LIST": "Назад к списку",
+			"BOOK_FOR_CLIENT": "Описание для клиентов",
+			"CANCEL": "Закрыть",
+			"CLEAR": "Очистить",
+			"CLEAR_ALL": "Очистить все",
+			"CLICK": "Нажмите здесь",
+			"COMPANY": "Компания",
+			"COMPANY_TICKERS": "Компании",
+			"CONFERENCE": "Conference",
+			"COPY_LINK": "Скопировать ссылку",
+			"COPY_URL": "Скопировать URL",
+			"COUNTRY": "Страна",
+			"COVERAGE": "Coverage",
+			"CURRENT_POSITION": "Текущая позиция",
+			"DEAL_ROADSHOW": "Deal Roadshow",
+			"EDIT": "Редактировать",
+			"EMPLOYER": "Работодатель",
+			"EMPLOYMENT_HISTORY": "Опыт работы",
+			"END_DATE": "По",
+			"FROM": "От",
+			"GO_BACK_TO": "Назад к",
+			"GROUP": "Группа",
+			"HELLO": "Привет",
+			"HERE": "здесь",
+			"HOST": "Владелец",
+			"HOSTED_EVENT": "Hosted Event",
+			"HOST_PHOTO": "Фото владельца",
+			"INDUSTRY": "Отрасли",
+			"INDUSTRY_EVENT": "Industry Event",
+			"IN_PERSON": "Личная",
+			"JOIN": "Продолжить",
+			"KEYWORD": "Ключевое слово",
+			"KEYWORDS": "Ключевые слова",
+			"LEVEL": "Уровень",
+			"LOAD_MORE": "Загрузить ещё",
+			"LOCATION": "Место расположения",
+			"LOG_IN": "Войти",
+			"LOG_OUT": "Выйти",
+			"ME": "Я",
+			"MEETING_OFFERINGS": "Возможные форматы встреч",
+			"MINUTES": "мин.",
+			"NEW_EVENT": "Новое событие",
+			"NONE": "Отсутствует",
+			"NONE_PROVIDED": "Не существует",
+			"NON_DEAL_ROADSHOW": "Non Deal Roadshow",
+			"NO_DATA_AVAILABLE": "Данные не доступны",
+			"NO_DATA_PROVIDED": "Данные не доступны",
+			"NO_MEETING_YET": "Встреч пока нет",
+			"ONLINE_MEETING": "Встреча онлайн",
+			"PHONE_BRIDGE": "Телефонная конференция",
+			"PHONE_CALL": "Телефонный звонок",
+			"RESEARCH_REPORT": "Аналитический отчет",
+			"REVERSE_ROADSHOW": "Reverse Roadshow",
+			"SAVE": "Сохранить",
+			"SAVE_AND_CONTINUE": "Сохранить и продолжить",
+			"SAVE_CHANGES": "Сохранить изменения",
+			"SECTOR": "Сектор",
+			"SET_TIME": "Установить время",
+			"SORT_BY": "Сортировать по",
+			"START_DATE": "С",
+			"SUB_INDUSTRY": "Под отрасль",
+			"TIME_ZONE": "Часовой пояс",
+			"TITLE": "Заголовок",
+			"TO": "До",
+			"TO_GENERATE": "для создания.",
+			"UNIQUE_URL": "Уникальный URL",
+			"VERIFY": "Проверить",
+			"VIEW_ALL": "Показать все"
+		}
+	}
+}
